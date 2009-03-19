@@ -38,4 +38,6 @@ nmap _ <C-W>-
 " Tabs should be four spaces long, not eight
 set sw=4
 set ts=4
+set hlsearch " Highlight the last used search pattern
+set ruler " show the cursor position all the time
 
