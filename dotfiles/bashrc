@@ -1,0 +1,6 @@
+
+# Load compatible rc file (for aliases and variables)
+. $HOME/config/dotfiles/shrc
+
+# Vi mode:
+set -o vi

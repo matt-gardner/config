@@ -1,0 +1,58 @@
+export PATH=:$PATH:$HOME/admin/bin:$HOME/bin:$HOME/bin/jython2.2.1/:/aml/mathematica/6.0/bin/:/usr/local/mpich-1.2.7/bin
+
+pythondirs=(
+			$HOME/python 
+			$HOME/python/amlpso 
+			$HOME/python/amlpso-old
+			$HOME/python/evilplot 
+			$HOME/google-opt
+			$HOME/clone/pssh
+			)
+
+##############################################################################
+# Python Path
+
+export PYTHONPATH=""
+
+for dir in ${pythondirs[@]}
+do
+	if [[ -d $dir ]]
+	then
+		if [[ $PYTHONPATH == "" ]]
+		then
+			export PYTHONPATH="$dir"
+		else
+			export PYTHONPATH="$PYTHONPATH:$dir"
+		fi
+	fi
+done
+
+set -o vi
+export RSHCOMMAND=ssh
+
+# This is because I use a black terminal on my mac, but a white terminal
+# in the lab.  I want the colors to change if I'm logged in from the mac,
+# but to use the default colors in the lab.  So it turns out that $TERM
+# is xterm-color on the mac, and just xterm in the lab, so this works.
+if [[ $TERM == "xterm-color" ]]
+then
+	export LS_COLORS="di=36:ln=35:so=32:pi=33:ex=32:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:*.py=33"
+else
+	export LS_COLORS=""
+fi
+
+# Aliases that I want on all of my machines
+alias convertalltoeps='for file in `ls *.pgm`; do convert $file `basename $file .pgm`.eps; done'
+alias ls='ls --color=always'
+alias vi=vim
+alias rm='rm -i'
+alias pushall="git commit -a -m'.'; git push;"
+alias cs401='cd ~/school/cs401R/NLP/'
+alias cs450='cd ~/school/cs450'
+alias cs478='cd ~/school/cs478'
+alias cs601='cd ~/school/cs601R'
+alias pso='cd ~/python/amlpso'
+alias papers='cd ~/papers'
+PS1="\u:\W$ "
+
+

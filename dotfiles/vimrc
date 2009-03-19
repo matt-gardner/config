@@ -1,0 +1,41 @@
+syntax on
+if has("autocmd")
+	" When editing a file, always jump to the last curser position
+	autocmd BufReadPost *
+	\ if line("'\"") > 0 && line ("'\"") <= line("$") |
+	\   exe "normal! g'\""  |
+	\ endif
+
+	" Allow filetype detection, plugins, and indenting
+	filetype plugin indent on
+	" For python you want 4 spaces to be a tab, and tabs should be expanded
+	autocmd FileType python setlocal et sw=4 sts=4
+	autocmd FileType set foldlevel=1
+	" Use the skeletons when opening python and latex files
+	autocmd BufNewFile *.py r ~/.vim/skel.py
+	autocmd BufNewFile *.tex r ~/.vim/skel.tex
+	" Gets rid of an extra line that gets put in
+    autocmd BufNewFile *.py exe "normal 1Gddj"
+    autocmd BufNewFile *.tex exe "normal 1Gddj"
+
+endif
+" Get rid of the annoying default plaintex for empty .tex files
+let g:tex_flavor='latex'
+
+" Make some mappings to do spellchecking
+nmap <silent> <F3> :setlocal spell spelllang=en_us<cr>
+
+
+" Some folding options
+set foldenable
+set foldlevelstart=0
+set foldopen=block,insert,hor,jump,mark,percent,quickfix,search,tag,undo
+" Maps F2 to getting rid of the highlighting after a search - very nice
+nmap <silent> <F2> :nohl<cr>:set spelllang=<cr>
+" Resize windows with + and _, instead of the C-W stuff
+nmap + <C-W>+
+nmap _ <C-W>-
+" Tabs should be four spaces long, not eight
+set sw=4
+set ts=4
+

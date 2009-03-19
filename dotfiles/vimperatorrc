@@ -1,0 +1,4 @@
+set guioptions=mbT
+map <BS> H
+set visualbell
+set visualbellstyle=display: none;
