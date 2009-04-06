@@ -1,8 +1,6 @@
-set guioptions=mbT
+set guioptions=mBTr
 set focuscontent
 map <BS> H
 norm goh
-set titlestring=Mozilla Firefox
 set vb
-set visualbellstyle=display: none;
 set newtab=help
