@@ -49,4 +49,18 @@ alias pushall="git commit -a -m'.'; git push;"
 
 PS1="\u:\W$ "
 
+PATH="/Library/Frameworks/Python.framework/Versions/Current/bin:${PATH}"
+
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export PATH=~/Documents/mysql-5.0.51b-osx10.5-x86/bin:$PATH
+export PATH=$PATH::
+export MYSQL_HOME=~/Documents/mysql-5.0.51b-osx10.5-x86
+export LIBRARY_PATH=/opt/local/lib
+#export DYLD_LIBRARY_PATH=/opt/local/lib
+export CPLUS_INCLUDE_PATH=/opt/local/include
+export PKG_CONFIG_PATH=/opt/local/include/gtkmm-2.4:/opt/local/include/gtkmm-2.0:/opt/local/lib/pkgconfig:/usr/X11R6/lib/pkgconfig
+export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib:/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ImageIO.framework/Versions/A
+export CLICOLOR=1
+export LSCOLORS=gxfxcxdxcxegedabaggxgx
+export EDITOR=vim
 
