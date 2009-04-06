@@ -1,9 +1,10 @@
-export PATH=:$PATH:$HOME/admin/bin:$HOME/bin:$HOME/bin/jython2.2.1/:/aml/mathematica/6.0/bin/:/usr/local/mpich-1.2.7/bin
+#!/bin/bash
+
+export PATH=:$PATH:$HOME/admin/bin:$HOME/bin
 
 pythondirs=(
 			$HOME/python 
 			$HOME/python/amlpso 
-			$HOME/python/amlpso-old
 			$HOME/python/evilplot 
 			$HOME/google-opt
 			$HOME/clone/pssh
@@ -28,7 +29,6 @@ do
 done
 
 set -o vi
-export RSHCOMMAND=ssh
 
 # This is because I use a black terminal on my mac, but a white terminal
 # in the lab.  I want the colors to change if I'm logged in from the mac,
@@ -42,17 +42,11 @@ else
 fi
 
 # Aliases that I want on all of my machines
-alias convertalltoeps='for file in `ls *.pgm`; do convert $file `basename $file .pgm`.eps; done'
+alias convertalltoeps='for file in `ls *.pgm`; do convert $file `basename $file .pgm`.eps; done; for file in `ls *.ppm`; do convert $file `basename $file .ppm`.eps; done'
 alias ls='ls --color=always'
-alias vi=vim
 alias rm='rm -i'
 alias pushall="git commit -a -m'.'; git push;"
-alias cs401='cd ~/school/cs401R/NLP/'
-alias cs450='cd ~/school/cs450'
-alias cs478='cd ~/school/cs478'
-alias cs601='cd ~/school/cs601R'
-alias pso='cd ~/python/amlpso'
-alias papers='cd ~/papers'
+
 PS1="\u:\W$ "
 
 

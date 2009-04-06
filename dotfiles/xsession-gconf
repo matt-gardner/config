@@ -1,0 +1,23 @@
+#!/bin/bash
+
+##############################################################################
+# Key bindings:
+function bind {
+    gconftool-2 -t string -s /apps/metacity/$1_keybindings/$2 $3
+}
+# go to gconf-edit: /apps/metacity to see what the possible bindings are
+
+bind window close "<Ctrl><Alt>d"
+bind window maximize_vertically "<Ctrl><Alt>space"
+bind window maximize_horizontally "<Ctrl><Alt>h"
+bind window begin_resize "<Ctrl><Alt>grave"
+
+if hostname -f |grep -q aml.cs.byu.edu
+then
+	xrandr --output HDMI-1 --right-of HDMI-2
+fi
+
+gnome-session
+
+kill %1 %2 %3 %4 %5 %6 %7 %8
+

@@ -10,7 +10,7 @@ if has("autocmd")
 	filetype plugin indent on
 	" For python you want 4 spaces to be a tab, and tabs should be expanded
 	autocmd FileType python setlocal et sw=4 sts=4
-	autocmd FileType set foldlevel=1
+	autocmd FileType python set foldlevel=1
 	" Use the skeletons when opening python and latex files
 	autocmd BufNewFile *.py r ~/.vim/skel.py
 	autocmd BufNewFile *.tex r ~/.vim/skel.tex

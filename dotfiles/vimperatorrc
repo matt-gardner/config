@@ -1,6 +1,5 @@
 set guioptions=mBTr
 set focuscontent
 map <BS> H
-norm goh
 set vb
 set newtab=help
