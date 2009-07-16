@@ -1,7 +1,13 @@
 #!/bin/bash
 alias cs401='cd ~/school/cs401R/NLP/'
+alias cs404='cd ~/school/cs404/'
 alias cs450='cd ~/school/cs450'
 alias cs478='cd ~/school/cs478'
 alias cs601='cd ~/school/cs601R'
+alias engl316='cd ~/school/engl316'
 alias pso='cd ~/python/amlpso'
 alias papers='cd ~/papers'
+alias scratch='cd /aml/scratch/mjg82'
+alias data='cd /aml/data/mjg82'
+alias talks='cd /aml/data/mjg82/nlpdata/talks'
+alias runserver='pushd ~/studyjournal; python manage.py runserver 0.0.0.0:8000 & popd'

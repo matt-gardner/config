@@ -41,6 +41,7 @@ pythondirs=(
 			$HOME/python/evilplot 
 			$HOME/google-opt
 			$HOME/clone/pssh
+			$HOME/python/util
 			)
 
 export PYTHONPATH=""
@@ -72,6 +73,8 @@ alias convertalltoeps='for file in `ls *.pgm`; do convert $file `basename $file 
 alias ls='ls --color=always'
 alias rm='rm -i'
 alias pushall="git commit -a -m'.'; git push;"
+alias pretty1="enscript -GE"
+alias pretty2="enscript -G2rE"
 
 
 # Some system specific stuff
