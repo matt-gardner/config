@@ -76,7 +76,6 @@ alias pushall="git commit -a -m'.'; git push;"
 alias pretty1="enscript -GE"
 alias pretty2="enscript -G2rE"
 
-
 # Some system specific stuff
 if [[ $USER == "MGardner" ]]
 then
@@ -102,4 +101,3 @@ else
 		export LS_COLORS=""
 	fi
 fi
-
