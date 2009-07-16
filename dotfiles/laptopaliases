@@ -33,5 +33,4 @@ alias 'mysql-start'='cd ~/Documents/mysql-5.0.51b-osx10.5-x86; bin/mysqld_safe -
 #alias 'mysql-start'='mysqld_safe --defaults-file=$MYSQL_HOME/my.cnf &'
 alias 'mysql-stop'='mysqladmin -u root -p shutdown'
 
-PS1="matthew-gardner's-computer:\W$ "
 

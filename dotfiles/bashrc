@@ -1,10 +1,9 @@
 
 # Load compatible rc file (for aliases and variables)
-. $HOME/config/dotfiles/shrc
-if [[ -e $HOME/.aliases ]]
-then 
-	. $HOME/.aliases
-fi
+. $HOME/.shrc
 
 # Vi mode:
 set -o vi
+
+# Ignore repeat commands in .bash_history
+export HISTCONTROL=ignoredups
