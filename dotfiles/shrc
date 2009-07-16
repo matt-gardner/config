@@ -63,4 +63,5 @@ export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib:/System/Library/Frameworks/Appl
 export CLICOLOR=1
 export LSCOLORS=gxfxcxdxcxegedabaggxgx
 export EDITOR=vim
+export HISTCONTROL=ignoredups
 
