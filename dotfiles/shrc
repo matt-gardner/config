@@ -70,7 +70,6 @@ fi
 
 # Aliases that I want on all of my machines
 alias convertalltoeps='for file in `ls *.pgm`; do convert $file `basename $file .pgm`.eps; done; for file in `ls *.ppm`; do convert $file `basename $file .ppm`.eps; done'
-alias ls='ls --color=always'
 alias rm='rm -i'
 alias pushall="git commit -a -m'.'; git push;"
 alias pretty1="enscript -GE"
@@ -87,6 +86,7 @@ then
 	export CLICOLOR=1
 	export LSCOLORS=gxfxcxdxcxegedabaggxgx
 	export EDITOR=vim
+	alias ls='ls -G'
 	PS1="matthew-gardner's-computer:\W$ "
 else
 	PS1="\u:\W$ "
@@ -94,6 +94,7 @@ else
 	# in the lab.  I want the colors to change if I'm logged in from the mac,
 	# but to use the default colors in the lab.  So it turns out that $TERM
 	# is xterm-color on the mac, and just xterm in the lab, so this works.
+	alias ls='ls --color=always'
 	if [[ $TERM == "xterm-color" ]]
 	then
 		export LS_COLORS="di=36:ln=35:so=32:pi=33:ex=32:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:*.py=33"
