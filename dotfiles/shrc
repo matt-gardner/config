@@ -42,6 +42,7 @@ pythondirs=(
 			$HOME/google-opt
 			$HOME/clone/pssh
 			$HOME/python/util
+			/Library/Python/2.5/site-packages
 			)
 
 export PYTHONPATH=""
