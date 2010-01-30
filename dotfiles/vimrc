@@ -17,6 +17,7 @@ if has("autocmd")
 	" Gets rid of an extra line that gets put in
     autocmd BufNewFile *.py exe "normal 1Gddj"
     autocmd BufNewFile *.tex exe "normal 1Gddj"
+    autocmd BufEnter *.html setfiletype htmldjango
 
 endif
 " Get rid of the annoying default plaintex for empty .tex files
