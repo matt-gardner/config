@@ -7,7 +7,6 @@ pathdirs=(
 		# On my laptop
 		/opt/local/bin
 		/opt/local/sbin
-		$HOME/Documents/mysql-5.0.51b-osx10.5-x86/bin
 		/Library/Frameworks/Python.framework/Versions/Current/bin
 
 		# On the lab machines
@@ -39,10 +38,10 @@ pythondirs=(
 			$HOME/python 
 			$HOME/python/amlpso 
 			$HOME/python/evilplot 
-			$HOME/google-opt
-			$HOME/clone/pssh
 			$HOME/python/util
 			/Library/Python/2.5/site-packages
+			$HOME/clone/smug
+			$HOME/clone
 			)
 
 export PYTHONPATH=""
