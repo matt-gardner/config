@@ -76,7 +76,7 @@ alias pretty1="enscript -GE"
 alias pretty2="enscript -G2rE"
 
 # Some system specific stuff
-if [[ $USER == "MGardner" ]]
+if [[ `hostname` == "matthew-gardners-computer.local" ]]
 then
 	export MYSQL_HOME=~/Documents/mysql-5.0.51b-osx10.5-x86
 	export LIBRARY_PATH=/opt/local/lib
@@ -87,9 +87,7 @@ then
 	export LSCOLORS=gxfxcxdxcxegedabaggxgx
 	export EDITOR=vim
 	alias ls='ls -G'
-	PS1="matthew-gardner's-computer:\W$ "
 else
-	PS1="\u:\W$ "
 	# This is because I use a black terminal on my mac, but a white terminal
 	# in linux.  I want different colors on the different systems.  So it turns
 	# out that $TERM is xterm-color on the mac, and just xterm in linux, so
