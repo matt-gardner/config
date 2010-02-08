@@ -1,3 +1,7 @@
+" Use Vim settings, rather then Vi settings (usually better).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+
 syntax on
 if has("autocmd")
 	" When editing a file, always jump to the last curser position
@@ -17,15 +21,37 @@ if has("autocmd")
 	" Gets rid of an extra line that gets put in
     autocmd BufNewFile *.py exe "normal 1Gddj"
     autocmd BufNewFile *.tex exe "normal 1Gddj"
+	" Use django file type for html files, 'cause I don't do any other html
     autocmd BufEnter *.html setfiletype htmldjango
 
 endif
 " Get rid of the annoying default plaintex for empty .tex files
 let g:tex_flavor='latex'
 
-" Make some mappings to do spellchecking
+" Make a mapping to do spellchecking
 nmap <silent> <F3> :setlocal spell spelllang=en_us<cr>
 
+" Allow lower case to match upper case search targets.
+set smartcase
+
+" Always show the status line
+set laststatus=2
+
+" ReST editing stuff
+function ReST_Extend_Line()
+    let cur = getline(".")
+    let prev = getline( line(".") - 1 )
+    return repeat(cur[0], len(prev) - len(cur))
+endfunction
+imap <F9> <c-r>=ReST_Extend_Line()<cr>
+map <F9> yypVr
+
+" Don't use Ex mode.
+map Q <nop>
+
+" Tab completion for ex command-line (like :split)
+set wildmenu
+set wildmode=longest:full,full
 
 " Some folding options
 set foldenable
