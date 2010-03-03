@@ -15,5 +15,8 @@ shopt -s histappend
 # Whenever the prompt is displayed, write the previous command to disk
 export PROMPT_COMMAND='history -a'
 
-# Enable programmable completion
-source /etc/bash_completion
+# Enable programmable completion (but the mac doesn't have it)
+if [[ ! `hostname` == "matthew-gardners-computer.local" ]]
+then
+	source /etc/bash_completion
+fi
