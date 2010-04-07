@@ -3,28 +3,33 @@
 ##############################################################################
 # Path
 
-pathdirs=(
-		# On my laptop
-		/opt/local/bin
-		/opt/local/sbin
-		/Library/Frameworks/Python.framework/Versions/Current/bin
+prepath=(
+	$HOME/bin
+	)
 
-		# On the lab machines
-		$HOME/admin/bin
-		$HOME/bin
-		)
+postpath=(
+	# On my laptop
+	/opt/local/bin
+	/opt/local/sbin
+	/Library/Frameworks/Python.framework/Versions/Current/bin
+	# Lab machines
+	$HOME/admin/bin
+	)
 
-for dir in ${pathdirs[@]}
+for dir in "${prepath[@]}"
 do
-	if [[ -d $dir ]]
-	then
-		if [[ $PATH == "" ]]
-		then
-			export PATH="$dir"
-		else
-			export PATH="$PATH:$dir"
-		fi
-	fi
+    if [[ -d $dir ]]
+    then
+        export PATH="$dir:$PATH"
+    fi
+done
+
+for dir in "${postpath[@]}"
+do
+    if [[ -d $dir ]]
+    then
+        export PATH="$PATH:$dir"
+    fi
 done
 
 # I like not having to type ./ before running an executable.  Maybe that's 
@@ -35,12 +40,11 @@ export PATH=$PATH::
 # Python Path
 
 pythondirs=(
-			$HOME/python 
-			$HOME/python/amlpso 
-			$HOME/python/evilplot 
-			$HOME/python/util
 			/Library/Python/2.5/site-packages
+			$HOME/pythonutil
+			$HOME/clone/amlpso 
 			$HOME/clone/smug
+			$HOME/clone/evilplot 
 			$HOME/clone
 			)
 

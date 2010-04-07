@@ -53,6 +53,10 @@ map Q <nop>
 set wildmenu
 set wildmode=longest:full,full
 
+" When at the top or bottom of the terminal, always leave 2 lines above the
+" curser
+set scrolloff=2
+
 " Some folding options
 set foldenable
 set foldlevelstart=0
