@@ -23,10 +23,16 @@ if has("autocmd")
     autocmd BufNewFile *.tex exe "normal 1Gddj"
 	" Use django file type for html files, 'cause I don't do any other html
     autocmd BufEnter *.html setfiletype htmldjango
+	" Include bibliography files for autocompletion purposes
+	autocmd BufEnter *.tex set include=\\\\input\\\\|\\\\include{\\\\|\\\\bibliography{
+	autocmd BufEnter *.tex set suffixesadd=.tex,.bib
 
 endif
 " Get rid of the annoying default plaintex for empty .tex files
 let g:tex_flavor='latex'
+
+" Add included files to autocomplete
+set complete+=i
 
 " Make a mapping to do spellchecking
 nmap <silent> <F3> :setlocal spell spelllang=en_us<cr>
@@ -36,6 +42,9 @@ set smartcase
 
 " Always show the status line
 set laststatus=2
+
+" Show partial commands in the command buffer as they are being typed
+set showcmd
 
 " ReST editing stuff
 function ReST_Extend_Line()
