@@ -15,6 +15,10 @@ if has("autocmd")
 	" For python you want 4 spaces to be a tab, and tabs should be expanded
 	autocmd FileType python setlocal et sw=4 sts=4
 	autocmd FileType python set foldlevel=1
+	autocmd FileType python set foldlevel=1
+	autocmd FileType python set includeexpr=PythonIncludeExpr()
+	autocmd FileType python set include=^\\(from\\\\|import\\)
+	autocmd FileType python set path+=,~/pythonutil
 	" Use the skeletons when opening python and latex files
 	autocmd BufNewFile *.py r ~/.vim/skel.py
 	autocmd BufNewFile *.tex r ~/.vim/skel.tex
@@ -23,10 +27,43 @@ if has("autocmd")
     autocmd BufNewFile *.tex exe "normal 1Gddj"
 	" Use django file type for html files, 'cause I don't do any other html
     autocmd BufEnter *.html setfiletype htmldjango
+	" Include bibliography files for autocompletion purposes
+	autocmd FileType tex set include=\\\\input\\\\|\\\\include{\\\\|\\\\bibliography{
+	autocmd FileType tex set suffixesadd=.tex,.bib
 
 endif
+
+function! PythonIncludeExpr()
+	"echo v:fname
+	for dir in split(&path, ',')
+		"echo dir
+		if isdirectory(dir . '/' . v:fname)
+			echo 'Directory found'
+			return v:fname . "/__init__.py"
+		endif
+	endfor
+	return substitute(v:fname, '\.', '/', 'g')
+endfunction
+
+" Add everything in PYTHONPATH to vim's path, for autocompletion purposes
+"python << EOF
+"import os
+"import sys
+"import vim
+"for p in sys.path:
+	"# Add each directory in sys.path, if it exists.
+	"if os.path.isdir(p):
+		"# Command 'set' needs backslash before each space.
+		"vim.command(r"set path+=%s" % (p.replace(" ", r"\ ")))
+"EOF
+
+
+
 " Get rid of the annoying default plaintex for empty .tex files
 let g:tex_flavor='latex'
+
+" Add included files to autocomplete
+set complete+=i
 
 " Make a mapping to do spellchecking
 nmap <silent> <F3> :setlocal spell spelllang=en_us<cr>
@@ -36,6 +73,9 @@ set smartcase
 
 " Always show the status line
 set laststatus=2
+
+" Show partial commands in the command buffer as they are being typed
+set showcmd
 
 " ReST editing stuff
 function ReST_Extend_Line()
@@ -52,6 +92,10 @@ map Q <nop>
 " Tab completion for ex command-line (like :split)
 set wildmenu
 set wildmode=longest:full,full
+
+" When at the top or bottom of the terminal, always leave 2 lines above the
+" curser
+set scrolloff=2
 
 " Some folding options
 set foldenable

@@ -17,7 +17,7 @@ bind window begin_resize "<Ctrl><Alt>grave"
 
 if hostname -f |grep -q aml.cs.byu.edu
 then
-	xrandr --output HDMI-1 --right-of HDMI-2
+	xrandr --output HDMI1 --right-of HDMI2
 fi
 papermon.sh &
 

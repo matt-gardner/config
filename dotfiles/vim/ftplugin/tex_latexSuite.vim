@@ -12,6 +12,7 @@ endif
 
 set sw=2
 set iskeyword+=:
+set iskeyword+=-
 set winaltkeys=no
 
 silent! do LatexSuite User LatexSuiteFileType
