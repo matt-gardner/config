@@ -84,7 +84,7 @@ alias pretty1="enscript -GE"
 alias pretty2="enscript -G2rE"
 
 # Some system specific stuff
-if [[ `hostname` == "matthew-gardners-computer.local" ]]
+if [[ $TERM == "xterm-color" ]]
 then
 	export MYSQL_HOME=~/Documents/mysql-5.0.51b-osx10.5-x86
 	export LIBRARY_PATH=/opt/local/lib
@@ -92,19 +92,19 @@ then
 	export PKG_CONFIG_PATH=/opt/local/include/gtkmm-2.4:/opt/local/include/gtkmm-2.0:/opt/local/lib/pkgconfig:/usr/X11R6/lib/pkgconfig
 	export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib:/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ImageIO.framework/Versions/A
 	export CLICOLOR=1
-	export LSCOLORS=gxfxcxdxcxegedabaggxgx
 	export EDITOR=vim
 	alias ls='ls -G'
-else
 	# This is because I use a black terminal on my mac, but a white terminal
 	# in linux.  I want different colors on the different systems.  So it turns
 	# out that $TERM is xterm-color on the mac, and just xterm in linux, so
 	# this works.
-	alias ls='ls --color=always'
-	if [[ $TERM == "xterm-color" ]]
+	if [[ ! `hostname` == 'matthew-gardners-computer.local' ]]
+	#if [[ `hostname -f |cut -d'.' -f2` == "aml" ]]
 	then
 		export LS_COLORS="di=36:ln=35:so=32:pi=33:ex=32:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:*.py=33"
 	else
-		export LS_COLORS=""
+		export LSCOLORS=gxfxcxdxcxegedabaggxgx
 	fi
+else
+	alias ls='ls --color=always'
 fi
