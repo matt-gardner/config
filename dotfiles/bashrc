@@ -15,6 +15,10 @@ shopt -s histappend
 # Whenever the prompt is displayed, write the previous command to disk
 export PROMPT_COMMAND='history -a'
 
+# Some rather silly people decided to put miserable functionality as default
+# in Fedora 13 and beyond.  This disables it.
+unset -f command_not_found_handle
+
 # Enable programmable completion (but the mac doesn't have it)
 if [[ ! `hostname` == "matthew-gardners-computer.local" ]]
 then
