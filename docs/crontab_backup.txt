@@ -1,0 +1,7 @@
+These are the entries in my crontab file for backing up the study journal
+database in case something goes wrong.  I should figure out how to make these
+automatically get added somehow, but I haven't yet, so I have to remember to
+run crontab -e every time I reinstall the machine.
+
+0 0 * * * cp /home/mjg82/studyjournal/db /home/mjg82/backups/db.backup
+0 12 * * * cp /home/mjg82/studyjournal/db /home/mjg82/studyjournal/db.backup
