@@ -1,0 +1,20 @@
+This was what I needed to do to get Trac to work.  This is the extra stuff that
+goes in /etc/trac/trac.ini
+
+[components]
+
+tracext.git.* = enabled
+webadmin.* = enabled
+acct_mgr.* = enabled
+acct_mgr.htfile.HtDigestStore = enabled
+trac.web.auth.loginmodule = disabled
+
+[account-manager]
+
+password_store = HtDigestStore
+password_file = /aml/home/mjg82/.trac.htdigest
+htdigest_realm = TracDigestRealm
+
+Getting Trac 0.12 to work was a bit of a mess, because I had to uninstall Trac
+0.11.7, then install 0.12 from source, along with an updated version of the git
+plugin, and the account manager.  But it worked eventually.
