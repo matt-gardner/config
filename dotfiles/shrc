@@ -72,6 +72,10 @@ then
 	. $HOME/.aliases
 fi
 
+# Default editor should be vim
+export EDITOR=vim
+export VISUAL=vim
+
 # Aliases that I want on all of my machines
 alias convertalltoeps='for file in `ls *.pgm`; do convert $file `basename $file .pgm`.eps; done; for file in `ls *.ppm`; do convert $file `basename $file .ppm`.eps; done'
 alias rm='rm -i'
