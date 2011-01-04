@@ -15,6 +15,10 @@ password_store = HtDigestStore
 password_file = /aml/home/mjg82/.trac.htdigest
 htdigest_realm = TracDigestRealm
 
+[mainnav]
+
+tickets.href = /report/1
+
 Getting Trac 0.12 to work was a bit of a mess, because I had to uninstall Trac
 0.11.7, then install 0.12 from source, along with an updated version of the git
 plugin, and the account manager.  But it worked eventually.
