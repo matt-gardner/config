@@ -6,7 +6,7 @@
 set -o vi
 
 # Set the prompt
-PS1="\u:\W$ "
+PS1="\u@\h:\W$ "
 
 # Ignore repeat commands in .bash_history
 export HISTCONTROL=ignoredups
