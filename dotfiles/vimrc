@@ -19,6 +19,8 @@ if has("autocmd")
 	autocmd FileType python set includeexpr=PythonIncludeExpr()
 	autocmd FileType python set include=^\\(from\\\\|import\\)
 	autocmd FileType python set path+=,~/pythonutil
+	" Use syntax folding for C++ because I don't have a good script for it
+	autocmd FileType cpp set foldmethod=syntax
 	" Use the skeletons when opening python and latex files
 	autocmd BufNewFile *.py r ~/.vim/skel.py
 	autocmd BufNewFile *.tex r ~/.vim/skel.tex
@@ -89,6 +91,9 @@ map <F9> yypVr
 " Don't use Ex mode.
 map Q <nop>
 
+" Get rid of annoying ctr-u in insert mode
+imap <c-u> <nop>
+
 " Tab completion for ex command-line (like :split)
 set wildmenu
 set wildmode=longest:full,full
@@ -101,11 +106,14 @@ set scrolloff=2
 set foldenable
 set foldlevelstart=0
 set foldopen=block,insert,hor,jump,mark,percent,quickfix,search,tag,undo
+
 " Maps F2 to getting rid of the highlighting after a search - very nice
 nmap <silent> <F2> :nohl<cr>:set spelllang=<cr>
+
 " Resize windows with + and _, instead of the C-W stuff
 nmap + <C-W>+
 nmap _ <C-W>-
+
 " Tabs should be four spaces long, not eight
 set sw=4
 set ts=4

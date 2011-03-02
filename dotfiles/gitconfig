@@ -1,0 +1,9 @@
+[user]
+	email = mjg82@byu.edu
+	name = Matt Gardner
+[color]
+    status = auto
+    diff = auto
+    branch = auto
+[alias]
+	s = status -sb
