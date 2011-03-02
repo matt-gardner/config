@@ -1,24 +1,37 @@
-This was what I needed to do to get Trac to work.  This is the extra stuff that
-goes in /etc/trac/trac.ini
+This may no longer be needed, because I made an etc directory that holds what I
+want to go into /etc.  But this explains what I changed and why, as well as
+contains some helpful debug information.
+
+This was what I needed to do to get Trac to work.
+
+Getting Trac 0.12 to work was a bit of a mess, because I had to uninstall Trac
+0.11.7, then install 0.12 from source, along with an updated version of the git
+plugin, and the account manager.  But it worked eventually.
+
+This is the extra stuff that goes in /etc/trac/trac.ini
 
 [components]
 
+# Support git repos
 tracext.git.* = enabled
+
+# Do admin stuff from the web interface
 webadmin.* = enabled
+
+# Nicer login as well as modifying accounts from the web interface
 acct_mgr.* = enabled
 acct_mgr.htfile.HtDigestStore = enabled
 trac.web.auth.loginmodule = disabled
 
 [account-manager]
 
+# This makes logging in through the account manager work
 password_store = HtDigestStore
 password_file = /aml/home/mjg82/.trac.htdigest
 htdigest_realm = TracDigestRealm
 
 [mainnav]
 
+# View tickets goes directly to the first report, instead of a report landing
+# page
 tickets.href = /report/1
-
-Getting Trac 0.12 to work was a bit of a mess, because I had to uninstall Trac
-0.11.7, then install 0.12 from source, along with an updated version of the git
-plugin, and the account manager.  But it worked eventually.
