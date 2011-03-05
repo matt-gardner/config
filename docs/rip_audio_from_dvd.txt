@@ -1,0 +1,19 @@
+To see what's on the dvd:
+
+lsdvd
+
+To get one track at a time:
+
+transcode -i /dev/dvd -x dvd -T2,1,1 -a 0 -y null,ogg -m track1.ogg
+transcode -i /dev/dvd -x dvd -T2,2,1 -a 0 -y null,ogg -m track2.ogg
+
+(this came from
+http://www.ubuntugeek.com/how-to-rip-dvd-audio-to-mp3-or-ogg.html, and it has
+explanations, though they were missing the null before the ogg after -y.  For
+some reason ripping straight to mp3 didn't work, but to ogg did.)
+
+Then, converting to mp3 files, simply run
+
+soundconverter
+
+which can be obtained from yum.  It's a GUI that's easy enough to use.
