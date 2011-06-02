@@ -4,32 +4,32 @@
 # Path
 
 prepath=(
-	$HOME/bin
-	)
+  $HOME/bin
+  )
 
 postpath=(
-	# On my laptop
-	/opt/local/bin
-	/opt/local/sbin
-	/Library/Frameworks/Python.framework/Versions/Current/bin
-	# Lab machines
-	$HOME/admin/bin
-	)
+  # On my laptop
+  /opt/local/bin
+  /opt/local/sbin
+  /Library/Frameworks/Python.framework/Versions/Current/bin
+  # Lab machines
+  $HOME/admin/bin
+  )
 
 for dir in "${prepath[@]}"
 do
-    if [[ -d $dir ]]
-    then
-        export PATH="$dir:$PATH"
-    fi
+  if [[ -d $dir ]]
+  then
+    export PATH="$dir:$PATH"
+  fi
 done
 
 for dir in "${postpath[@]}"
 do
-    if [[ -d $dir ]]
-    then
-        export PATH="$PATH:$dir"
-    fi
+  if [[ -d $dir ]]
+  then
+    export PATH="$PATH:$dir"
+  fi
 done
 
 # I like not having to type ./ before running an executable.  Maybe that's
@@ -40,28 +40,28 @@ export PATH=$PATH::
 # Python Path
 
 pythondirs=(
-			/Library/Python/2.5/site-packages
-			$HOME/pythonutil
-			$HOME/clone
-			$HOME/clone/mrs
-			$HOME/clone/amlpso
-			$HOME/clone/smug
-			$HOME/clone/evilplot
-			)
+    /Library/Python/2.5/site-packages
+    $HOME/pythonutil
+    $HOME/clone
+    $HOME/clone/mrs
+    $HOME/clone/amlpso
+    $HOME/clone/smug
+    $HOME/clone/evilplot
+    )
 
 export PYTHONPATH=""
 
 for dir in ${pythondirs[@]}
 do
-	if [[ -d $dir ]]
-	then
-		if [[ $PYTHONPATH == "" ]]
-		then
-			export PYTHONPATH="$dir"
-		else
-			export PYTHONPATH="$PYTHONPATH:$dir"
-		fi
-	fi
+  if [[ -d $dir ]]
+  then
+    if [[ $PYTHONPATH == "" ]]
+    then
+      export PYTHONPATH="$dir"
+    else
+      export PYTHONPATH="$PYTHONPATH:$dir"
+    fi
+  fi
 done
 
 set -o vi
@@ -70,7 +70,7 @@ set -o vi
 # Aliases that are machine specific
 if [[ -e $HOME/.aliases ]]
 then
-	. $HOME/.aliases
+  . $HOME/.aliases
 fi
 
 # Default editor should be vim
@@ -90,15 +90,15 @@ alias start_vpn="cd ~/config/openvpn; sudo openvpn --config client.conf"
 if [[ `hostname` == 'matthew-gardners-computer.local' ]]
 #if [[ `hostname -f |cut -d'.' -f2` == "aml" ]]
 then
-	export MYSQL_HOME=~/Documents/mysql-5.0.51b-osx10.5-x86
-	export LIBRARY_PATH=/opt/local/lib
-	export CPLUS_INCLUDE_PATH=/opt/local/include
-	export PKG_CONFIG_PATH=/opt/local/include/gtkmm-2.4:/opt/local/include/gtkmm-2.0:/opt/local/lib/pkgconfig:/usr/X11R6/lib/pkgconfig
-	export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib:/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ImageIO.framework/Versions/A
-	export CLICOLOR=1
-	alias ls='ls -G'
+  export MYSQL_HOME=~/Documents/mysql-5.0.51b-osx10.5-x86
+  export LIBRARY_PATH=/opt/local/lib
+  export CPLUS_INCLUDE_PATH=/opt/local/include
+  export PKG_CONFIG_PATH=/opt/local/include/gtkmm-2.4:/opt/local/include/gtkmm-2.0:/opt/local/lib/pkgconfig:/usr/X11R6/lib/pkgconfig
+  export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib:/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ImageIO.framework/Versions/A
+  export CLICOLOR=1
+  alias ls='ls -G'
 else
-	alias ls='ls --color=always'
+  alias ls='ls --color=always'
 fi
 
 # This is because I use a black terminal on my mac, but a white terminal
@@ -109,7 +109,7 @@ fi
 # just removing it and living with the color difference.
 if [[ $TERM == "xterm-color" ]]
 then
-	export LS_COLORS="di=36:ln=35:so=32:pi=33:ex=32:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:*.py=33"
+  export LS_COLORS="di=36:ln=35:so=32:pi=33:ex=32:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:*.py=33"
 else
-	export LSCOLORS=gxfxcxdxcxegedabaggxgx
+  export LSCOLORS=gxfxcxdxcxegedabaggxgx
 fi
