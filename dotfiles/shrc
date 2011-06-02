@@ -32,7 +32,7 @@ do
     fi
 done
 
-# I like not having to type ./ before running an executable.  Maybe that's 
+# I like not having to type ./ before running an executable.  Maybe that's
 # sacrilegious, but oh well.
 export PATH=$PATH::
 
@@ -42,10 +42,11 @@ export PATH=$PATH::
 pythondirs=(
 			/Library/Python/2.5/site-packages
 			$HOME/pythonutil
-			$HOME/clone/amlpso 
-			$HOME/clone/smug
-			$HOME/clone/evilplot 
 			$HOME/clone
+			$HOME/clone/mrs
+			$HOME/clone/amlpso
+			$HOME/clone/smug
+			$HOME/clone/evilplot
 			)
 
 export PYTHONPATH=""
@@ -68,7 +69,7 @@ set -o vi
 
 # Aliases that are machine specific
 if [[ -e $HOME/.aliases ]]
-then 
+then
 	. $HOME/.aliases
 fi
 
@@ -82,6 +83,7 @@ alias rm='rm -i'
 alias pushall="git commit -a -m'.'; git push;"
 alias pretty1="enscript -GE"
 alias pretty2="enscript -G2rE"
+alias 2up="pdfnup --nup 2x1 --paper letterpaper --trim '60 60 60 60'"
 alias start_vpn="cd ~/config/openvpn; sudo openvpn --config client.conf"
 
 # Some system specific stuff
