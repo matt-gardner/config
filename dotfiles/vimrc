@@ -1,4 +1,4 @@
-" Use Vim settings, rather then Vi settings (usually better).
+" Use Vim settings, rather than Vi settings (usually better).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
@@ -55,16 +55,17 @@ autocmd BufWinEnter * 2match TrailingWhitespace /\s\+$/
 " The following apparently avoids a memory leak.
 autocmd BufWinLeave * call clearmatches()
 
+
 function! PythonIncludeExpr()
-	"echo v:fname
-	for dir in split(&path, ',')
-		"echo dir
-		if isdirectory(dir . '/' . v:fname)
-			echo 'Directory found'
-			return v:fname . "/__init__.py"
-		endif
-	endfor
-	return substitute(v:fname, '\.', '/', 'g')
+  "echo v:fname
+  for dir in split(&path, ',')
+    "echo dir
+    if isdirectory(dir . '/' . v:fname)
+      echo 'Directory found'
+      return v:fname . "/__init__.py"
+    endif
+  endfor
+  return substitute(v:fname, '\.', '/', 'g')
 endfunction
 
 " Add everything in PYTHONPATH to vim's path, for autocompletion purposes
@@ -73,10 +74,10 @@ endfunction
 "import sys
 "import vim
 "for p in sys.path:
-	"# Add each directory in sys.path, if it exists.
-	"if os.path.isdir(p):
-		"# Command 'set' needs backslash before each space.
-		"vim.command(r"set path+=%s" % (p.replace(" ", r"\ ")))
+  "# Add each directory in sys.path, if it exists.
+  "if os.path.isdir(p):
+    "# Command 'set' needs backslash before each space.
+    "vim.command(r"set path+=%s" % (p.replace(" ", r"\ ")))
 "EOF
 
 
