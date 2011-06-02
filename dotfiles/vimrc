@@ -55,6 +55,11 @@ autocmd BufWinEnter * 2match TrailingWhitespace /\s\+$/
 " The following apparently avoids a memory leak.
 autocmd BufWinLeave * call clearmatches()
 
+" Also highlight tab characters, which are evil.
+set list
+set listchars=tab:\ \ ,
+highlight SpecialKey ctermbg=Red guibg=Red
+
 
 function! PythonIncludeExpr()
   "echo v:fname
