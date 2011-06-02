@@ -1,4 +1,7 @@
 
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
 # Load compatible rc file (for aliases and variables)
 . $HOME/.shrc
 
@@ -20,6 +23,9 @@ shopt -s histappend
 
 # Whenever the prompt is displayed, write the previous command to disk
 export PROMPT_COMMAND='history -a'
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # Some rather silly people decided to put miserable functionality as default
 # in Fedora 13 and beyond.  This disables it.
