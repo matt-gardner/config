@@ -3,37 +3,49 @@
 set nocompatible
 
 syntax on
-if has("autocmd")
-	" When editing a file, always jump to the last curser position
-	autocmd BufReadPost *
-	\ if line("'\"") > 0 && line ("'\"") <= line("$") |
-	\   exe "normal! g'\""  |
-	\ endif
 
-	" Allow filetype detection, plugins, and indenting
-	filetype plugin indent on
-	" For python you want 4 spaces to be a tab, and tabs should be expanded
-	autocmd FileType python setlocal et sw=4 sts=4
-	autocmd FileType python set foldlevel=1
-	autocmd FileType python set foldlevel=1
-	autocmd FileType python set includeexpr=PythonIncludeExpr()
-	autocmd FileType python set include=^\\(from\\\\|import\\)
-	autocmd FileType python set path+=,~/pythonutil
-	" Use syntax folding for C++ because I don't have a good script for it
-	autocmd FileType cpp set foldmethod=syntax
-	" Use the skeletons when opening python and latex files
-	autocmd BufNewFile *.py r ~/.vim/skel.py
-	autocmd BufNewFile *.tex r ~/.vim/skel.tex
-	" Gets rid of an extra line that gets put in
-    autocmd BufNewFile *.py exe "normal 1Gddj"
-    autocmd BufNewFile *.tex exe "normal 1Gddj"
-	" Use django file type for html files, 'cause I don't do any other html
-    autocmd BufEnter *.html setfiletype htmldjango
-	" Include bibliography files for autocompletion purposes
-	autocmd FileType tex set include=\\\\input\\\\|\\\\include{\\\\|\\\\bibliography{
-	autocmd FileType tex set suffixesadd=.tex,.bib
+" When editing a file, always jump to the last curser position
+autocmd BufReadPost *
+\ if line("'\"") > 0 && line ("'\"") <= line("$") |
+\   exe "normal! g'\""  |
+\ endif
 
-endif
+" Allow filetype detection, plugins, and indenting
+filetype plugin indent on
+" For python you want 4 spaces to be a tab, and tabs should be expanded
+autocmd FileType python setlocal et sw=4 sts=4
+autocmd FileType python set foldlevel=1
+autocmd FileType python set foldlevel=1
+autocmd FileType python set includeexpr=PythonIncludeExpr()
+autocmd FileType python set include=^\\(from\\\\|import\\)
+autocmd FileType python set path+=,~/pythonutil
+" Use syntax folding for C++ because I don't have a good script for it
+autocmd FileType cpp set foldmethod=syntax
+" Use the skeletons when opening python and latex files
+autocmd BufNewFile *.py r ~/.vim/skel.py
+autocmd BufNewFile *.tex r ~/.vim/skel.tex
+" Gets rid of an extra line that gets put in
+autocmd BufNewFile *.py exe "normal 1Gddj"
+autocmd BufNewFile *.tex exe "normal 1Gddj"
+" Use django file type for html files, 'cause I don't do any other html
+autocmd BufEnter *.html setfiletype htmldjango
+" Include bibliography files for autocompletion purposes
+autocmd FileType tex set include=\\\\input\\\\|\\\\include{\\\\|\\\\bibliography{
+autocmd FileType tex set suffixesadd=.tex,.bib
+
+" Add a highlight group to look out for trailing whitespace.
+" Thanks to: http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+highlight TrailingWhitespace ctermbg=red guibg=red
+autocmd colorscheme * highlight TrailingWhitespace ctermbg=red guibg=red
+2match TrailingWhitespace /\s\+$/
+" Explanation of the following: whitespace: \s , one or more: \+ ,
+"   current cursor position: \%# , negate: \@<! , end of line: $
+autocmd InsertEnter * 2match TrailingWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * 2match TrailingWhitespace /\s\+$/
+autocmd BufWinEnter * 2match TrailingWhitespace /\s\+$/
+" The following apparently avoids a memory leak.
+autocmd BufWinLeave * call clearmatches()
+
 
 function! PythonIncludeExpr()
 	"echo v:fname
