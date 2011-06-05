@@ -1,3 +1,7 @@
+Command to run tracd:
+
+tracd -e projects -p 8002
+
 This may no longer be needed, because I made an etc directory that holds what I
 want to go into /etc.  But this explains what I changed and why, as well as
 contains some helpful debug information.

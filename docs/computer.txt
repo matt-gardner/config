@@ -1,0 +1,24 @@
+Parts:
+case (and power supply - look at efficiency (PLUS))
+motherboard
+video card? (depending on motherboard)
+processor (Tom's hardware - benchmark site to check)
+ram
+hard drive
+monitor
+fan?
+optical drive?
+speakers (depending on monitor)
+keyboard and mouse (if you don't already have extras)
+
+
+Spec on 4/14/2011:
+case: Antec - $50 - $100 (the minuet, which the potatoes have, is about $100)
+motherboard: MSi 880GM-E43 - $80
+processor: AMD Phenom II Six-Core - $200
+ram: Mushkin 8GB (2x4GB) DDR3 - $82
+hard drive: Hitachi 1TB: $55
+monitor: Acer G235HAbd 23" - $150
+fan: up to $10
+
+Total: $677
