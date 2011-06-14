@@ -85,6 +85,9 @@ endfunction
     "vim.command(r"set path+=%s" % (p.replace(" ", r"\ ")))
 "EOF
 
+" Enforce 80 character line widths by wrapping automatically
+" And I like having an empty space on the end, so we actually make it 79
+set textwidth=79
 
 
 " Get rid of the annoying default plaintex for empty .tex files
