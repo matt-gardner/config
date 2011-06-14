@@ -13,6 +13,9 @@ autocmd BufReadPost *
 " first line
 autocmd BufReadPost *COMMIT_EDITMSG exe "normal 1G"
 
+" Automatically format text as you go
+set formatoptions=a
+
 " Allow filetype detection, plugins, and indenting
 filetype plugin indent on
 
