@@ -58,6 +58,7 @@ install kile evince-dvi
 install inkscape inkscape-docs gnumeric audacity gnome-games bsd-games
 install epiphany epiphany-extensions wireshark wireshark-gnome
 install nspluginwrapper padevchooser redhat-lsb gnome-device-manager
+install checkgmail
 install chromium avidemux-gtk avidemux-cli
 install gcstar gourmet digikam banshee
 

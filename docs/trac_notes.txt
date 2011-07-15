@@ -1,6 +1,14 @@
+Command to run tracd:
+
+tracd -e projects -p 8002
+
 This may no longer be needed, because I made an etc directory that holds what I
 want to go into /etc.  But this explains what I changed and why, as well as
 contains some helpful debug information.
+
+Packages that you need to install manually:
+git extension
+account manager
 
 This was what I needed to do to get Trac to work.
 
@@ -27,7 +35,7 @@ trac.web.auth.loginmodule = disabled
 
 # This makes logging in through the account manager work
 password_store = HtDigestStore
-password_file = /aml/home/mjg82/.trac.htdigest
+password_file = /home/matt/.trac.htdigest
 htdigest_realm = TracDigestRealm
 
 [mainnav]
