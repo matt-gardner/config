@@ -1,0 +1,231 @@
+#!/bin/bash
+
+##############################################################################
+# Keyboard configuration (needs to happen early)
+
+# Stuff from Andrew - consider putting in the keyboard layouts that I like
+
+kbd="/desktop/gnome/peripherals/keyboard"
+#gconftool-2 -t bool -s "$kbd/general/groupPerWindow" false
+# Note that the items in this list need to have tab characters (very odd fmt).
+#gconftool-2 -t list --list-type=string -s "$kbd/kbd/options" \
+    #"[ctrl	ctrl:nocaps,terminate	terminate:ctrl_alt_bksp]"
+#gconftool-2 -t list --list-type=string -s "$kbd/kbd/layouts" \
+    #"[us	dvorak,us]"
+
+#gconftool-2 -t bool -s $kbd/disable_xmm_and_xkb_warning true
+#gconftool-2 -t list --list-type=string -s "$kbd/general/known_file_list" \
+    #"[.xmodmap-pointer1,.xmodmap-pointer2]"
+
+#if [[ `hostname -s` == maggie ]]
+#then
+    #gconftool-2 -t list --list-type=string -s "$kbd/general/update_handlers" \
+        #"[.xmodmap-pointer1,.xmodmap-pointer2]"
+#fi
+
+##############################################################################
+# Window Manager
+
+# number of workspaces
+WORKSPACES=6
+gconftool-2 -t int -s /apps/metacity/general/num_workspaces "$WORKSPACES"
+
+# turn on compositing (effects)
+gconftool-2 -t bool -s /apps/metacity/general/compositing_manager true
+
+gconftool-2 -t bool -s /apps/nautilus/preferences/show_desktop false
+#gconftool-2 -t string -s /apps/metacity/general/focus_mode sloppy
+#gconftool-2 -t string -s /apps/metacity/general/focus_new_windows strict
+#gconftool-2 -t string -s /apps/metacity/general/focus_new_windows smart
+#gconftool-2 -t bool -s /apps/metacity/general/raise_on_click false
+#gconftool-2 -t string -s /apps/metacity/general/mouse_button_modifier "<Mod4>"
+#gconftool-2 -t string -s /apps/metacity/general/theme amcnabb
+gconftool-2 -t bool -s /apps/metacity/general/visual_bell false
+gconftool-2 -t bool -s /apps/metacity/general/audible_bell false
+#gconftool-2 -t bool -s /apps/metacity/general/resize_with_right_button true
+
+gconftool-2 -t bool -s /desktop/gnome/interface/cursor_blink false
+gconftool-2 -t string -s /desktop/gnome/font_rendering/antialiasing rgba
+gconftool-2 -t string -s /desktop/gnome/font_rendering/hinting medium
+gconftool-2 -t bool -s /desktop/gnome/file_views/show_hidden_files true
+
+# Turn off annoying sounds!
+gconftool-2 -t bool -s /desktop/gnome/sound/event_sounds false
+gconftool-2 -t bool -s /apps/notification-daemon/sound_enabled false
+gconftool-2 -t bool -s /apps/gnome_settings_daemon/plugins/sound/active false
+
+# Turn off CPU-intensive stuff
+gconftool-2 -t bool -s /desktop/gnome/interface/menus_have_icons false
+gconftool-2 -t bool -s /apps/gnome-session/options/show_splash_screen false
+
+# get rid of annoying icons in gnome apps
+#gconftool-2 -t string -s /desktop/gnome/interface/toolbar_style text
+
+# Stop the awful "An additional font is required" dialog.
+#gconftool-2 -t bool -s "/apps/gnome-packagekit/enable_font_helper" false
+
+
+##############################################################################
+# Panels
+
+# More stuff from Andrew - consider fixing this
+
+#gconftool-2 --recursive-unset /apps/panel/toplevels
+#gconftool-2 --recursive-unset /apps/panel/applets
+#gconftool-2 --recursive-unset /apps/panel/objects
+
+# Add applets and objects
+#for xmlfile in $HOME/config/gconf/*.xml
+#do
+    #gconftool-2 --load $xmlfile
+#done
+
+# Position the items
+#applets="/apps/panel/applets"
+#objects="/apps/panel/objects"
+# Items on the left/top (from left to right)
+#gconftool-2 -t int -s $objects/menu/position 1
+#gconftool-2 -t bool -s $objects/menu/panel_right_stick false
+#gconftool-2 -t int -s $objects/lock/position 2
+#gconftool-2 -t bool -s $objects/lock/panel_right_stick false
+#gconftool-2 -t int -s $applets/switcher/position 3
+#gconftool-2 -t bool -s $applets/switcher/panel_right_stick false
+#gconftool-2 -t int -s $objects/charpicker_drawer/position 4
+#gconftool-2 -t bool -s $objects/charpicker_drawer/panel_right_stick false
+#gconftool-2 -t int -s $applets/charpicker/position 4
+#gconftool-2 -t bool -s $applets/charpicker/panel_right_stick false
+# Items on the right/bottom (from right to left)
+#gconftool-2 -t int -s $applets/multiload/position 1
+#gconftool-2 -t bool -s $applets/multiload/panel_right_stick true
+#gconftool-2 -t int -s $applets/clock/position 2
+#gconftool-2 -t bool -s $applets/clock/panel_right_stick true
+#gconftool-2 -t int -s $applets/brightness/position 4
+#gconftool-2 -t bool -s $applets/brightness/panel_right_stick true
+#gconftool-2 -t int -s $applets/systray/position 5
+#gconftool-2 -t bool -s $applets/systray/panel_right_stick true
+
+# set the list of panels
+#gconftool-2 -t list --list-type=string -s \
+    #/apps/panel/general/toplevel_id_list "[panel]"
+
+# set the lists of applets and objects; if it's a small screen, then
+# assume it's a laptop
+#applet_list="/apps/panel/general/applet_id_list"
+#vertical_res=$(xrandr --current |head -n 1 \
+    #|sed -e 's/^.*current .* x \(.*\),.*$/\1/')
+#if [[ $vertical_res -le 768 ]]
+#then
+    # list of applets
+    #gconftool-2 -t list --list-type=string -s "$applet_list" \
+        #"[clock,systray,switcher,brightness]"
+    # The charpicker is misbehaving and ignoring the toplevel_id.  Ignore for
+    # now:
+        #"[clock,systray,switcher,charpicker,brightness]"
+    # list of objects
+    #gconftool-2 -t list --list-type=string -s \
+        #/apps/panel/general/object_id_list "[menu,lock]"
+        #/apps/panel/general/object_id_list "[menu,lock,charpicker_drawer]"
+    # put the charpicker in the drawer
+    #gconftool-2 -t string -s $applets/charpicker/toplevel_id charpicker_panel
+#else
+    # list of applets
+    #gconftool-2 -t list --list-type=string -s "$applet_list" \
+        #"[clock,systray,switcher,charpicker,multiload]"
+    # list of objects
+    #gconftool-2 -t list --list-type=string -s \
+        #/apps/panel/general/object_id_list "[menu,lock]"
+#fi
+
+
+##############################################################################
+# MultiLoadApplet settings
+
+#multiloadprefs="/apps/panel/applets/multiload/prefs"
+#if [[ `hostname -s` == maude || `hostname -s` == maggie ]]
+#then
+    #MULTILOADSIZE=30
+#else
+    #MULTILOADSIZE=50
+#fi
+#gconftool-2 -t int -s $multiloadprefs/size $MULTILOADSIZE
+
+
+##############################################################################
+# Key bindings:
+function bind {
+    gconftool-2 -t string -s /apps/metacity/$1_keybindings/$2 $3
+}
+# go to gconf-edit: /apps/metacity to see what the possible bindings are
+
+#bind global panel_run_dialog "<Mod4>Return"
+#bind global switch_windows "disabled"
+bind global cycle_windows "<Alt>grave"
+bind global switch_to_workspace_up "<Ctr><Alt>Up"
+bind global switch_to_workspace_down "<Ctr><Alt>Down"
+bind global switch_to_workspace_left "<Ctr><Alt>Left"
+bind global switch_to_workspace_right "<Ctr><Alt>Right"
+
+bind window close "<Ctr><Alt>D"
+#bind window toggle_on_all_workspaces "<Alt><Mod4>0"
+#bind window toggle_maximized "<Alt><Mod4>Return"
+bind window maximize_vertically "<Ctr><Alt>space"
+bind window maximize_horizontally "<Ctr><Alt>h"
+#bind window toggle_fullscreen "<Alt><Mod4>f"
+#bind window toggle_above "<Alt><Mod4>t"
+#bind window raise_or_lower "<Alt><Mod4>Tab"
+#bind window begin_resize "<Alt><Mod4>grave"
+bind window move_to_workspace_up "<Ctr><Alt><Shift>Up"
+bind window move_to_workspace_down "<Ctr><Alt><Shift>Down"
+bind window move_to_workspace_right "<Ctr><Alt><Shift>Right"
+bind window move_to_workspace_left "<Ctr><Alt><Shift>Left"
+
+# Disable:
+#bind global panel_main_menu "disabled"
+#bind global cycle_panels "disabled"
+#bind global cycle_panels_backward "disabled"
+#bind global show_desktop "disabled"
+#bind global switch_panels "disabled"
+#bind global switch_group "disabled"
+bind window activate_window_menu "disabled"
+bind window minimize "disabled"
+
+##############################################################################
+# gnome-terminal settings
+
+#gconftool-2 -t bool -s \
+    #/apps/gnome-terminal/global/use_menu_accelerators false
+#gconftool-2 -t bool -s \
+    #/apps/gnome-terminal/global/use_mnemonics false
+gconftool-2 -t bool -s \
+    /apps/gnome-terminal/global/confirm_window_close false
+
+# Turn off all retarded key bindings
+gconftool-2 -a /apps/gnome-terminal/keybindings |
+    (while read key remainder
+        do gconftool-2 -t string -s \
+            /apps/gnome-terminal/keybindings/$key disabled
+    done)
+
+gtprofile=/apps/gnome-terminal/profiles/Default
+gconftool-2 -t string -s $gtprofile/background_color "#FFFFFF"
+transparency="0.9"
+gconftool-2 -t float -s $gtprofile/background_darkness "$transparency"
+gconftool-2 -t string -s $gtprofile/background_type "transparent"
+gconftool-2 -t bool -s $gtprofile/default_show_menubar false
+gconftool-2 -t bool -s $gtprofile/silent_bell true
+gconftool-2 -t bool -s $gtprofile/login_shell true
+gconftool-2 -t bool -s $gtprofile/use_system_font false
+gconftool-2 -t int -s $gtprofile/scrollback_lines 65536
+
+gconftool-2 -t string -s $gtprofile/font "Monospace 10"
+
+
+##############################################################################
+# Mousekeys (set as late as possible because something seems to disable it)
+
+#if [[ `hostname -s` == maggie ]]
+#then
+    #gconftool-2 -t bool \
+        #-s /desktop/gnome/accessibility/keyboard/mousekeys_enable true
+#fi
+
