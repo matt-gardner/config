@@ -1,0 +1,33 @@
+#!/usr/bin/python
+
+"""Starts three servers, assuming they are all in specific locations.
+
+The three servers are:
+- Language study program, at ~/language_study
+- Study journal program, at ~/studyjournal
+- Trac, at ~/trac
+"""
+
+import subprocess
+
+def run(*args):
+    returncode = subprocess.call(args)
+    if returncode != 0:
+        print >>sys.stderr, 'Command failed with error code', returncode
+        sys.exit(1)
+
+run('screen', '-dmS', 'study')
+run('screen', '-S', 'study', '-X', 'stuff', 'cd studyjournal\n')
+run('screen', '-S', 'study', '-X', 'stuff', 'python manage.py runserver '
+        '0.0.0.0:8000\n')
+
+run('screen', '-dmS', 'language')
+run('screen', '-S', 'language', '-X', 'stuff', 'cd language_study\n')
+run('screen', '-S', 'language', '-X', 'stuff', 'python manage.py runserver '
+        '0.0.0.0:8001\n')
+
+run('screen', '-dmS', 'trac')
+run('screen', '-S', 'trac', '-X', 'stuff', 'cd trac\n')
+run('screen', '-S', 'trac', '-X', 'stuff', 'tracd -e projects -p 8002\n')
+
+# vim: et sw=4 sts=4
