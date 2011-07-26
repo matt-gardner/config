@@ -7,7 +7,7 @@ groupinstall office printing sound-and-video system-tools text-internet
 install nss_ldap sssd
 
 # XFCE stuff
-install xfce4-xkb-plugin xfce-systemload-plugin
+install xfce4-xkb-plugin xfce4-systemload-plugin
 
 # Needed by the server
 install httpd mod_ssl mod_dav_svn mod_python apr-util-ldap bind dhcp
