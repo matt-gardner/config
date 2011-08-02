@@ -1,27 +1,77 @@
 #!/bin/bash
 
+killall -9 papermon.sh
+$HOME/bin/papermon.sh &
+
 ##############################################################################
-# Key bindings:
-function bind {
-    gconftool-2 -t string -s /apps/metacity/$1_keybindings/$2 $3
-}
-# go to gconf-edit: /apps/metacity to see what the possible bindings are
+# Keyboard layout stuff
 
-# Compositing with metacity
-gconftool-2 -s '/apps/metacity/general/compositing_manager' --type bool true
+# For some reason this doesn't actually work with xfce4 (and maybe gnome).  I
+# think it's because it has to run after the xfce4-xkb-plugin loads, which is
+# later.  But I don't know where to put it.  So at least I have these commands
+# here and can run them manually once on a system install, then have everything
+# work until I reinstall.
 
-bind window close "<Ctrl><Alt>d"
-bind window maximize_vertically "<Ctrl><Alt>space"
-bind window maximize_horizontally "<Ctrl><Alt>h"
-bind window begin_resize "<Ctrl><Alt>grave"
+# Switch keyboard layouts when left win is pressed, and toggle with menu key
+setxkbmap -layout 'us,si,gr,es'
+setxkbmap -variant ',us,polytonic,deadtilde'
 
-if hostname -f |grep -q aml.cs.byu.edu
-then
-	xrandr --output HDMI1 --right-of HDMI2
+# Switch keyboard layouts when left win is pressed, and toggle with menu key
+setxkbmap -option grp:lwin_switch
+setxkbmap -option grp:menu_toggle
+
+##############################################################################
+# Start Session
+
+if [[ -x /usr/bin/startxfce4 ]]; then
+    # XFCE4
+
+    . $HOME/.xsession-xfconf
+
+    /usr/bin/startxfce4
+else
+    # GNOME
+
+    # Load gconf settings
+    ($HOME/.xsession-gconf) &
+
+    disable_autostart()
+    {
+        SYSDIR="/etc/xdg/autostart"
+        LOCALDIR="$HOME/.config/autostart"
+        mkdir -p "$LOCALDIR"
+        cp "$SYSDIR/$1.desktop" "$LOCALDIR"
+        echo "X-GNOME-Autostart-enabled=false" >>"$LOCALDIR/$1.desktop"
+    }
+
+    # By the way, there's no need to disable services if the desktop file has an
+    # AutostartCondition line.
+
+    # Bluetooth (re-enable if and when I ever need it):
+    disable_autostart bluetooth-applet
+    # Silly backup tool:
+    disable_autostart deja-dup-monitor
+    # GNOME personal file sharing:
+    disable_autostart gnome-user-share
+    # PackageKit Applet:
+    disable_autostart gpk-update-icon
+    # SELinux restorecond:
+    disable_autostart restorecond
+    # SELinux troubleshooter:
+    disable_autostart sealertauto
+    # Silly home directory mangler:
+    disable_autostart user-dirs-update-gtk
+    # XScreenSaver (I use GNOME ScreenSaver):
+    disable_autostart xscreensaver-autostart
+
+    ##########################################################################
+    # Window/Session Manager
+
+    # which window manager (metacity or compiz)
+    gconftool-2 --type string --set /apps/gnome-session/rh/window_manager metacity
+
+    gnome-session
 fi
-papermon.sh &
 
-gnome-session
-
+# Get rid of any straggler children
 kill %1 %2 %3 %4 %5 %6 %7 %8
-

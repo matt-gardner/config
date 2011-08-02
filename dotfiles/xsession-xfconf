@@ -1,0 +1,82 @@
+#!/bin/bash
+
+##############################################################################
+# Keybindings
+
+xfconf-query -c xfce4-keyboard-shortcuts \
+    -p /xfwm4/custom/override -t bool -s true
+
+xfwm4-key() {
+    xfconf-query -c xfce4-keyboard-shortcuts -n -t string \
+        -p "/xfwm4/custom/$1" -s "$2"
+}
+
+# Remove all existing key bindings.
+for p in $(xfconf-query -c xfce4-keyboard-shortcuts -p /xfwm4/custom -l); do
+    if [[ $p != "/xfwm4/custom/override" ]]; then
+        xfconf-query -c xfce4-keyboard-shortcuts -p "$p" -r
+    fi
+done
+
+xfwm4-key "<Control><Alt>Left" "prev_workspace_key"
+xfwm4-key "<Control><Alt>Right" "next_workspace_key"
+xfwm4-key "<Control><Alt><Shift>Left" "move_window_prev_workspace_key"
+xfwm4-key "<Control><Alt><Shift>Right" "move_window_next_workspace_key"
+
+#xfwm4-key "<Alt>Tab" "cycle_windows_key"
+xfwm4-key "<Alt>grave" "cycle_windows_key"
+#xfwm4-key "<Super><Alt>Tab" "cycle_reverse_windows_key"
+#xfwm4-key "<Super><Alt>Up" "raise_window_key"
+#xfwm4-key "<Super><Alt>Down" "lower_window_key"
+
+xfwm4-key "<Control><Alt>space" "maximize_vert_key"
+#xfwm4-key "<Super><Alt>space" "fill_vert_key"
+xfwm4-key "<Control><Alt>h" "maximize_horiz_key"
+#xfwm4-key "<Super><Alt>Shift_R" "fill_horiz_key"
+#xfwm4-key "<Super>Return" "maximize_window_key"
+#xfwm4-key "<Super><Alt>Return" "fullscreen_key"
+
+xfwm4-key "<Control><Alt>d" "close_window_key"
+
+##############################################################################
+# XFWM4 Settings
+
+xfwm4-setting() {
+    xfconf-query -c xfwm4 -p "/general/$1" -n -t "$2" -s "$3"
+}
+
+#xfwm4-setting theme string amcnabb
+xfwm4-setting workspace_count int 6
+
+# Set focus follows mouse.
+#xfwm4-setting click_to_focus bool false
+#xfwm4-setting focus_delay int 0
+
+# Don't raise a window when it's clicked on.
+#xfwm4-setting raise_on_click bool false
+
+# Modifier key for dragging and resizing windows with the mouse.
+#xfwm4-setting easy_click string Super
+
+# Snap windows to border and to other windows.
+xfwm4-setting snap_to_border bool true
+xfwm4-setting snap_to_windows bool true
+
+# Don't maximize windows when the title bar is double-clicked.
+xfwm4-setting double_click_action string none
+
+# Don't drag windows between workspaces when reaching screen edge.
+xfwm4-setting wrap_windows bool false
+
+xfwm4-setting use_compositing bool true
+
+##############################################################################
+# Miscellaneous
+
+# Turn on mousekeys (allow middle click using keyboard)
+#if [[ $(hostname -s) == maggie ]]; then
+    #xfconf-query -c accessibility -n -t bool -p /MouseKeys -s true
+#fi
+
+# Disable desktop icons
+#xfconf-query -c xfce4-desktop -n -t int -p /desktop-icons/style -s 0

@@ -1,7 +1,74 @@
-gcstar - a collection managar (I've only used this a little, though)
-gourmet - a recipe collector (the we actually have data for)
-checkgmail - adds a panel icon that tells you if you have email
-gstreamer-plugins-ugly (don't forget to install this one!)
-vlc (the dvd player)
-digikam
-ImageMagick-c++
+groupinstall base base-x core development-libs development-tools
+groupinstall gnome-desktop graphical-internet graphics xfce
+groupinstall java java-development legacy-software-support
+groupinstall office printing sound-and-video system-tools text-internet
+
+# Authentication (important):
+install nss_ldap sssd
+
+# XFCE stuff
+install xfce4-xkb-plugin xfce4-systemload-plugin
+
+# Needed by the server
+install httpd mod_ssl mod_dav_svn mod_python apr-util-ldap bind dhcp
+install openldap-servers samba mediawiki tftp-server ssmtp mysql
+install ltsp-server scponly autofs
+
+# System tools
+install syslinux kernel-doc memtest86+ livecd-tools spin-kickstarts
+install rpmdevtools rpmlint qemu-kvm virt-manager libvirt tunctl
+install wine dracut-network sysstat ddrescue fedora-release-rawhide
+
+# UNIX Tools
+install bash-completion xbindkeys lynx irssi ncftp
+install gconf-editor xorg-x11-xinit-session xorg-x11-apps
+install htop iotop collectl lm_sensors nethogs
+install tftp enscript pssh pdftk pdfjam cowsay socat
+
+# Basic Development tools
+install subversion git-all git-daemon bzr mercurial
+install vim-enhanced vim-X11 emacs eclipse ddd
+install trac trac-git-plugin trac-accountmanager-plugin
+
+# C/C++ Libraries
+install ElectricFence wxGTK-devel gsl-devel xorg-x11-server-sdk
+install ImageMagick-c++-devel
+
+# Python Libraries and Tools
+install python3 python3-setuptools pypy python-docs python-docutils
+install jython python-setuptools ipython numpy scipy
+install python-twisted python-imaging-devel python-imaging-tk python-alsaaudio
+install python-BeautifulSoup pexpect pydot python-py
+install Django Django-doc
+install pygame python-matplotlib pydb python-nltk python-cvxopt PyOpenGL
+install sympy python-cjson opencv-python python-guppy
+
+# Other Programming Languages
+install R perl-Error
+
+# Writing Tools
+install texlive texlive-latex texlive-texmf-doc texlive-texmf-xetex
+#texlive-dvips
+install rubber gnuplot graphviz gv xfig dia xpdf
+install sil-gentium-fonts sil-gentium-alt-fonts sil-gentium-basic-book-fonts
+install sil-gentium-basic-fonts sil-gentium-basic-fonts-common
+install kile evince-dvi
+
+# Applications
+install inkscape inkscape-docs gnumeric audacity gnome-games bsd-games
+install epiphany epiphany-extensions wireshark wireshark-gnome
+install nspluginwrapper padevchooser redhat-lsb gnome-device-manager
+install checkgmail
+install chromium avidemux-gtk avidemux-cli
+install gcstar gourmet digikam banshee
+
+# Flash plugin prerequisites (see https://fedoraproject.org/wiki/Flash):
+install nspluginwrapper.i686 alsa-plugins-pulseaudio.i686 libcurl.i686
+
+# Codecs and RPM Fusion stuff
+install ffmpeg gstreamer-ffmpeg gstreamer-plugins-good gstreamer-plugins-bad
+install gstreamer-plugins-ugly
+install lame mpg321 mplayer gnome-mplayer mencoder vlc xmms-mp3
+install xine-ui xine-lib-extras-freeworld
+
+run
