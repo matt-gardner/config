@@ -16,6 +16,9 @@ autocmd BufReadPost *COMMIT_EDITMSG exe "normal 1G"
 " Allow filetype detection, plugins, and indenting
 filetype plugin indent on
 
+" Hit F4 while in insert mode to do a correct paste
+set pastetoggle=<F4>
+
 " For python you want 4 spaces to be a tab, and tabs should be expanded
 autocmd FileType python setlocal et sw=4 sts=4
 autocmd FileType python set foldlevel=1
