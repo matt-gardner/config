@@ -38,6 +38,10 @@ autocmd BufNewFile *.tex exe "normal 1Gddj"
 " Use django file type for html files, 'cause I don't do any other html
 autocmd BufEnter *.html setfiletype htmldjango
 
+" For django and javascript, use spaces instead of tabs (I dislike tabs...)
+autocmd FileType htmldjango setlocal et sw=4 sts=4
+autocmd FileType javascript setlocal et sw=4 sts=4
+
 " Include bibliography files for autocompletion purposes
 autocmd FileType tex set include=\\\\input\\\\|\\\\include{\\\\|\\\\bibliography{
 autocmd FileType tex set suffixesadd=.tex,.bib
