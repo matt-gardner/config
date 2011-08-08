@@ -93,6 +93,12 @@ endfunction
 " And I like having an empty space on the end, so we actually make it 79
 set textwidth=79
 
+" Automatically format comments when typing.  So if you type a long comment,
+" vim will autowrap for you.
+set formatoptions+=r
+" Also continue a comment if inserting with 'O' directly under or over an
+" existing comment.
+set formatoptions+=o
 
 " Get rid of the annoying default plaintex for empty .tex files
 let g:tex_flavor='latex'
