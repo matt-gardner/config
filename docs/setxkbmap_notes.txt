@@ -1,0 +1,9 @@
+This command did what I wanted it to:
+
+setxkbmap -option=grp:lwin_switch
+
+This will list the current set up:
+
+setxkbmap -query
+
+I should look into how to get this into .xsession, or something like that

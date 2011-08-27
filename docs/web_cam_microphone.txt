@@ -1,0 +1,7 @@
+When we got our webcam, the picture worked just fine but the microphone didn't
+do anything.  Turns out that was because the sound driver was trying to use the
+"default input device," which was not the USB microphone from the webcam (it
+was nothing, because there was no default mic).  So, the way I fixed it was by
+installing pavucontrol.  I ran that program and made the USB microphone not a
+fallback and the sound card microphone (nonexistant) a fallback.  And that
+fixed it.
