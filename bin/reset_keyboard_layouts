@@ -1,0 +1,8 @@
+#!/bin/bash
+
+setxkbmap -layout 'us,si,gr,es'
+setxkbmap -variant ',us,polytonic,deadtilde'
+
+setxkbmap -option grp:lwin_switch
+setxkbmap -option grp:menu_toggle
+setxkbmap -option grp:rwin_toggle
