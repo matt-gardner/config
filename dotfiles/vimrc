@@ -16,6 +16,9 @@ autocmd BufReadPost *COMMIT_EDITMSG exe "normal 1G"
 " Allow filetype detection, plugins, and indenting
 filetype plugin indent on
 
+" Hit F4 while in insert mode to do a correct paste
+set pastetoggle=<F4>
+
 " For python you want 4 spaces to be a tab, and tabs should be expanded
 autocmd FileType python setlocal et sw=4 sts=4
 autocmd FileType python set foldlevel=1
@@ -37,6 +40,10 @@ autocmd BufNewFile *.tex exe "normal 1Gddj"
 
 " Use django file type for html files, 'cause I don't do any other html
 autocmd BufEnter *.html setfiletype htmldjango
+
+" For django and javascript, use spaces instead of tabs (I dislike tabs...)
+autocmd FileType htmldjango setlocal et sw=4 sts=4
+autocmd FileType javascript setlocal et sw=4 sts=4
 
 " Include bibliography files for autocompletion purposes
 autocmd FileType tex set include=\\\\input\\\\|\\\\include{\\\\|\\\\bibliography{
@@ -89,6 +96,12 @@ endfunction
 " And I like having an empty space on the end, so we actually make it 79
 set textwidth=79
 
+" Automatically format comments when typing.  So if you type a long comment,
+" vim will autowrap for you.
+set formatoptions+=r
+" Also continue a comment if inserting with 'O' directly under or over an
+" existing comment.
+set formatoptions+=o
 
 " Get rid of the annoying default plaintex for empty .tex files
 let g:tex_flavor='latex'
