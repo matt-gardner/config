@@ -19,6 +19,11 @@ setxkbmap -variant ',us,polytonic,deadtilde'
 # Switch keyboard layouts when left win is pressed, and toggle with menu key
 setxkbmap -option grp:lwin_switch
 setxkbmap -option grp:menu_toggle
+setxkbmap -option grp:rwin_toggle # on a Mac laptop running linux, because the
+# command keys are considered lwin and rwin
+
+# Enable horizontal scrolling
+synclient HorizTwoFingerScroll=1
 
 ##############################################################################
 # Start Session
