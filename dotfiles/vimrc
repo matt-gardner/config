@@ -156,6 +156,9 @@ nmap <silent> <F2> :nohl<cr>:set spelllang=<cr>
 nmap + <C-W>+
 nmap _ <C-W>-
 
+" Use <C-T> to run :TlistToggle - the taglist plugin that shows code structure
+nmap <C-T> :TlistToggle<cr>
+
 " Tabs should be four spaces long, not eight
 set sw=4
 set ts=4
