@@ -45,6 +45,12 @@ autocmd BufEnter *.html setfiletype htmldjango
 autocmd FileType htmldjango setlocal et sw=4 sts=4
 autocmd FileType javascript setlocal et sw=4 sts=4
 
+" You know what, just use spaces instead of tabs everywhere
+set et sw=4 sts=4
+
+" And for latex files, use two spaces instead of four
+autocmd FileType tex setlocal et sw=2 sts=2
+
 " Include bibliography files for autocompletion purposes
 autocmd FileType tex set include=\\\\input\\\\|\\\\include{\\\\|\\\\bibliography{
 autocmd FileType tex set suffixesadd=.tex,.bib
