@@ -43,10 +43,10 @@ pythondirs=(
     /Library/Python/2.5/site-packages
     $HOME/pythonutil
     $HOME/clone
-    $HOME/clone/mrs
     $HOME/clone/amlpso
     $HOME/clone/smug
     $HOME/clone/evilplot
+    $HOME/games
     )
 
 export PYTHONPATH=""
