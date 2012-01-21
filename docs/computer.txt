@@ -22,3 +22,16 @@ monitor: Acer G235HAbd 23" - $150
 fan: up to $10
 
 Total: $677
+
+
+
+Spec on 12/23/2011 (just a rough comparison of what you get now for about the
+same price):
+case: same as above
+motherboard and processor: AMD eight-core or Intel i5 2500K
+ram: 16GB (4x4 DDR3)
+hard drive: 1TB: $100ish, or 120GB SSD: $128 (there was a flood in Thailand
+that steeply raised the prices of hard drives)
+monitor: there was a deal the day I looked that had the same monitor as above
+at $110.  But generally monitors look to be about $200 for 23".
+fan: same as above
