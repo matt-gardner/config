@@ -42,6 +42,7 @@ install python-BeautifulSoup pexpect pydot python-py
 install Django Django-doc
 install pygame python-matplotlib pydb python-nltk python-cvxopt PyOpenGL
 install sympy python-cjson opencv-python python-guppy
+install python-gevent libevent-devel
 
 # Other Programming Languages
 install R perl-Error
@@ -58,9 +59,9 @@ install kile evince-dvi
 install inkscape inkscape-docs gnumeric audacity gnome-games bsd-games
 install epiphany epiphany-extensions wireshark wireshark-gnome
 install nspluginwrapper padevchooser redhat-lsb gnome-device-manager
-install checkgmail
 install chromium avidemux-gtk avidemux-cli
 install gcstar gourmet digikam banshee
+install dosbox zsnes
 
 # Flash plugin prerequisites (see https://fedoraproject.org/wiki/Flash):
 install nspluginwrapper.i686 alsa-plugins-pulseaudio.i686 libcurl.i686
@@ -70,5 +71,16 @@ install ffmpeg gstreamer-ffmpeg gstreamer-plugins-good gstreamer-plugins-bad
 install gstreamer-plugins-ugly
 install lame mpg321 mplayer gnome-mplayer mencoder vlc xmms-mp3
 install xine-ui xine-lib-extras-freeworld
+install libdvdcss dvdrip
+
+# Gnome 3 extensions
+install gnome-tweak-tool gnome-shell-extension-alternate-tab
+install gnome-shell-extension-alternative-status-menu
+install gnome-shell-extension-native-window-placement
+install gnome-shell-extension-places-menu
+install gnome-shell-extension-remove-accessibility-icon
+install gnome-shell-extension-user-theme gnome-shell-extension-weather
+# This one isn't in the packages, but you can find it online
+install gnome-shell-frippery
 
 run

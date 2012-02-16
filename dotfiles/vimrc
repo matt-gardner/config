@@ -45,6 +45,13 @@ autocmd BufEnter *.html setfiletype htmldjango
 autocmd FileType htmldjango setlocal et sw=4 sts=4
 autocmd FileType javascript setlocal et sw=4 sts=4
 
+" You know what, just use spaces instead of tabs everywhere
+set et sw=4 sts=4
+
+" And for latex and html files, use two spaces instead of four
+autocmd FileType tex setlocal et sw=2 sts=2
+autocmd FileType htmldjango setlocal et sw=2 sts=2
+
 " Include bibliography files for autocompletion purposes
 autocmd FileType tex set include=\\\\input\\\\|\\\\include{\\\\|\\\\bibliography{
 autocmd FileType tex set suffixesadd=.tex,.bib
@@ -155,6 +162,9 @@ nmap <silent> <F2> :nohl<cr>:set spelllang=<cr>
 " Resize windows with + and _, instead of the C-W stuff
 nmap + <C-W>+
 nmap _ <C-W>-
+
+" Use <C-T> to run :TlistToggle - the taglist plugin that shows code structure
+nmap <C-T> :TlistToggle<cr>
 
 " Tabs should be four spaces long, not eight
 set sw=4
