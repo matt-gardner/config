@@ -53,8 +53,17 @@ autocmd FileType tex setlocal et sw=2 sts=2
 autocmd FileType htmldjango setlocal et sw=2 sts=2
 
 " Include bibliography files for autocompletion purposes
-autocmd FileType tex set include=\\\\input\\\\|\\\\include{\\\\|\\\\bibliography{
+autocmd FileType tex set include=\\\\input\\\\|\\\\include{\\\\|\\\\bibliography{\\\\|\\.\\.\\/\\.\\.\\/\\.\\.
 autocmd FileType tex set suffixesadd=.tex,.bib
+function! LatexIncludeExpr(fname)
+    let fname = a:fname
+    if fname[0] != "."
+        let fname = "../../.." . fname
+    endif
+    let fname = substitute(fname, '^.\{-}{\|}.*\|,.*', '', 'g')
+    return fname
+endfunction
+autocmd FileType tex let &l:includeexpr="LatexIncludeExpr(v:fname)"
 
 " Add a highlight group to look out for trailing whitespace.
 " Thanks to: http://vim.wikia.com/wiki/Highlight_unwanted_spaces
