@@ -168,6 +168,10 @@ set foldopen=block,insert,hor,jump,mark,percent,quickfix,search,tag,undo
 " Maps F2 to getting rid of the highlighting after a search - very nice
 nmap <silent> <F2> :nohl<cr>:set spelllang=<cr>
 
+" Maps F5 to cleaning up whitespace - convert tab characters to 4 spaces and
+" remove any trailing whitespace.
+nmap <F5> :%s/\s\+$//<cr>:%s/\t/    /g<cr>
+
 " Resize windows with + and _, instead of the C-W stuff
 nmap + <C-W>+
 nmap _ <C-W>-
@@ -175,9 +179,6 @@ nmap _ <C-W>-
 " Use <C-T> to run :TlistToggle - the taglist plugin that shows code structure
 nmap <C-T> :TlistToggle<cr>
 
-" Tabs should be four spaces long, not eight
-set sw=4
-set ts=4
 set hlsearch " Highlight the last used search pattern
 set ruler " show the cursor position all the time
 
