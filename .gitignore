@@ -1,3 +1,5 @@
 *.swp
 vim/.netrwhist
 *.pyc
+*.add.spl
+*.netrwhist

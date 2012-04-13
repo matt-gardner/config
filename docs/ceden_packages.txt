@@ -1,0 +1,9 @@
+Packages to install after a fresh reinstall of ceden:
+
+git-core
+gitk
+git-svn
+texlive-latex-recommended
+texlive-fonts-recommended
+ant
+default-jdk

@@ -40,6 +40,7 @@ export PATH=$PATH::
 # Python Path
 
 pythondirs=(
+    /usr/local/lib/python2.6/dist-packages
     /Library/Python/2.5/site-packages
     $HOME/pythonutil
     $HOME/clone
@@ -85,6 +86,7 @@ alias pretty1="enscript -GE"
 alias pretty2="enscript -G2rE"
 alias 2up="pdfnup --nup 2x1 --paper letterpaper --trim '60 60 60 60'"
 alias start_vpn="cd ~/config/openvpn; sudo openvpn --config client.conf"
+alias scala=/usr0/home/mg1/clone/scala-2.9.1/bin/scala
 
 # Some system specific stuff
 if [[ `hostname` == 'matthew-gardners-computer.local' ]]

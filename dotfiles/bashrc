@@ -34,5 +34,5 @@ unset -f command_not_found_handle
 # Enable programmable completion
 if [ -f /etc/bash_completion ] && ! shopt -oq posix
 then
-	source /etc/bash_completion
+    source /etc/bash_completion
 fi
