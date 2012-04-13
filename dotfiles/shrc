@@ -113,3 +113,9 @@ then
 else
   export LSCOLORS=gxfxcxdxcxegedabaggxgx
 fi
+
+# XLE stuff
+export XLEPATH=$HOME/xle
+export PATH=$XLEPATH/bin:$PATH
+export LD_LIBRARY_PATH=$XLEPATH/lib:$LD_LIBRARY_PATH
+export DYLD_LIBRARY_PATH=$XLEPATH/lib:$DYLD_LIBRARY_PATH
