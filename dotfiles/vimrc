@@ -19,6 +19,10 @@ filetype plugin indent on
 " Hit F4 while in insert mode to do a correct paste
 set pastetoggle=<F4>
 
+" Enforce 80 character line widths by wrapping automatically
+" And I like having an empty space on the end, so we actually make it 79
+set textwidth=79
+
 " For python you want 4 spaces to be a tab, and tabs should be expanded
 autocmd FileType python setlocal et sw=4 sts=4
 autocmd FileType python set foldlevel=1
@@ -26,6 +30,9 @@ autocmd FileType python set foldlevel=1
 autocmd FileType python set includeexpr=PythonIncludeExpr()
 autocmd FileType python set include=^\\(from\\\\|import\\)
 autocmd FileType python set path+=,~/pythonutil
+
+" Let lines in java be 100 characters long, as per convention
+autocmd FileType java set textwidth=99
 
 " Use syntax folding for C++ because I don't have a good script for it
 autocmd FileType cpp set foldmethod=syntax
@@ -107,10 +114,6 @@ endfunction
     "# Command 'set' needs backslash before each space.
     "vim.command(r"set path+=%s" % (p.replace(" ", r"\ ")))
 "EOF
-
-" Enforce 80 character line widths by wrapping automatically
-" And I like having an empty space on the end, so we actually make it 79
-set textwidth=79
 
 " Automatically format comments when typing.  So if you type a long comment,
 " vim will autowrap for you.
