@@ -44,6 +44,7 @@ pythondirs=(
     /Library/Python/2.5/site-packages
     $HOME/pythonutil
     $HOME/clone
+    $HOME/clone/mrs-mapreduce
     $HOME/clone/amlpso
     $HOME/clone/smug
     $HOME/clone/evilplot
@@ -84,7 +85,8 @@ alias rm='rm -i'
 alias pushall="git commit -a -m'.'; git push;"
 alias pretty1="enscript -GE"
 alias pretty2="enscript -G2rE"
-alias 2up="pdfnup --nup 2x1 --paper letterpaper --trim '60 60 60 60'"
+# --trim specification is "left bottom right top"
+alias 2up="pdfnup --nup 2x1 --paper letterpaper --trim '80 40 60 60'"
 alias start_vpn="cd ~/config/openvpn; sudo openvpn --config client.conf"
 alias scala=/usr0/home/mg1/clone/scala-2.9.1/bin/scala
 
