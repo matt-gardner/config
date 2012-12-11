@@ -8,12 +8,8 @@ prepath=(
   )
 
 postpath=(
-  # On my laptop
-  /opt/local/bin
-  /opt/local/sbin
-  /Library/Frameworks/Python.framework/Versions/Current/bin
-  # Lab machines
-  $HOME/admin/bin
+  $HOME/clone/android-sdk-linux/platform-tools
+  $HOME/clone/android-sdk-linux/tools
   )
 
 for dir in "${prepath[@]}"
@@ -113,3 +109,9 @@ then
 else
   export LSCOLORS=gxfxcxdxcxegedabaggxgx
 fi
+
+# XLE stuff
+export XLEPATH=$HOME/xle
+export PATH=$XLEPATH/bin:$PATH
+export LD_LIBRARY_PATH=$XLEPATH/lib:$LD_LIBRARY_PATH
+export DYLD_LIBRARY_PATH=$XLEPATH/lib:$DYLD_LIBRARY_PATH
