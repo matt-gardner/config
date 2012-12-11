@@ -35,3 +35,42 @@ that steeply raised the prices of hard drives)
 monitor: there was a deal the day I looked that had the same monitor as above
 at $110.  But generally monitors look to be about $200 for 23".
 fan: same as above
+
+Total: same as above, essentially
+
+
+Spec on 10/23/2012 (trying to see how much it would cost to replace different
+components of our machine):
+case: same as above - $50 - $100
+processor: AMD Phenom II X4 3.2Ghz - $95
+motherboard: ASUS M5A88-M - $100
+ram: $30 for 4GB, $40 for 8GB
+hard drive: $70 for 500GB, $90ish for 1TB, $100 for 128GB solid state drive
+fan: $10ish
+power supply: $30 for a cheap one
+
+Total: $465 (no monitor, high end of that listed above)
+
+
+
+Spec on 11/30/2012 (looking at building a mid-to-high-end machine, from
+scratch):
+
+case: Corsair 200R - $50 ($30 after a rebate)
+processor: i5-3570K - $230
+motherboard: Z77 chipset motherboard, Gigabyte or ASUS - $130ish
+ram: 16GB (2x8GB) DDR3 1600 G-Skill - $70
+hard drive: Seagate Barracuda 1TB 7200 RPM - $70
+SSD: ADATA 120GB - $90 ($80 after a rebate)
+monitor: ASUS VK228H-CSM 21.5" widescreen, webcam+speakers - $160
+power supply: Thermaltake TR2 430W - $35 ($25 after rebate)
+dvd rom drive: $20
+keyboard and mouse: MS ergonomic desktop 7000 - $60 on amazon
+
+Total: $915 (shipping offsets the rebates, I think)
+With Windows: add $99 for OEM and $180 for retail (retail not really worth it)
+
+Dell price: $875, but would still need to buy K&M and monitor, adding $190 to
+the price; also, this has no SSD, the processor is slightly worse, and there's
+a video card.  So it's like, $1155 for a mostly equivalent system from Dell,
+compared to $1014ish building it yourself.

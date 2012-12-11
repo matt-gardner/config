@@ -19,6 +19,10 @@ filetype plugin indent on
 " Hit F4 while in insert mode to do a correct paste
 set pastetoggle=<F4>
 
+" Enforce 80 character line widths by wrapping automatically
+" And I like having an empty space on the end, so we actually make it 79
+set textwidth=79
+
 " For python you want 4 spaces to be a tab, and tabs should be expanded
 autocmd FileType python setlocal et sw=4 sts=4
 autocmd FileType python set foldlevel=1
@@ -26,6 +30,9 @@ autocmd FileType python set foldlevel=1
 autocmd FileType python set includeexpr=PythonIncludeExpr()
 autocmd FileType python set include=^\\(from\\\\|import\\)
 autocmd FileType python set path+=,~/pythonutil
+
+" Let lines in java be 100 characters long, as per convention
+autocmd FileType java set textwidth=99
 
 " Use syntax folding for C++ because I don't have a good script for it
 autocmd FileType cpp set foldmethod=syntax
@@ -108,10 +115,6 @@ endfunction
     "vim.command(r"set path+=%s" % (p.replace(" ", r"\ ")))
 "EOF
 
-" Enforce 80 character line widths by wrapping automatically
-" And I like having an empty space on the end, so we actually make it 79
-set textwidth=79
-
 " Automatically format comments when typing.  So if you type a long comment,
 " vim will autowrap for you.
 set formatoptions+=r
@@ -168,6 +171,10 @@ set foldopen=block,insert,hor,jump,mark,percent,quickfix,search,tag,undo
 " Maps F2 to getting rid of the highlighting after a search - very nice
 nmap <silent> <F2> :nohl<cr>:set spelllang=<cr>
 
+" Maps F5 to cleaning up whitespace - convert tab characters to 4 spaces and
+" remove any trailing whitespace.
+nmap <F5> :%s/\s\+$//<cr>:%s/\t/    /g<cr>
+
 " Resize windows with + and _, instead of the C-W stuff
 nmap + <C-W>+
 nmap _ <C-W>-
@@ -175,9 +182,6 @@ nmap _ <C-W>-
 " Use <C-T> to run :TlistToggle - the taglist plugin that shows code structure
 nmap <C-T> :TlistToggle<cr>
 
-" Tabs should be four spaces long, not eight
-set sw=4
-set ts=4
 set hlsearch " Highlight the last used search pattern
 set ruler " show the cursor position all the time
 
