@@ -7,3 +7,4 @@ texlive-latex-recommended
 texlive-fonts-recommended
 ant
 default-jdk
+gimp
