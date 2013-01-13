@@ -41,7 +41,8 @@ export PATH=$PATH::
 
 pythondirs=(
     /usr/local/lib/python2.6/dist-packages
-    /Library/Python/2.5/site-packages
+    /usr/lib/python2.7/site-packages
+    /usr/lib64/python2.7/site-packages
     $HOME/pythonutil
     $HOME/clone
     $HOME/clone/amlpso
