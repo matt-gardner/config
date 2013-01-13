@@ -19,6 +19,10 @@ filetype plugin indent on
 " Hit F4 while in insert mode to do a correct paste
 set pastetoggle=<F4>
 
+" Enforce 80 character line widths by wrapping automatically
+" And I like having an empty space on the end, so we actually make it 79
+set textwidth=79
+
 " For python you want 4 spaces to be a tab, and tabs should be expanded
 autocmd FileType python setlocal et sw=4 sts=4
 autocmd FileType python set foldlevel=1
@@ -26,6 +30,9 @@ autocmd FileType python set foldlevel=1
 autocmd FileType python set includeexpr=PythonIncludeExpr()
 autocmd FileType python set include=^\\(from\\\\|import\\)
 autocmd FileType python set path+=,~/pythonutil
+
+" Let lines in java be 100 characters long, as per convention
+autocmd FileType java set textwidth=99
 
 " Use syntax folding for C++ because I don't have a good script for it
 autocmd FileType cpp set foldmethod=syntax
@@ -108,10 +115,6 @@ endfunction
     "vim.command(r"set path+=%s" % (p.replace(" ", r"\ ")))
 "EOF
 
-" Enforce 80 character line widths by wrapping automatically
-" And I like having an empty space on the end, so we actually make it 79
-set textwidth=79
-
 " Automatically format comments when typing.  So if you type a long comment,
 " vim will autowrap for you.
 set formatoptions+=r
@@ -171,6 +174,11 @@ nmap <silent> <F2> :nohl<cr>:set spelllang=<cr>
 " Maps F5 to cleaning up whitespace - convert tab characters to 4 spaces and
 " remove any trailing whitespace.
 nmap <F5> :%s/\s\+$//<cr>:%s/\t/    /g<cr>
+
+" Map F7 and F8 to changing the width of the terminal, for switching between
+" java and other kinds of editing (I could do this on bufenter...)
+nmap <silent> <F7> :!xdotool getactivewindow windowsize --usehints 80 24<cr><cr>
+nmap <silent> <F8> :!xdotool getactivewindow windowsize --usehints 100 24<cr><cr>
 
 " Resize windows with + and _, instead of the C-W stuff
 nmap + <C-W>+

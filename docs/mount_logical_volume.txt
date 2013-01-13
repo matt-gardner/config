@@ -1,0 +1,26 @@
+To mount a logical volume (like, say, if you need to take a disk that has a
+standard fedora install and stick it in another machine to get data out, for
+instance):
+
+make sure that package lvm2 is installed
+
+run:
+pvs
+
+this will tell you the name of the volume group (in recent (2012) versions of
+fedora, this looks like vg_hostname, generally).  It's the second column of the
+output, the VG column
+
+run (as root):
+lvdisplay /dev/[volume group name]
+(example: lvdisplay /dev/vg_soncek)
+
+This will tell you the different logical volumes in the volume group.  One of
+them will be a home directory.  In fedora, this is just lv_home, and you can
+probably skip this step.
+
+Now you need to make the volume group active.  Run:
+vgchange vg_soncek -a y
+
+Now mount the volume:
+mount /dev/vg_soncek/lv_home /mnt

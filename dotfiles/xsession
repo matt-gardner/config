@@ -28,13 +28,13 @@ synclient HorizTwoFingerScroll=1
 ##############################################################################
 # Start Session
 
-if [[ -x /usr/bin/startxfce4 ]]; then
-    # XFCE4
-
-    . $HOME/.xsession-xfconf
-
-    /usr/bin/startxfce4
-else
+#if [[ -x /usr/bin/startxfce4 ]]; then
+#    # XFCE4
+#
+#    . $HOME/.xsession-xfconf
+#
+#    /usr/bin/startxfce4
+#else
     # GNOME
 
     # Load gconf settings
@@ -75,8 +75,10 @@ else
     # which window manager (metacity or compiz)
     gconftool-2 --type string --set /apps/gnome-session/rh/window_manager metacity
 
+    gconftool-2 --type string --set /apps/metacity/global_keybindings/run_command_terminal "<Ctr><Alt>t"
+
     gnome-session
-fi
+#fi
 
 # Get rid of any straggler children
 kill %1 %2 %3 %4 %5 %6 %7 %8

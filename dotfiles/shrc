@@ -8,12 +8,8 @@ prepath=(
   )
 
 postpath=(
-  # On my laptop
-  /opt/local/bin
-  /opt/local/sbin
-  /Library/Frameworks/Python.framework/Versions/Current/bin
-  # Lab machines
-  $HOME/admin/bin
+  $HOME/clone/android-sdk-linux/platform-tools
+  $HOME/clone/android-sdk-linux/tools
   )
 
 for dir in "${prepath[@]}"
@@ -45,6 +41,7 @@ pythondirs=(
     /usr/lib64/python2.7/site-packages
     $HOME/pythonutil
     $HOME/clone
+    $HOME/clone/mrs-mapreduce
     $HOME/clone/amlpso
     $HOME/clone/smug
     $HOME/clone/evilplot
@@ -85,9 +82,10 @@ alias rm='rm -i'
 alias pushall="git commit -a -m'.'; git push;"
 alias pretty1="enscript -GE"
 alias pretty2="enscript -G2rE"
-alias 2up="pdfnup --nup 2x1 --paper letterpaper --trim '60 60 60 60'"
+# --trim specification is "left bottom right top"
+alias 2up="pdfnup --nup 2x1 --paper letterpaper --trim '80 40 60 60'"
 alias start_vpn="cd ~/config/openvpn; sudo openvpn --config client.conf"
-alias scala=/usr0/home/mg1/clone/scala-2.9.1/bin/scala
+alias scala=/home/mg1/clone/scala-2.9.1/bin/scala
 
 # Some system specific stuff
 if [[ `hostname` == 'matthew-gardners-computer.local' ]]
