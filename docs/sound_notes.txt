@@ -1,0 +1,12 @@
+I found this page to be helpful in understanding sound:
+http://www.seehuhn.de/pages/alsa
+
+The problem I was having was that the default sound card was not working, and I
+needed to change the default to card 2 instead of card 0.  I tried doing that
+from the GUI, in Preferences > Sound, but that didn't work.  But the page above
+showed how to set it with a few lines in a ~/.asoundrc file.  The lines are
+these:
+
+defaults.ctl.card 2
+defaults.pcm.card 2
+defaults.timer.card 2
