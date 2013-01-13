@@ -17,11 +17,11 @@
 # inodes could fill up fast with the way we're doing this backup.
 # df -i : tells you how many inodes you're using
 
-MOUNTPOINT = "/media/backup_disk"
+MOUNTPOINT = "/run/media/matt/backup_disk"
 DEVICE = "LABEL=backup_disk"
 
 
-WINDOWS = '/media/OS/Users/Sabrina/'
+WINDOWS = '/run/media/matt/OS/Users/Sabrina/'
 PATHS = [WINDOWS+'Documents/Scores', WINDOWS+'Pictures', WINDOWS+'Music',
         WINDOWS+'Videos', '/home']
 # exclusion: DON'T PUT SPACES IN PATHS (use "?" instead of " " in paths)!
