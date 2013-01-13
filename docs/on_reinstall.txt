@@ -3,3 +3,6 @@ Some notes for things to be sure of when you reinstall a machine:
 Make sure that sshd is running:
 systemctl start sshd.service
 systemctl enable sshd.service # start service on every system boot
+
+If alt-drag breaks, this should fix it:
+gconftool-2 -t str --set /apps/metacity/general/mouse_button_modifier "<alt>"
