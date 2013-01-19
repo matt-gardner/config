@@ -21,18 +21,20 @@ snippet br
 snippet de
 	default:
 		${1}
-snippet ca
-	catch(${1:Exception} ${2:e}) ${3}
+snippet catch
+	catch(${1:Exception} ${2:e}) {
+	    ${3}
+	}
 snippet th
 	throw 
 snippet sy
 	synchronized
 snippet im
 	import
-snippet j.u
-	java.util
-snippet j.i
-	java.io.
+snippet ju
+	import java.util
+snippet ji
+	import java.io.
 snippet j.b
 	java.beans.
 snippet j.n
@@ -72,7 +74,7 @@ snippet tc
 	}
 snippet t
 	public void test${1:Name}() throws Exception ${2}
-snippet cl
+snippet class
 	class ${1:`Filename("", "untitled")`} {
 	    ${2}
 	}
