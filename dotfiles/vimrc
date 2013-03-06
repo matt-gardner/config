@@ -23,6 +23,9 @@ set pastetoggle=<F4>
 " And I like having an empty space on the end, so we actually make it 79
 set textwidth=79
 
+" Associate *.tape files with ducttape
+au BufRead,BufNewFile *.tape set filetype=ducttape
+
 " For python you want 4 spaces to be a tab, and tabs should be expanded
 autocmd FileType python setlocal et sw=4 sts=4
 autocmd FileType python set foldlevel=1
