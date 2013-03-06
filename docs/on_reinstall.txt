@@ -7,6 +7,8 @@ systemctl enable sshd.service # start service on every system boot
 If alt-drag breaks, this should fix it:
 gconftool-2 -t str --set /apps/metacity/general/mouse_button_modifier "<alt>"
 
+anyconnect in Fedora 18 requires the installation of the package pangox-compat
+
 These were the things in clone/ on the laptop that I probably want to put back:
 android-sdk-linux
 androminion
