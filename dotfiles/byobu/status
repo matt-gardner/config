@@ -1,8 +1,8 @@
 apport=0
 arch=0
 battery=0
-cpu_count=0
-cpu_freq=0
+cpu_count=1
+cpu_freq=1
 cpu_temp=0
 custom=0
 date=1
