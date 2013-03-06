@@ -1,14 +1,23 @@
-Command to run tracd:
+Packages that you need to install manually:
+git extension (if you have trac version < 1.0)
+account manager
 
-tracd -e projects -p 8002
+Command to run tracd: tracd -e projects -p 8002
+
+Remember to copy the etc file to /etc
+
+You'll need to be sure /home/mg1/.trac.htdigest exists and has the right info
+in it.  Right now it has user matt and my simple password in it.  If you need
+to create it, use the command htdigest.  You also need to be sure the user you
+create with htdigest has admin permissions in the project databases.  You can
+do that with `trac-admin [/path/to/project] permission add [user] ADMIN`.
+
+
+Other notes:
 
 This may no longer be needed, because I made an etc directory that holds what I
 want to go into /etc.  But this explains what I changed and why, as well as
 contains some helpful debug information.
-
-Packages that you need to install manually:
-git extension
-account manager
 
 This was what I needed to do to get Trac to work.
 
