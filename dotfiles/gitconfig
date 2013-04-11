@@ -7,3 +7,5 @@
     branch = auto
 [alias]
 	s = status -sb
+[push]
+	default = simple

@@ -9,4 +9,15 @@ gconftool-2 -t str --set /apps/metacity/general/mouse_button_modifier "<alt>"
 
 Except, with mate:
 Open dconf-editor, find the setting under /apps/marco/general, and uncheck
-"resize-with-right-button".
+"resize-with-right-button" (but, as of 4/10/2013, this is also broken...)
+
+anyconnect in Fedora 18 requires the installation of the package pangox-compat
+
+These were the things in clone/ on the laptop that I probably want to put back:
+android-sdk-linux
+androminion
+anyconnect
+ducttape?
+evilplot
+latex-makefile
+Zotero?

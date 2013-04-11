@@ -8,8 +8,12 @@
 # Vi mode:
 set -o vi
 
-# Set the prompt
-PS1="\u@\h:\W$ "
+# Whenever the prompt is displayed, write the previous command to disk
+#export PROMPT_COMMAND='history -a' # we put this into the following line
+
+# Set up some variables that we'll use when making the prompt
+export PS1="\u@\h:\W$ "
+
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -20,9 +24,6 @@ export HISTCONTROL=ignoredups
 
 # Append to history instead of overwriting it
 shopt -s histappend
-
-# Whenever the prompt is displayed, write the previous command to disk
-export PROMPT_COMMAND='history -a'
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"

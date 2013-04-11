@@ -10,6 +10,7 @@ prepath=(
 postpath=(
   $HOME/clone/android-sdk-linux/platform-tools
   $HOME/clone/android-sdk-linux/tools
+  $HOME/clone/ducttape-0.3-pre2
   )
 
 for dir in "${prepath[@]}"

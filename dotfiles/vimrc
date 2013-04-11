@@ -23,6 +23,9 @@ set pastetoggle=<F4>
 " And I like having an empty space on the end, so we actually make it 79
 set textwidth=79
 
+" Associate *.tape files with ducttape
+au BufRead,BufNewFile *.tape set filetype=ducttape
+
 " For python you want 4 spaces to be a tab, and tabs should be expanded
 autocmd FileType python setlocal et sw=4 sts=4
 autocmd FileType python set foldlevel=1
@@ -30,6 +33,14 @@ autocmd FileType python set foldlevel=1
 autocmd FileType python set includeexpr=PythonIncludeExpr()
 autocmd FileType python set include=^\\(from\\\\|import\\)
 autocmd FileType python set path+=,~/pythonutil
+
+" You know what, just use spaces instead of tabs everywhere
+set et sw=4 sts=4
+
+" Except, lets start moving towards two spaces instead of four, to save on line
+" width
+autocmd FileType htmldjango setlocal et sw=2 sts=2
+autocmd FileType javascript setlocal et sw=2 sts=2
 
 " Let lines in java be 100 characters long, as per convention
 autocmd FileType java set textwidth=99
@@ -47,13 +58,6 @@ autocmd BufNewFile *.tex exe "normal 1Gddj"
 
 " Use django file type for html files, 'cause I don't do any other html
 autocmd BufEnter *.html setfiletype htmldjango
-
-" For django and javascript, use spaces instead of tabs (I dislike tabs...)
-autocmd FileType htmldjango setlocal et sw=4 sts=4
-autocmd FileType javascript setlocal et sw=4 sts=4
-
-" You know what, just use spaces instead of tabs everywhere
-set et sw=4 sts=4
 
 " And for latex and html files, use two spaces instead of four
 autocmd FileType tex setlocal et sw=2 sts=2
