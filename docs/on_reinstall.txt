@@ -6,3 +6,7 @@ systemctl enable sshd.service # start service on every system boot
 
 If alt-drag breaks, this should fix it:
 gconftool-2 -t str --set /apps/metacity/general/mouse_button_modifier "<alt>"
+
+Except, with mate:
+Open dconf-editor, find the setting under /apps/marco/general, and uncheck
+"resize-with-right-button".
