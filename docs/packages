@@ -25,6 +25,7 @@ install bash-completion xbindkeys lynx irssi ncftp
 install gconf-editor xorg-x11-xinit-session xorg-x11-apps
 install htop iotop collectl lm_sensors nethogs
 install tftp enscript pssh pdftk pdfjam cowsay socat
+install tmux byobu
 
 # Basic Development tools
 install subversion git-all git-daemon bzr mercurial
