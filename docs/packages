@@ -1,14 +1,14 @@
 groupinstall Base "Development Libraries" "Development Tools"
-groupinstall "GNOME Desktop Environment" "Graphical Internet" Graphics Xfce
+#groupinstall "GNOME Desktop Environment" "Graphical Internet" Graphics Xfce
 groupinstall Java "Java Development"
 groupinstall "Office/Productivity" "Printing Support" "Sound and Video"
 groupinstall "System Tools" "Text-based Internet"
 
 # Authentication (important):
-install nss_ldap sssd
+#install nss_ldap sssd
 
 # XFCE stuff
-install xfce4-xkb-plugin xfce4-systemload-plugin
+#install xfce4-xkb-plugin xfce4-systemload-plugin
 
 # Needed by the server
 install httpd mod_ssl mod_dav_svn mod_python apr-util-ldap bind dhcp
@@ -29,7 +29,7 @@ install tmux byobu
 
 # Basic Development tools
 install subversion git-all git-daemon bzr mercurial
-install vim-enhanced vim-X11 emacs eclipse ddd ctags
+install vim-enhanced vim-X11 emacs eclipse ddd ctags xdotool
 install trac trac-git-plugin trac-accountmanager-plugin
 
 # C/C++ Libraries
@@ -58,9 +58,9 @@ install sil-gentium-basic-fonts sil-gentium-basic-fonts-common
 install kile evince-dvi
 
 # Applications
-install inkscape inkscape-docs gnumeric audacity gnome-games bsd-games
+install inkscape inkscape-docs gnumeric audacity bsd-games
 install epiphany epiphany-extensions wireshark wireshark-gnome
-install nspluginwrapper padevchooser redhat-lsb gnome-device-manager
+install nspluginwrapper redhat-lsb
 install avidemux-gtk avidemux-cli
 install gourmet digikam banshee
 install dosbox zsnes
@@ -73,12 +73,12 @@ install xine-ui xine-lib-extras-freeworld
 install libdvdcss dvdrip
 
 # Gnome 3 extensions
-install gnome-tweak-tool gnome-shell-extension-alternate-tab
-install gnome-shell-extension-alternative-status-menu
-install gnome-shell-extension-native-window-placement
-install gnome-shell-extension-places-menu
-install gnome-shell-extension-remove-accessibility-icon
-install gnome-shell-extension-user-theme gnome-shell-extension-weather
+#install gnome-tweak-tool gnome-shell-extension-alternate-tab
+#install gnome-shell-extension-alternative-status-menu
+#install gnome-shell-extension-native-window-placement
+#install gnome-shell-extension-places-menu
+#install gnome-shell-extension-remove-accessibility-icon
+#install gnome-shell-extension-user-theme gnome-shell-extension-weather
 # This one isn't in the packages, but you can find it online
 #install gnome-shell-frippery
 
