@@ -32,15 +32,15 @@ snippet sy
 snippet im
 	import
 snippet ju
-	import java.util
+	import java.util.
 snippet ji
 	import java.io.
-snippet j.b
-	java.beans.
-snippet j.n
-	java.net.
-snippet j.m
-	java.math.
+snippet jb
+	import java.beans.
+snippet jn
+	import java.net.
+snippet jm
+	import java.math.
 snippet if
 	if (${1}) {
 	    ${2}
@@ -75,13 +75,15 @@ snippet tc
 snippet t
 	public void test${1:Name}() throws Exception ${2}
 snippet class
-	class ${1:`Filename("", "untitled")`} {
+	public class ${1:`Filename("", "untitled")`} {
 	    ${2}
 	}
 snippet in
 	interface ${1:`Filename("", "untitled")`} ${2:extends Parent}${3}
 snippet m
-	${1:void} ${2:method}(${3}) ${4:throws }${5}
+	${1:public} ${2:void} ${3:method}(${4}) {
+	    ${5}
+	}
 snippet v
 	${1:String} ${2:var}${3: = null}${4};${5}
 snippet co
@@ -92,3 +94,7 @@ snippet as
 	assert ${1:test} : "${2:Failure message}";${3}
 snippet print
 	System.out.println(${1});
+snippet )
+	) {
+	    ${1}
+	}
