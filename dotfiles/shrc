@@ -37,11 +37,13 @@ export PATH=$PATH::
 # Python Path
 
 pythondirs=(
-    /usr/local/lib/python2.6/dist-packages
+    /usr0/local/lib/python2.7/dist-packages
+    /usr/lib/python2.7/dist-packages
     /usr/lib/python2.7/site-packages
     /usr/lib64/python2.7/site-packages
     $HOME/pythonutil
     $HOME/clone
+    $HOME/clone/django
     $HOME/clone/mrs-mapreduce
     $HOME/clone/amlpso
     $HOME/clone/django
@@ -86,7 +88,7 @@ alias pushall="git commit -a -m'.'; git push;"
 alias pretty1="enscript -GE"
 alias pretty2="enscript -G2rE"
 # --trim specification is "left bottom right top"
-alias 2up="pdfnup --nup 2x1 --paper letterpaper --trim '80 40 60 60'"
+alias 2up="pdfnup --nup 2x1 --paper letterpaper --trim '40 60 60 40'"
 alias start_vpn="cd ~/config/openvpn; sudo openvpn --config client.conf"
 alias scala=/home/mg1/clone/scala-2.9.1/bin/scala
 
