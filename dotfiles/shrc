@@ -44,6 +44,8 @@ pythondirs=(
     $HOME/clone
     $HOME/clone/mrs-mapreduce
     $HOME/clone/amlpso
+    $HOME/clone/django
+    $HOME/clone/south
     $HOME/clone/smug
     $HOME/clone/evilplot
     $HOME/games
