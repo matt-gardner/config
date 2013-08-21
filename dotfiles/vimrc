@@ -48,6 +48,7 @@ autocmd FileType python set path+=,~/pythonutil
 
 " You know what, just use spaces instead of tabs everywhere
 set et sw=4 sts=4
+set colorcolumn=81
 
 " Except, lets start moving towards two spaces instead of four, to save on line
 " width
@@ -56,6 +57,7 @@ autocmd FileType javascript setlocal et sw=2 sts=2
 
 " Let lines in java be 100 characters long, as per convention
 autocmd FileType java set textwidth=99
+autocmd FileType java set colorcolumn=101
 
 " Use syntax folding for C++ because I don't have a good script for it
 autocmd FileType cpp set foldmethod=syntax
