@@ -2,6 +2,21 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+filetype off
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle 'scrooloose/syntastic'
+
+let g:ycm_autoclose_preview_window_after_insertion=1
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'active_filetypes': [],
+                           \ 'passive_filetypes': ['java'] }
+
+" Allow filetype detection, plugins, and indenting
+filetype plugin indent on
+
 syntax on
 
 " When editing a file, always jump to the last curser position
@@ -12,9 +27,6 @@ autocmd BufReadPost *
 " But don't do that when editing a git commit message - go back to the
 " first line
 autocmd BufReadPost *COMMIT_EDITMSG exe "normal 1G"
-
-" Allow filetype detection, plugins, and indenting
-filetype plugin indent on
 
 " Hit F4 while in insert mode to do a correct paste
 set pastetoggle=<F4>
@@ -141,6 +153,11 @@ set smartcase
 " Always show the status line
 set laststatus=2
 
+" Add syntastic stuff to the status line
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
 " Show partial commands in the command buffer as they are being typed
 set showcmd
 
@@ -179,18 +196,17 @@ nmap <silent> <F2> :nohl<cr>:set spelllang=<cr>
 " remove any trailing whitespace.
 nmap <F5> :%s/\s\+$//<cr>:%s/\t/    /g<cr>
 
-" Map F7 and F8 to changing the width of the terminal, for switching between
-" java and other kinds of editing (I could do this on bufenter...)
-nmap <silent> <F7> :!xdotool getactivewindow windowsize --usehints 80 24<cr><cr>
-nmap <silent> <F8> :!xdotool getactivewindow windowsize --usehints 100 24<cr><cr>
-
-" Resize windows with + and _, instead of the C-W stuff
+" Easier window resizing.
 nmap + <C-W>+
 nmap _ <C-W>-
+nmap <C-H> <C-W><
+nmap <C-L> <C-W>>
 
 " Use <C-T> to run :TlistToggle - the taglist plugin that shows code structure
 nmap <C-T> :TlistToggle<cr>
 
 set hlsearch " Highlight the last used search pattern
 set ruler " show the cursor position all the time
+set colorcolumn=81
+autocmd FileType java set colorcolumn=101
 
