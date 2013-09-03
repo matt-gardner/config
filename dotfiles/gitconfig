@@ -5,5 +5,9 @@
     status = auto
     diff = auto
     branch = auto
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
 [alias]
 	s = status -s
