@@ -6,6 +6,4 @@
     diff = auto
     branch = auto
 [alias]
-	s = status -sb
-[push]
-	default = simple
+	s = status -s
