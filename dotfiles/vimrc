@@ -24,21 +24,6 @@ set backspace=indent,eol,start
 " Allow filetype detection, plugins, and indenting
 filetype plugin indent on
 
-filetype off
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
-
-Bundle 'gmarik/vundle'
-Bundle 'scrooloose/syntastic'
-
-let g:ycm_autoclose_preview_window_after_insertion=1
-let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': [],
-                           \ 'passive_filetypes': ['java'] }
-
-" Allow filetype detection, plugins, and indenting
-filetype plugin indent on
-
 syntax on
 
 " When editing a file, always jump to the last curser position
@@ -96,6 +81,10 @@ autocmd FileType javascript setlocal et sw=2 sts=2
 " Let lines in java be 100 characters long, as per convention
 autocmd FileType java set textwidth=99
 autocmd FileType java set colorcolumn=101
+
+" HTML files can have pretty long lines, let's say.
+autocmd FileType htmldjango set textwidth=139
+autocmd FileType htmldjango set colorcolumn=141
 
 " Use syntax folding for C++ because I don't have a good script for it
 autocmd FileType cpp set foldmethod=syntax
