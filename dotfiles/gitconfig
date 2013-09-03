@@ -10,4 +10,4 @@
 [merge]
 	tool = vimdiff
 [alias]
-	s = status -sb
+	s = status -s
