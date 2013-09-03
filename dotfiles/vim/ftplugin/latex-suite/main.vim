@@ -737,7 +737,7 @@ if g:Tex_Diacritics != 0
 	exe 'source '.s:path.'/diacritics.vim'
 endif
 
-exe 'source '.s:path.'/texviewer.vim'
+"exe 'source '.s:path.'/texviewer.vim'
 exe 'source '.s:path.'/version.vim'
 
 " ==============================================================================
