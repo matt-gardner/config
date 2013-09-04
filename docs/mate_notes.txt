@@ -1,0 +1,11 @@
+Trying to fix suspend problems with MATE on the laptop:
+
+https://bugzilla.redhat.com/show_bug.cgi?id=888184:
+
+switching to lightdm solves the issue here too.
+
+(to save folk have to search for how to do this:
+sudo yum install lightdm
+sudo systemctl disable gdm
+sudo systemctl enable lightdm
+)
