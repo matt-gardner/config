@@ -1,8 +1,13 @@
 Packages that you need to install manually:
 git extension (if you have trac version < 1.0)
-account manager
+account manager (sudo easy_install TracAccountManager)
 
-Command to run tracd: tracd -e projects -p 8002
+Command to run tracd: tracd -e projects -p 8003
+
+(for some reason, after I installed 0.12 from aptitude and then decided to
+install 1.0.1 from source, just running the above command gave me a 'No such
+file' error on /usr/bin/tracd, even though `which tracd` gave me
+/usr/local/bin/tracd.  Setting up a symlink fixed that problem)
 
 Remember to copy the etc file to /etc
 
@@ -30,7 +35,8 @@ This is the extra stuff that goes in /etc/trac/trac.ini
 [components]
 
 # Support git repos
-tracext.git.* = enabled
+#tracext.git.* = enabled # Trac 0.*, with extension
+tracopt.versioncontrol.git.* = enabled # Trac 1.0.1
 
 # Do admin stuff from the web interface
 webadmin.* = enabled

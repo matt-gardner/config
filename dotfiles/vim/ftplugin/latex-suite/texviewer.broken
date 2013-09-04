@@ -867,7 +867,7 @@ endfunction " }}}
 " these lines need to be outside the function.
 if has('python') && Tex_GetVarValue('Tex_UsePython')
 	python import sys, re
-	exec "python sys.path += [r'". s:path . "']"
+	exec "python sys.path += '/home/mg1/.vim/ftplugin/latex-suite/'"
 	python import bibtools
 endif
 
