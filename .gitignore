@@ -3,3 +3,4 @@ vim/.netrwhist
 *.pyc
 *.add.spl
 *.netrwhist
+dotfiles/byobu/.ssh-agent
