@@ -4,6 +4,7 @@
 # Path
 
 prepath=(
+  $HOME/clone/eclipse-4.3
   $HOME/bin
   )
 
