@@ -4,3 +4,6 @@ vim/.netrwhist
 *.add.spl
 *.netrwhist
 dotfiles/byobu/.ssh-agent
+dotfiles/vim/bundle/
+dotfiles/vim/eclim/
+dotfiles/vim/plugin/eclim.vim
