@@ -16,8 +16,6 @@ if exists("g:no_google_python_indent") && g:no_google_python_indent
 endif
 
 setlocal indentexpr=GetGooglePythonIndent(v:lnum)
-echom "LOADING"
-echom &indentexpr
 
 if exists("*GetGooglePythonIndent")
   finish
