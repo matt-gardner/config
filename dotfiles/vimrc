@@ -10,14 +10,24 @@ Bundle 'gmarik/vundle'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'SirVer/ultisnips'
 
 " The preview window is what's on top, giving more information about the
 " possible completions.  This setting makes it go away when you leave insert
 " mode.
 let g:ycm_autoclose_preview_window_after_insertion=1
 
+" Make UltiSnips play nicely with YCM
+let g:UltiSnipsExpandTrigger = '<leader>a'
+let g:UltiSnipsJumpForwardTrigger = '<leader>b'
+let g:UltiSnipsJumpBackwardTrigger = '<leader>c'
+
 " This makes eclim play nicely with YCM.
 let g:EclimCompletionMethod = 'omnifunc'
+
+" This makes it so that eclim doesn't show TODOs as errors on the left side of the screen, as TODOs
+" in eclipse come in at "sign level" 3 (task tags).
+let g:EclimSignLevel = 2
 
 " Eclim disables syntastic for java files, anyway, so there's not a lot of
 " point in having this anymore.  But maybe I'll leave it as an example in case
