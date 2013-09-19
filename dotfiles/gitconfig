@@ -13,5 +13,3 @@
 	s = status -sb
 [push]
 	default = simple
-[core]
-	autocrlf = false
