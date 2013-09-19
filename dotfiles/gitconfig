@@ -11,5 +11,3 @@
 	tool = vimdiff
 [alias]
 	s = status -sb
-[core]
-	autocrlf = false
