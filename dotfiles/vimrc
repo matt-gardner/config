@@ -12,22 +12,38 @@ Bundle 'scrooloose/syntastic'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'SirVer/ultisnips'
 
+" Allow filetype detection, plugins, and indenting
+filetype plugin indent on
+
+syntax on
+
 " The preview window is what's on top, giving more information about the
 " possible completions.  This setting makes it go away when you leave insert
 " mode.
 let g:ycm_autoclose_preview_window_after_insertion=1
 
-" Make UltiSnips play nicely with YCM
-let g:UltiSnipsExpandTrigger = '<leader>a'
-let g:UltiSnipsJumpForwardTrigger = '<leader>b'
-let g:UltiSnipsJumpBackwardTrigger = '<leader>c'
+" Make UltiSnips play nicely with YCM.  These mappings do not work well in
+" latex, and I can't figure out how to change <leader> to something other than
+" '\' (let mapleader = '\,' doesn't work, probably because of when plugins get
+" loaded).  So we'll just suffer through latex editing for now...
+let g:UltiSnipsExpandTrigger = '<leader>f'
+let g:UltiSnipsJumpForwardTrigger = '<leader>g'
+let g:UltiSnipsJumpBackwardTrigger = '<leader>d'
 
 " This makes eclim play nicely with YCM.
 let g:EclimCompletionMethod = 'omnifunc'
 
-" This makes it so that eclim doesn't show TODOs as errors on the left side of the screen, as TODOs
-" in eclipse come in at "sign level" 3 (task tags).
+" This makes it so that eclim doesn't show TODOs as errors on the left side of
+" the screen, as TODOs in eclipse come in at "sign level" 3 (task tags).  I
+" wish there were a better way to do this, as some other warnings are quite
+" helpful...
 let g:EclimSignLevel = 2
+
+" Some Eclim shortcuts
+au FileType java nmap <leader>jc :JavaCorrect<cr>
+au FileType java nmap <leader>js :JavaSearchContext<cr>
+au FileType java nmap <leader>ji :JavaImport<cr>
+au FileType java nmap <leader>jio :JavaImportOrganize<cr>
 
 " Eclim disables syntastic for java files, anyway, so there's not a lot of
 " point in having this anymore.  But maybe I'll leave it as an example in case
@@ -38,11 +54,6 @@ let g:EclimSignLevel = 2
 
 " Not sure what the deal is, but YCM messed up backspace, and this fixes it
 set backspace=indent,eol,start
-
-" Allow filetype detection, plugins, and indenting
-filetype plugin indent on
-
-syntax on
 
 " Show line numbers
 set number
@@ -62,23 +73,31 @@ autocmd BufReadPost *COMMIT_EDITMSG exe "normal 1G"
 " Hit F4 while in insert mode to do a correct paste
 set pastetoggle=<F4>
 
-" Enforce 80 character line widths by wrapping automatically
-" And I like having an empty space on the end, so we actually make it 79
-set textwidth=79
-
 " Associate *.tape files with ducttape
 au BufRead,BufNewFile *.tape set filetype=ducttape
 
-" For python you want 4 spaces to be a tab, and tabs should be expanded
-autocmd FileType python setlocal et sw=4 sts=4
-autocmd FileType python set foldlevel=1
+" Some python goodies
 autocmd FileType python set foldlevel=1
 autocmd FileType python set includeexpr=PythonIncludeExpr()
 autocmd FileType python set include=^\\(from\\\\|import\\)
 autocmd FileType python set path+=,~/pythonutil
 
+" For python you want 4 spaces to be a tab, and tabs should be expanded
+autocmd FileType python setlocal et sw=4 sts=4
+
 " You know what, just use spaces instead of tabs everywhere
 set et sw=4 sts=4
+
+" Except, lets start moving towards two spaces instead of four, to save on line
+" width
+autocmd FileType htmldjango setlocal et sw=2 sts=2
+autocmd FileType javascript setlocal et sw=2 sts=2
+autocmd FileType tex setlocal et sw=2 sts=2
+
+
+" Enforce 80 character line widths by wrapping automatically
+" And I like having an empty space on the end, so we actually make it 79
+set textwidth=79
 
 " Let lines in java be 100 characters long, as per convention
 autocmd FileType java set textwidth=99
@@ -91,16 +110,12 @@ if exists('+colorcolumn')
     set colorcolumn=81
     autocmd FileType java set colorcolumn=101
     autocmd FileType htmldjango set colorcolumn=141
+" If it isn't, highlight any characters that go over the allowed width.
 else
     au Filetype python,c,cpp,tex let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
     au Filetype java let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
     au Filetype htmldjango let w:m2=matchadd('ErrorMsg', '\%>140v.\+', -1)
 endif
-
-" Except, lets start moving towards two spaces instead of four, to save on line
-" width
-autocmd FileType htmldjango setlocal et sw=2 sts=2
-autocmd FileType javascript setlocal et sw=2 sts=2
 
 " Use syntax folding for C++ because I don't have a good script for it
 autocmd FileType cpp set foldmethod=syntax
@@ -115,10 +130,6 @@ autocmd BufNewFile *.tex exe "normal 1Gddj"
 
 " Use django file type for html files, 'cause I don't do any other html
 autocmd BufEnter *.html setfiletype htmldjango
-
-" And for latex and html files, use two spaces instead of four
-autocmd FileType tex setlocal et sw=2 sts=2
-autocmd FileType htmldjango setlocal et sw=2 sts=2
 
 " Include bibliography files for autocompletion purposes
 autocmd FileType tex set include=\\\\input\\\\|\\\\include{\\\\|\\\\bibliography{\\\\|\\.\\.\\/\\.\\.\\/\\.\\.
@@ -150,7 +161,6 @@ autocmd BufWinLeave * call clearmatches()
 set list
 set listchars=tab:\ \ ,
 highlight SpecialKey ctermbg=Red guibg=Red
-
 
 function! PythonIncludeExpr()
   "echo v:fname
