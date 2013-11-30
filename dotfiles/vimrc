@@ -117,6 +117,10 @@ else
     au Filetype htmldjango let w:m2=matchadd('ErrorMsg', '\%>140v.\+', -1)
 endif
 
+" And put an underline on the line where the cursor currently is, to save on
+" searching for the cursor when switching windows.
+set cursorline
+
 " Use syntax folding for C++ because I don't have a good script for it
 autocmd FileType cpp set foldmethod=syntax
 
