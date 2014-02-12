@@ -1,15 +1,14 @@
 " Use Vim settings, rather than Vi settings (usually better).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
-filetype off
 
+filetype off
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'scrooloose/syntastic'
-Bundle 'Valloric/YouCompleteMe'
+"Bundle 'Valloric/YouCompleteMe'
+"Bundle 'scrooloose/syntastic'
 Bundle 'SirVer/ultisnips'
 
 " Allow filetype detection, plugins, and indenting
