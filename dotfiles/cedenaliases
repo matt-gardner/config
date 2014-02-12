@@ -2,3 +2,4 @@
 alias papers='cd ~/papers'
 alias nell='cd ~/clone/OntologyLearner/'
 alias pra='cd ~/clone/OntologyLearner/src/java/edu/cmu/ml/rtw/pra/'
+alias pratest='cd ~/clone/OntologyLearner/test/java/edu/cmu/ml/rtw/pra/'
