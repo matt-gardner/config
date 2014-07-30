@@ -12,44 +12,28 @@ speakers (depending on monitor)
 keyboard and mouse (if you don't already have extras)
 
 
-Spec on 4/14/2011:
-case: Antec - $50 - $100 (the minuet, which the potatoes have, is about $100)
-motherboard: MSi 880GM-E43 - $80
-processor: AMD Phenom II Six-Core - $200
-ram: Mushkin 8GB (2x4GB) DDR3 - $82
-hard drive: Hitachi 1TB: $55
-monitor: Acer G235HAbd 23" - $150
-fan: up to $10
 
-Total: $677
+Spec on 2/13/2014 (again looking at a mid-to-high-end machine, from scratch):
 
+case: Corsair 200R - $65
+power supply: $35
+processor: i7-4771 or i5-4670 - $319 or $219
+motherboard: H81 chipset (~$70) or H87 chipset (~$100) - main difference for me
+    is extra RAM slots on H87 chipset
+ram: DDR3 1600: 2x4GB (~$70) or 2x8GB (~$140)
+hard drive: Samsung 250GB SSD - $155 (and use our current backup disk as a
+    companion HDD)
+monitor: lots of options, between $150 and $200
+dvd drive: $20 (blu ray: $50)
+speakers: use the ones we have
+keyboard and mouse: MS sculpt ergonomic desktop? $84 on amazon
+OS: Windows 8.1 retail: $119
 
-
-Spec on 12/23/2011 (just a rough comparison of what you get now for about the
-same price):
-case: same as above
-motherboard and processor: AMD eight-core or Intel i5 2500K
-ram: 16GB (4x4 DDR3)
-hard drive: 1TB: $100ish, or 120GB SSD: $128 (there was a flood in Thailand
-that steeply raised the prices of hard drives)
-monitor: there was a deal the day I looked that had the same monitor as above
-at $110.  But generally monitors look to be about $200 for 23".
-fan: same as above
-
-Total: same as above, essentially
+Total: $987 - $1267
 
 
-Spec on 10/23/2012 (trying to see how much it would cost to replace different
-components of our machine):
-case: same as above - $50 - $100
-processor: AMD Phenom II X4 3.2Ghz - $95
-motherboard: ASUS M5A88-M - $100
-ram: $30 for 4GB, $40 for 8GB
-hard drive: $70 for 500GB, $90ish for 1TB, $100 for 128GB solid state drive
-fan: $10ish
-power supply: $30 for a cheap one
 
-Total: $465 (no monitor, high end of that listed above)
+
 
 
 
@@ -74,3 +58,51 @@ Dell price: $875, but would still need to buy K&M and monitor, adding $190 to
 the price; also, this has no SSD, the processor is slightly worse, and there's
 a video card.  So it's like, $1155 for a mostly equivalent system from Dell,
 compared to $1014ish building it yourself.
+
+
+
+
+
+Spec on 10/23/2012 (trying to see how much it would cost to replace different
+components of our machine):
+case: same as below - $50 - $100
+processor: AMD Phenom II X4 3.2Ghz - $95
+motherboard: ASUS M5A88-M - $100
+ram: $30 for 4GB, $40 for 8GB
+hard drive: $70 for 500GB, $90ish for 1TB, $100 for 128GB solid state drive
+fan: $10ish
+power supply: $30 for a cheap one
+
+Total: $465 (no monitor, high end of that listed above)
+
+
+
+
+
+Spec on 12/23/2011 (just a rough comparison of what you get now for about the
+same price):
+case: same as below
+motherboard and processor: AMD eight-core or Intel i5 2500K
+ram: 16GB (4x4 DDR3)
+hard drive: 1TB: $100ish, or 120GB SSD: $128 (there was a flood in Thailand
+that steeply raised the prices of hard drives)
+monitor: there was a deal the day I looked that had the same monitor as below
+at $110.  But generally monitors look to be about $200 for 23".
+fan: same as below
+
+Total: same as below, essentially
+
+
+
+
+
+Spec on 4/14/2011:
+case: Antec - $50 - $100 (the minuet, which the potatoes have, is about $100)
+motherboard: MSi 880GM-E43 - $80
+processor: AMD Phenom II Six-Core - $200
+ram: Mushkin 8GB (2x4GB) DDR3 - $82
+hard drive: Hitachi 1TB: $55
+monitor: Acer G235HAbd 23" - $150
+fan: up to $10
+
+Total: $677
