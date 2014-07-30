@@ -11,24 +11,57 @@ Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'SirVer/ultisnips'
 Bundle 'christoomey/vim-tmux-navigator'
+Bundle 'junegunn/seoul256.vim'
+Bundle 'derekwyatt/vim-scala'
 
 " Allow filetype detection, plugins, and indenting
 filetype plugin indent on
 
 syntax on
 
+" I've taken a liking to this colorscheme for the moment.
+let g:seoul256_background = 233
+colorscheme seoul256
+
 " The preview window is what's on top, giving more information about the
 " possible completions.  This setting makes it go away when you leave insert
 " mode.
 let g:ycm_autoclose_preview_window_after_insertion=1
 
+" This specifies paths that YCM will not ask about when loading a
+" .ycm_extra_conf.py file.
+let g:ycm_extra_conf_globlist = ['~/classes/my_own_learning/neural_nets/*']
+
+let g:ycm_filetype_blacklist = {
+    \ 'tex': 1
+    \}
+
+let g:syntastic_python_checkers=['pyflakes']
+
 " Make UltiSnips play nicely with YCM.  These mappings do not work well in
-" latex, and I can't figure out how to change <leader> to something other than
-" '\' (let mapleader = '\,' doesn't work, probably because of when plugins get
-" loaded).  So we'll just suffer through latex editing for now...
+" latex, so we remove the mappings for FileType tex (these contortions are
+" necessary because the mapping happens at load time, while the autocommand
+" runs at buffer open time - the mappings are already set, and changing
+" <leader> won't do anything).
 let g:UltiSnipsExpandTrigger = '<leader>f'
 let g:UltiSnipsJumpForwardTrigger = '<leader>g'
 let g:UltiSnipsJumpBackwardTrigger = '<leader>d'
+au FileType tex call SetLatexSnippetOptions()
+function SetLatexSnippetOptions()
+    if exists("g:loaded_latex_options")
+      return
+    endif
+    let g:loaded_latex_options = 1
+    iunmap <leader>f
+    iunmap <leader>g
+    iunmap <leader>d
+    inoremap <leader>,f <C-R>=UltiSnips_ExpandSnippet()<CR>
+    inoremap <leader>,g <C-R>=UltiSnips_JumpForwards()<CR>
+    inoremap <leader>,d <C-R>=UltiSnips_JumpBackwards()<CR>
+endfunction
+" Don't split on - in identifiers for autocomplete purposes when editing latex.
+au FileType tex set iskeyword+=-
+
 
 " This makes eclim play nicely with YCM.
 let g:EclimCompletionMethod = 'omnifunc'
@@ -82,17 +115,11 @@ autocmd FileType python set includeexpr=PythonIncludeExpr()
 autocmd FileType python set include=^\\(from\\\\|import\\)
 autocmd FileType python set path+=,~/pythonutil
 
-" For python you want 4 spaces to be a tab, and tabs should be expanded
+" Use spaces instead of tabs everywhere, and use two spaces instead of four.
+set et sw=2 sts=2
+
+" Unless we're in python, where the convention is to use four spaces.
 autocmd FileType python setlocal et sw=4 sts=4
-
-" You know what, just use spaces instead of tabs everywhere
-set et sw=4 sts=4
-
-" Except, lets start moving towards two spaces instead of four, to save on line
-" width
-autocmd FileType htmldjango setlocal et sw=2 sts=2
-autocmd FileType javascript setlocal et sw=2 sts=2
-autocmd FileType tex setlocal et sw=2 sts=2
 
 
 " Enforce 80 character line widths by wrapping automatically
@@ -147,6 +174,8 @@ function! LatexIncludeExpr(fname)
     return fname
 endfunction
 autocmd FileType tex let &l:includeexpr="LatexIncludeExpr(v:fname)"
+" Also set the default foldlevel for tex to fold less stuff.
+autocmd FileType tex set foldlevel=1
 
 " Add a highlight group to look out for trailing whitespace.
 " Thanks to: http://vim.wikia.com/wiki/Highlight_unwanted_spaces
@@ -245,7 +274,7 @@ set scrolloff=2
 
 " Some folding options
 set foldenable
-set foldlevelstart=0
+set foldlevelstart=1
 set foldopen=block,insert,hor,jump,mark,percent,quickfix,search,tag,undo
 
 " Maps F2 to getting rid of the highlighting after a search - very nice
@@ -254,6 +283,11 @@ nmap <silent> <F2> :nohl<cr>:set spelllang=<cr>
 " Maps F5 to cleaning up whitespace - convert tab characters to 4 spaces and
 " remove any trailing whitespace.
 nmap <F5> :%s/\s\+$//<cr>:%s/\t/    /g<cr>
+
+" Somehow something maps C-J to something.  This will hopefully fix it.
+let g:C_Ctrl_j = 'off'
+let g:BASH_Ctrl_j = 'off'
+nnoremap <C-J> <C-W>j
 
 " Easier window resizing.
 nmap + <C-W>+
