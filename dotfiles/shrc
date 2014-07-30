@@ -92,6 +92,7 @@ alias pretty2="enscript -G2rE"
 alias 2up="pdfnup --nup 2x1 --paper letterpaper --trim '40 60 60 40'"
 alias start_vpn="cd ~/config/openvpn; sudo openvpn --config client.conf"
 alias scala=/home/mg1/clone/scala-2.9.1/bin/scala
+alias grep='grep --color'
 
 # Some system specific stuff
 if [[ `hostname` == 'matthew-gardners-computer.local' ]]
