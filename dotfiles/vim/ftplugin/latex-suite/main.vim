@@ -632,12 +632,7 @@ if g:Tex_SmartKeyQuote
 		" an open quote?
 		if ( line(".") < l || line(".") == l && col(".") < c )
 			if strpart(getline("."), col(".")-1) =~ '\V\^' . escape(open, '\')
-				if line(".") == l && col(".") + strlen(open) == c
-					" Insert "<++>''<++>" instead of just "''".
-					let q = IMAP_PutTextWithMovement("<++>".close."<++>")
-				else
-					let q = close
-				endif
+				let q = close
 			endif
 		endif
 
@@ -710,32 +705,32 @@ exe 'source '.s:path.'/texproject.vim'
 
 " source all the relevant files.
 exe 'source '.s:path.'/texmenuconf.vim'
-exe 'source '.s:path.'/envmacros.vim'
-exe 'source '.s:path.'/elementmacros.vim'
+"exe 'source '.s:path.'/envmacros.vim'
+"exe 'source '.s:path.'/elementmacros.vim'
 
 " source utf-8 or plain math menus
-if exists("g:Tex_UseUtfMenus") && g:Tex_UseUtfMenus != 0 && has("gui_running")
-	exe 'source '.s:path.'/mathmacros-utf.vim'
-else
-	exe 'source '.s:path.'/mathmacros.vim'
-endif
+"if exists("g:Tex_UseUtfMenus") && g:Tex_UseUtfMenus != 0 && has("gui_running")
+	"exe 'source '.s:path.'/mathmacros-utf.vim'
+"else
+	"exe 'source '.s:path.'/mathmacros.vim'
+"endif
 
 exe 'source '.s:path.'/multicompile.vim'
 exe 'source '.s:path.'/compiler.vim'
 exe 'source '.s:path.'/folding.vim'
 exe 'source '.s:path.'/templates.vim'
 exe 'source '.s:path.'/custommacros.vim'
-exe 'source '.s:path.'/bibtex.vim'
+"exe 'source '.s:path.'/bibtex.vim'
 
 " source advanced math functions
 if g:Tex_AdvancedMath == 1
-	exe 'source '.s:path.'/brackets.vim'
+	"exe 'source '.s:path.'/brackets.vim'
 	exe 'source '.s:path.'/smartspace.vim'
 endif
 
-if g:Tex_Diacritics != 0
-	exe 'source '.s:path.'/diacritics.vim'
-endif
+"if g:Tex_Diacritics != 0
+	"exe 'source '.s:path.'/diacritics.vim'
+"endif
 
 "exe 'source '.s:path.'/texviewer.vim'
 exe 'source '.s:path.'/version.vim'
@@ -822,7 +817,7 @@ endif
 let g:Tex_completion_explorer = ','
 
 " Mappings defined in package files will overwrite all other
-exe 'source '.s:path.'/packages.vim'
+"exe 'source '.s:path.'/packages.vim'
 
 " ==============================================================================
 " These functions are used to immitate certain operating system type functions
