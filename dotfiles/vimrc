@@ -3,16 +3,18 @@
 set nocompatible
 
 filetype off
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Bundle 'gmarik/vundle'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'scrooloose/syntastic'
-Bundle 'SirVer/ultisnips'
-Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'junegunn/seoul256.vim'
-Bundle 'derekwyatt/vim-scala'
+Plugin 'gmarik/vundle'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/syntastic'
+Plugin 'SirVer/ultisnips'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'junegunn/seoul256.vim'
+Plugin 'derekwyatt/vim-scala'
+
+call vundle#end()
 
 " Allow filetype detection, plugins, and indenting
 filetype plugin indent on
