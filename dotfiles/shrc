@@ -3,11 +3,21 @@
 ##############################################################################
 # Path
 
-prepath=(
-  $HOME/clone/apps/eclipse
-  $HOME/clone/apps/scala-2.11.2/bin
-  $HOME/bin
-  )
+if [[ `hostname` == 'matt-ai2.local' ]]
+then
+  prepath=(
+    /usr/local/bin
+    $HOME/clone/eclipse/Eclipse.app/Contents/MacOS/
+    $HOME/clone/scala-2.11.2/bin
+    $HOME/bin
+    )
+else
+  prepath=(
+    $HOME/clone/apps/eclipse
+    $HOME/clone/apps/scala-2.11.2/bin
+    $HOME/bin
+    )
+fi
 
 postpath=(
   $HOME/clone/android-sdk-linux/platform-tools
@@ -90,14 +100,9 @@ alias start_vpn="cd ~/config/openvpn; sudo openvpn --config client.conf"
 alias grep='grep --color'
 
 # Some system specific stuff
-if [[ `hostname` == 'matthew-gardners-computer.local' ]]
+if [[ `hostname` == 'matt-ai2.local' ]]
 #if [[ `hostname -f |cut -d'.' -f2` == "aml" ]]
 then
-  export MYSQL_HOME=~/Documents/mysql-5.0.51b-osx10.5-x86
-  export LIBRARY_PATH=/opt/local/lib
-  export CPLUS_INCLUDE_PATH=/opt/local/include
-  export PKG_CONFIG_PATH=/opt/local/include/gtkmm-2.4:/opt/local/include/gtkmm-2.0:/opt/local/lib/pkgconfig:/usr/X11R6/lib/pkgconfig
-  export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib:/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ImageIO.framework/Versions/A
   export CLICOLOR=1
   alias ls='ls -G'
 else
