@@ -130,6 +130,7 @@ set textwidth=79
 
 " Let lines in java be 100 characters long, as per convention
 autocmd FileType java set textwidth=99
+autocmd FileType scala set textwidth=99
 
 " HTML files can have pretty long lines, let's say.
 autocmd FileType htmldjango set textwidth=139
@@ -138,6 +139,7 @@ autocmd FileType htmldjango set textwidth=139
 if exists('+colorcolumn')
     set colorcolumn=81
     autocmd FileType java set colorcolumn=101
+    autocmd FileType scala set colorcolumn=101
     autocmd FileType htmldjango set colorcolumn=141
 " If it isn't, highlight any characters that go over the allowed width.
 else
