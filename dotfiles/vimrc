@@ -9,6 +9,7 @@ call vundle#begin()
 Plugin 'gmarik/vundle'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdtree'
 Plugin 'SirVer/ultisnips'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'junegunn/seoul256.vim'
@@ -41,6 +42,11 @@ let g:ycm_filetype_blacklist = {
     \}
 
 let g:syntastic_python_checkers=['pyflakes']
+
+" If all we have left is the NERDTree, close it.
+autocmd bufenter * if (winnr("$") == 1
+                       \ && exists("b:NERDTreeType")
+                       \ && b:NERDTreeType == "primary") | q | endif
 
 " Make UltiSnips play nicely with YCM.  These mappings do not work well in
 " latex, so we remove the mappings for FileType tex (these contortions are
@@ -76,6 +82,9 @@ noremap <leader>gs :Gstatus<CR>
 noremap <leader>gw :Gwrite<CR>
 noremap <leader>gb :Gblame<CR>
 
+" NERDTree shortcuts, for browsing the filesystem
+noremap <leader>nt :NERDTreeToggle<CR>
+
 " This makes eclim play nicely with YCM.
 let g:EclimCompletionMethod = 'omnifunc'
 
@@ -91,12 +100,13 @@ au FileType java nmap <leader>js :JavaSearchContext<cr>
 au FileType java nmap <leader>ji :JavaImport<cr>
 au FileType java nmap <leader>jio :JavaImportOrganize<cr>
 
-" Eclim disables syntastic for java files, anyway, so there's not a lot of
-" point in having this anymore.  But maybe I'll leave it as an example in case
-" I ever want to disable a filetype again.
-"let g:syntastic_mode_map = { 'mode': 'active',
-                           "\ 'active_filetypes': [],
-                           "\ 'passive_filetypes': ['java'] }
+" Eclim disables syntastic for java files, but only if there's an active
+" project in the directory.  This makes sure we don't use syntastic for java
+" even if there's no project - it misses imports and in general isn't very
+" good.
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'active_filetypes': [],
+                           \ 'passive_filetypes': ['java'] }
 
 " Not sure what the deal is, but YCM messed up backspace, and this fixes it
 set backspace=indent,eol,start
@@ -257,7 +267,7 @@ set smartcase
 set laststatus=2
 
 " Status line stuff.
-set statusline=%t                         "tail of the filename
+set statusline=%f                         "relative filename
 set statusline+=%{fugitive#statusline()}  "git branch
 "set statusline+=[%{&ff}]                   "file format
 set statusline+=%h                        "help file flag
