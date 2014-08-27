@@ -22,6 +22,9 @@ syntax on
 " mode.
 let g:ycm_autoclose_preview_window_after_insertion=1
 
+" Way better checker for python than the default.
+let g:syntastic_python_checkers=['pyflakes']
+
 " Make UltiSnips play nicely with YCM.  These mappings do not work well in
 " latex, and I can't figure out how to change <leader> to something other than
 " '\' (let mapleader = '\,' doesn't work, probably because of when plugins get
@@ -258,8 +261,14 @@ nmap <F5> :%s/\s\+$//<cr>:%s/\t/    /g<cr>
 " Easier window resizing.
 nmap + <C-W>+
 nmap _ <C-W>-
-nmap <C-H> <C-W><
-nmap <C-L> <C-W>>
+"nmap <C-H> <C-W><
+"nmap <C-L> <C-W>>
+
+" Easier moving between windows
+nmap <C-H> <C-W>h
+nmap <C-L> <C-W>l
+nmap <C-J> <C-W>j
+nmap <C-K> <C-W>k
 
 " Use <C-T> to run :TlistToggle - the taglist plugin that shows code structure
 nmap <C-T> :TlistToggle<cr>

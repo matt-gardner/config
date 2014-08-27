@@ -4,7 +4,9 @@
 # Path
 
 prepath=(
+  $HOME/clone/vim-7.4/bin
   $HOME/clone/eclipse-4.3
+  $HOME/clone/scala-2.9.1/bin
   $HOME/bin
   )
 
@@ -108,18 +110,7 @@ else
   alias ls='ls --color=always'
 fi
 
-# This is because I use a black terminal on my mac, but a white terminal
-# in linux.  I want different colors on the different systems.  So it turns
-# out that $TERM is xterm-color on the mac, and just xterm in linux, so
-# this works.
-# Except with the desktop now, I think this doesn't work.  I'll look into
-# just removing it and living with the color difference.
-if [[ $TERM == "xterm-color" ]]
-then
-  export LS_COLORS="di=36:ln=35:so=32:pi=33:ex=32:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:*.py=33"
-else
-  export LSCOLORS=gxfxcxdxcxegedabaggxgx
-fi
+export LS_COLORS="di=36:ln=35:so=32:pi=33:ex=32:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:*.py=33"
 
 # XLE stuff
 export XLEPATH=$HOME/xle
