@@ -3,17 +3,27 @@
 ##############################################################################
 # Path
 
-prepath=(
-  $HOME/clone/vim-7.4/bin
-  $HOME/clone/eclipse-4.3
-  $HOME/clone/scala-2.9.1/bin
-  $HOME/bin
-  )
+if [[ `hostname` == 'matt-ai2.local' ]]
+then
+  prepath=(
+    /usr/local/bin
+    $HOME/clone/eclipse/Eclipse.app/Contents/MacOS/
+    $HOME/clone/scala-2.11.2/bin
+    $HOME/bin
+    )
+else
+  prepath=(
+    $HOME/clone/apps/eclipse
+    $HOME/clone/apps/scala-2.11.2/bin
+    $HOME/clone/vim-7.4/bin
+    $HOME/clone/scala-2.9.1/bin
+    $HOME/bin
+    )
+fi
 
 postpath=(
   $HOME/clone/android-sdk-linux/platform-tools
   $HOME/clone/android-sdk-linux/tools
-  $HOME/clone/ducttape-0.3-pre2
   )
 
 for dir in "${prepath[@]}"
@@ -31,10 +41,6 @@ do
     export PATH="$PATH:$dir"
   fi
 done
-
-# I like not having to type ./ before running an executable.  Maybe that's
-# sacrilegious, but oh well.
-export PATH=$PATH::
 
 ##############################################################################
 # Python Path
@@ -80,6 +86,14 @@ then
   . $HOME/.aliases
 fi
 
+# A few things that are specific to my mac laptop at AI2
+if [[ `hostname` == 'matt-ai2.local' ]]
+then
+  export MAVEN_OPTS='-Xms1g -Xmx2g'
+  export _JAVA_OPTIONS='-Xms1g -Xmx2g -XX:MaxPermSize=512m'
+  export SBT_OPTS='-Xms1g -Xmx4g -XX:PermSize=512m -XX:MaxPermSize=512m'
+fi
+
 # Default editor should be vim
 export EDITOR=vim
 export VISUAL=vim
@@ -93,17 +107,11 @@ alias pretty2="enscript -G2rE"
 # --trim specification is "left bottom right top"
 alias 2up="pdfnup --nup 2x1 --paper letterpaper --trim '40 60 60 40'"
 alias start_vpn="cd ~/config/openvpn; sudo openvpn --config client.conf"
-alias scala=/home/mg1/clone/scala-2.9.1/bin/scala
+alias grep='grep --color'
 
 # Some system specific stuff
-if [[ `hostname` == 'matthew-gardners-computer.local' ]]
-#if [[ `hostname -f |cut -d'.' -f2` == "aml" ]]
+if [[ `hostname` == 'matt-ai2.local' ]]
 then
-  export MYSQL_HOME=~/Documents/mysql-5.0.51b-osx10.5-x86
-  export LIBRARY_PATH=/opt/local/lib
-  export CPLUS_INCLUDE_PATH=/opt/local/include
-  export PKG_CONFIG_PATH=/opt/local/include/gtkmm-2.4:/opt/local/include/gtkmm-2.0:/opt/local/lib/pkgconfig:/usr/X11R6/lib/pkgconfig
-  export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib:/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ImageIO.framework/Versions/A
   export CLICOLOR=1
   alias ls='ls -G'
 else

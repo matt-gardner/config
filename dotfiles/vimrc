@@ -3,35 +3,87 @@
 set nocompatible
 
 filetype off
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Bundle 'gmarik/vundle'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'scrooloose/syntastic'
-Bundle 'SirVer/ultisnips'
-Bundle 'christoomey/vim-tmux-navigator'
+Plugin 'gmarik/vundle'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdtree'
+Plugin 'SirVer/ultisnips'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'junegunn/seoul256.vim'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'fholgado/minibufexpl.vim'
+Plugin 'tpope/vim-fugitive'
+
+call vundle#end()
 
 " Allow filetype detection, plugins, and indenting
 filetype plugin indent on
 
 syntax on
 
+" I've taken a liking to this colorscheme for the moment.
+let g:seoul256_background = 233
+colorscheme seoul256
+
 " The preview window is what's on top, giving more information about the
 " possible completions.  This setting makes it go away when you leave insert
 " mode.
 let g:ycm_autoclose_preview_window_after_insertion=1
 
-" Way better checker for python than the default.
+" This specifies paths that YCM will not ask about when loading a
+" .ycm_extra_conf.py file.
+let g:ycm_extra_conf_globlist = ['~/classes/my_own_learning/neural_nets/*']
+
+let g:ycm_filetype_blacklist = {
+    \ 'tex': 1
+    \}
+
 let g:syntastic_python_checkers=['pyflakes']
 
+" If all we have left is the NERDTree, close it.
+autocmd bufenter * if (winnr("$") == 1
+                       \ && exists("b:NERDTreeType")
+                       \ && b:NERDTreeType == "primary") | q | endif
+
 " Make UltiSnips play nicely with YCM.  These mappings do not work well in
-" latex, and I can't figure out how to change <leader> to something other than
-" '\' (let mapleader = '\,' doesn't work, probably because of when plugins get
-" loaded).  So we'll just suffer through latex editing for now...
+" latex, so we remove the mappings for FileType tex (these contortions are
+" necessary because the mapping happens at load time, while the autocommand
+" runs at buffer open time - the mappings are already set, and changing
+" <leader> won't do anything).
 let g:UltiSnipsExpandTrigger = '<leader>f'
 let g:UltiSnipsJumpForwardTrigger = '<leader>g'
 let g:UltiSnipsJumpBackwardTrigger = '<leader>d'
+au FileType tex call SetLatexSnippetOptions()
+function SetLatexSnippetOptions()
+    if exists("g:loaded_latex_options")
+      return
+    endif
+    let g:loaded_latex_options = 1
+    iunmap <leader>f
+    iunmap <leader>g
+    iunmap <leader>d
+    inoremap <leader>,f <C-R>=UltiSnips_ExpandSnippet()<CR>
+    inoremap <leader>,g <C-R>=UltiSnips_JumpForwards()<CR>
+    inoremap <leader>,d <C-R>=UltiSnips_JumpBackwards()<CR>
+endfunction
+" Don't split on - in identifiers for autocomplete purposes when editing latex.
+au FileType tex set iskeyword+=-
+
+" MiniBufExplorer - a tab-like buffer list at the top of the page.  Use
+" <leader>r to get there, like the related files plugin at Google.
+noremap <leader>r :MBEFocus<CR>
+
+" Fugitive shortcuts, for running vim commands
+noremap <leader>gd :Gdiff<CR>
+noremap <leader>gs :Gstatus<CR>
+noremap <leader>gw :Gwrite<CR>
+noremap <leader>gb :Gblame<CR>
+
+" NERDTree shortcuts, for browsing the filesystem
+noremap <leader>nt :NERDTreeToggle<CR>
 
 " This makes eclim play nicely with YCM.
 let g:EclimCompletionMethod = 'omnifunc'
@@ -48,12 +100,13 @@ au FileType java nmap <leader>js :JavaSearchContext<cr>
 au FileType java nmap <leader>ji :JavaImport<cr>
 au FileType java nmap <leader>jio :JavaImportOrganize<cr>
 
-" Eclim disables syntastic for java files, anyway, so there's not a lot of
-" point in having this anymore.  But maybe I'll leave it as an example in case
-" I ever want to disable a filetype again.
-"let g:syntastic_mode_map = { 'mode': 'active',
-                           "\ 'active_filetypes': [],
-                           "\ 'passive_filetypes': ['java'] }
+" Eclim disables syntastic for java files, but only if there's an active
+" project in the directory.  This makes sure we don't use syntastic for java
+" even if there's no project - it misses imports and in general isn't very
+" good.
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'active_filetypes': [],
+                           \ 'passive_filetypes': ['java'] }
 
 " Not sure what the deal is, but YCM messed up backspace, and this fixes it
 set backspace=indent,eol,start
@@ -85,17 +138,11 @@ autocmd FileType python set includeexpr=PythonIncludeExpr()
 autocmd FileType python set include=^\\(from\\\\|import\\)
 autocmd FileType python set path+=,~/pythonutil
 
-" For python you want 4 spaces to be a tab, and tabs should be expanded
+" Use spaces instead of tabs everywhere, and use two spaces instead of four.
+set et sw=2 sts=2
+
+" Unless we're in python, where the convention is to use four spaces.
 autocmd FileType python setlocal et sw=4 sts=4
-
-" You know what, just use spaces instead of tabs everywhere
-set et sw=4 sts=4
-
-" Except, lets start moving towards two spaces instead of four, to save on line
-" width
-autocmd FileType htmldjango setlocal et sw=2 sts=2
-autocmd FileType javascript setlocal et sw=2 sts=2
-autocmd FileType tex setlocal et sw=2 sts=2
 
 
 " Enforce 80 character line widths by wrapping automatically
@@ -104,6 +151,7 @@ set textwidth=79
 
 " Let lines in java be 100 characters long, as per convention
 autocmd FileType java set textwidth=99
+autocmd FileType scala set textwidth=99
 
 " HTML files can have pretty long lines, let's say.
 autocmd FileType htmldjango set textwidth=139
@@ -112,6 +160,7 @@ autocmd FileType htmldjango set textwidth=139
 if exists('+colorcolumn')
     set colorcolumn=81
     autocmd FileType java set colorcolumn=101
+    autocmd FileType scala set colorcolumn=101
     autocmd FileType htmldjango set colorcolumn=141
 " If it isn't, highlight any characters that go over the allowed width.
 else
@@ -150,6 +199,8 @@ function! LatexIncludeExpr(fname)
     return fname
 endfunction
 autocmd FileType tex let &l:includeexpr="LatexIncludeExpr(v:fname)"
+" Also set the default foldlevel for tex to fold less stuff.
+autocmd FileType tex set foldlevel=1
 
 " Add a highlight group to look out for trailing whitespace.
 " Thanks to: http://vim.wikia.com/wiki/Highlight_unwanted_spaces
@@ -215,10 +266,23 @@ set smartcase
 " Always show the status line
 set laststatus=2
 
+" Status line stuff.
+set statusline=%f                         "relative filename
+set statusline+=%{fugitive#statusline()}  "git branch
+"set statusline+=[%{&ff}]                   "file format
+set statusline+=%h                        "help file flag
+set statusline+=%m                        "modified flag
+set statusline+=%r                        "read only flag
 " Add syntastic stuff to the status line
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+"set statusline+=%y                        "filetype
+set statusline+=%=                        "left/right separator
+set statusline+=%c,                       "cursor column
+set statusline+=%l/%L                     "cursor line/total lines
+set statusline+=\ %P                      "percent through file
+
 
 " Show partial commands in the command buffer as they are being typed
 set showcmd
@@ -248,7 +312,7 @@ set scrolloff=2
 
 " Some folding options
 set foldenable
-set foldlevelstart=0
+set foldlevelstart=1
 set foldopen=block,insert,hor,jump,mark,percent,quickfix,search,tag,undo
 
 " Maps F2 to getting rid of the highlighting after a search - very nice
@@ -257,6 +321,11 @@ nmap <silent> <F2> :nohl<cr>:set spelllang=<cr>
 " Maps F5 to cleaning up whitespace - convert tab characters to 4 spaces and
 " remove any trailing whitespace.
 nmap <F5> :%s/\s\+$//<cr>:%s/\t/    /g<cr>
+
+" Somehow something maps C-J to something.  This will hopefully fix it.
+let g:C_Ctrl_j = 'off'
+let g:BASH_Ctrl_j = 'off'
+nnoremap <C-J> <C-W>j
 
 " Easier window resizing.
 nmap + <C-W>+
