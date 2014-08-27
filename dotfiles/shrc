@@ -85,6 +85,14 @@ then
   . $HOME/.aliases
 fi
 
+# A few things that are specific to my mac laptop at AI2
+if [[ `hostname` == 'matt-ai2.local' ]]
+then
+  export MAVEN_OPTS='-Xms1g -Xmx2g'
+  export _JAVA_OPTIONS='-Xms1g -Xmx2g -XX:MaxPermSize=512m'
+  export SBT_OPTS='-Xms1g -Xmx4g -XX:PermSize=512m -XX:MaxPermSize=512m'
+fi
+
 # Default editor should be vim
 export EDITOR=vim
 export VISUAL=vim
@@ -102,7 +110,6 @@ alias grep='grep --color'
 
 # Some system specific stuff
 if [[ `hostname` == 'matt-ai2.local' ]]
-#if [[ `hostname -f |cut -d'.' -f2` == "aml" ]]
 then
   export CLICOLOR=1
   alias ls='ls -G'
