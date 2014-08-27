@@ -13,8 +13,8 @@ then
     )
 else
   prepath=(
-    $HOME/clone/eclipse-4.3
-    $HOME/clone/scala-2.11.2/bin
+    $HOME/clone/apps/eclipse
+    $HOME/clone/apps/scala-2.11.2/bin
     $HOME/bin
     )
 fi
@@ -22,7 +22,6 @@ fi
 postpath=(
   $HOME/clone/android-sdk-linux/platform-tools
   $HOME/clone/android-sdk-linux/tools
-  $HOME/clone/ducttape-0.3-pre2
   )
 
 for dir in "${prepath[@]}"
