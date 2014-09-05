@@ -11,3 +11,5 @@
 	tool = vimdiff
 [alias]
 	s = status -sb
+[credential]
+	helper = cache --timeout=86400
