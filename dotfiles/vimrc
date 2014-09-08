@@ -406,8 +406,14 @@ nnoremap <C-J> <C-W>j
 " Easier window resizing.
 nmap + <C-W>+
 nmap _ <C-W>-
-nmap <C-H> <C-W><
-nmap <C-L> <C-W>>
+"nmap <C-H> <C-W><
+"nmap <C-L> <C-W>>
+
+" Easier moving between windows
+nmap <C-H> <C-W>h
+nmap <C-L> <C-W>l
+nmap <C-J> <C-W>j
+nmap <C-K> <C-W>k
 
 set hlsearch " Highlight the last used search pattern
 set ruler " show the cursor position all the time

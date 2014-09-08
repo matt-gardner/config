@@ -15,6 +15,8 @@ else
   prepath=(
     $HOME/clone/apps/eclipse
     $HOME/clone/apps/scala-2.11.2/bin
+    $HOME/clone/vim-7.4/bin
+    $HOME/clone/scala-2.9.1/bin
     $HOME/bin
     )
 fi
