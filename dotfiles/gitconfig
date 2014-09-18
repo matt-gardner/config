@@ -11,7 +11,5 @@
 	tool = vimdiff
 [alias]
 	s = status -sb
-[push]
-	default = simple
 [credential]
 	helper = cache --timeout=3600
