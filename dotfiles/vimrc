@@ -121,6 +121,9 @@ au FileType tex set iskeyword+=-
 " MiniBufExplorer - a tab-like buffer list at the top of the page.  Use
 " <leader>r to get there, like the related files plugin at Google.
 noremap <leader>r :MBEFocus<CR>
+" But don't start the plugin automatically, as I don't need it all that often
+" anymore with NERDTree, and it can get so big as to be unweildy.
+let g:miniBufExplorerAutoStart = 0
 
 " Fugitive shortcuts, for running vim commands
 noremap <leader>gd :Gdiff<CR>
