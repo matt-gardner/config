@@ -123,6 +123,9 @@ au FileType tex set iskeyword+=-
 " MiniBufExplorer - a tab-like buffer list at the top of the page.  Use
 " <leader>r to get there, like the related files plugin at Google.
 noremap <leader>r :MBEFocus<CR>
+" But don't start the plugin automatically, as I don't need it all that often
+" anymore with NERDTree, and it can get so big as to be unweildy.
+let g:miniBufExplorerAutoStart = 0
 
 " Fugitive shortcuts, for running vim commands
 noremap <leader>gd :Gdiff<CR>
@@ -146,6 +149,7 @@ au FileType java nmap <leader>jc :JavaCorrect<cr>
 au FileType java nmap <leader>js :JavaSearchContext<cr>
 au FileType java nmap <leader>ji :JavaImport<cr>
 au FileType java nmap <leader>jio :JavaImportOrganize<cr>
+au FileType scala nmap <leader>si :ScalaImport<cr>
 
 " Eclim disables syntastic for java files, but only if there's an active
 " project in the directory.  This makes sure we don't use syntastic for java
