@@ -35,6 +35,9 @@ Plugin 'tpope/vim-dispatch'
 " Navigate code tags in a sidebar.
 Plugin 'majutsushi/tagbar'
 
+" Mostly I got this for play2-html syntax highlighting.
+Plugin 'gre/play2vim'
+
 " **********************
 " GENERAL VIM UX PLUGINS
 " **********************
@@ -154,10 +157,11 @@ au FileType scala nmap <leader>si :ScalaImport<cr>
 " Eclim disables syntastic for java files, but only if there's an active
 " project in the directory.  This makes sure we don't use syntastic for java
 " even if there's no project - it misses imports and in general isn't very
-" good.
+" good.  Also, it seems like it does not work well with scala, particularly
+" with .sbt files.  So let's disable it there, too.  And latex...
 let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'active_filetypes': [],
-                           \ 'passive_filetypes': ['java'] }
+                           \ 'passive_filetypes': ['java', 'scala', 'tex'] }
 
 " Not sure what the deal is, but YCM messed up backspace, and this fixes it
 set backspace=indent,eol,start
@@ -206,6 +210,7 @@ autocmd FileType scala set textwidth=99
 
 " HTML files can have pretty long lines, let's say.
 autocmd FileType htmldjango set textwidth=139
+autocmd FileType play2-html set textwidth=139
 
 " Highlight the 81st column, if possible
 if exists('+colorcolumn')
@@ -213,11 +218,13 @@ if exists('+colorcolumn')
     autocmd FileType java set colorcolumn=101
     autocmd FileType scala set colorcolumn=101
     autocmd FileType htmldjango set colorcolumn=141
+    autocmd FileType play2-html set colorcolumn=141
 " If it isn't, highlight any characters that go over the allowed width.
 else
     au Filetype python,c,cpp,tex let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
     au Filetype java let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
     au Filetype htmldjango let w:m2=matchadd('ErrorMsg', '\%>140v.\+', -1)
+    au Filetype play2-html let w:m2=matchadd('ErrorMsg', '\%>140v.\+', -1)
 endif
 
 " And put an underline on the line where the cursor currently is, to save on
@@ -235,8 +242,9 @@ autocmd BufNewFile *.tex r ~/.vim/skel.tex
 autocmd BufNewFile *.py exe "normal 1Gddj"
 autocmd BufNewFile *.tex exe "normal 1Gddj"
 
-" Use django file type for html files, 'cause I don't do any other html
-autocmd BufEnter *.html setfiletype htmldjango
+" Use django file type for html files, 'cause I don't do any other html>
+" Except now I've started using play, which has *.scala.html files.
+autocmd BufEnter *.html if @% =~ "\.scala\.html" | setfiletype html | set syntax=play2-html | else | setfiletype htmldjango | endif
 
 " Include bibliography files for autocompletion purposes
 autocmd FileType tex set include=\\\\input\\\\|\\\\include{\\\\|\\\\bibliography{\\\\|\\.\\.\\/\\.\\.\\/\\.\\.
