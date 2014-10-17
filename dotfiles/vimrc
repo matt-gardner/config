@@ -97,7 +97,7 @@ autocmd bufenter * if (winnr("$") == 1
                        \ && exists("b:NERDTreeType")
                        \ && b:NERDTreeType == "primary") | q | endif
 
-let NERDTreeIgnore = ['\.pyc$']
+let NERDTreeIgnore = ['\.pyc$', '\.swp$']
 
 " Make UltiSnips play nicely with YCM.  These mappings do not work well in
 " latex, so we remove the mappings for FileType tex (these contortions are
@@ -205,8 +205,7 @@ autocmd FileType python setlocal et sw=4 sts=4
 set textwidth=79
 
 " Let lines in java be 100 characters long, as per convention
-autocmd FileType java set textwidth=99
-autocmd FileType scala set textwidth=99
+autocmd FileType java,scala,markdown,text set textwidth=99
 
 " HTML files can have pretty long lines, let's say.
 autocmd FileType htmldjango set textwidth=139
@@ -215,14 +214,13 @@ autocmd FileType play2-html set textwidth=139
 " Highlight the 81st column, if possible
 if exists('+colorcolumn')
     set colorcolumn=81
-    autocmd FileType java set colorcolumn=101
-    autocmd FileType scala set colorcolumn=101
+    autocmd FileType java,scala,markdown,text set colorcolumn=101
     autocmd FileType htmldjango set colorcolumn=141
     autocmd FileType play2-html set colorcolumn=141
 " If it isn't, highlight any characters that go over the allowed width.
 else
     au Filetype python,c,cpp,tex let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-    au Filetype java let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
+    au Filetype java,scala,markdown,text let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
     au Filetype htmldjango let w:m2=matchadd('ErrorMsg', '\%>140v.\+', -1)
     au Filetype play2-html let w:m2=matchadd('ErrorMsg', '\%>140v.\+', -1)
 endif
@@ -233,6 +231,9 @@ set cursorline
 
 " Use syntax folding for C++ because I don't have a good script for it
 autocmd FileType cpp set foldmethod=syntax
+
+" *.md files are markdown
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 " Use the skeletons when opening python and latex files
 autocmd BufNewFile *.py r ~/.vim/skel.py
