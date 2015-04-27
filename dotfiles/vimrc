@@ -94,7 +94,7 @@ autocmd bufenter * if (winnr("$") == 1
                        \ && exists("b:NERDTreeType")
                        \ && b:NERDTreeType == "primary") | q | endif
 
-let NERDTreeIgnore = ['\.pyc$']
+let NERDTreeIgnore = ['\.pyc$', '\.swp$']
 
 " Make UltiSnips play nicely with YCM.  These mappings do not work well in
 " latex, so we remove the mappings for FileType tex (these contortions are
