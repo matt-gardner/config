@@ -58,6 +58,10 @@ Plugin 'scrooloose/nerdtree'
 " swapping
 Plugin 'wesQ3/vim-windowswap'
 
+" Press <leader>yw and <leader>pw to yank and paste windows, for easier window
+" swapping
+Plugin 'Lokaltog/vim-easymotion'
+
 call vundle#end()
 
 " Allow filetype detection, plugins, and indenting
@@ -84,8 +88,20 @@ let g:ycm_filetype_blacklist = {
 
 let g:syntastic_python_checkers=['pyflakes']
 
+" This sets some stuff under <Leader>f and <Leader>j that I have never used,
+" and gets in the way of some other mappings that I want to use.
+let g:scala_use_default_keymappings=0
+
 " NERDTree shortcuts, for browsing the filesystem
 noremap <leader>nt :NERDTreeToggle<CR>
+
+" easymotion shortcuts
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_add_search_history = 0
+let g:EasyMotion_landing_highlight = 0
+nmap <Leader>s <Plug>(easymotion-sn)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
 
 " Show bookmarks by default in the NERDTree
 let NERDTreeShowBookmarks = 1
@@ -148,10 +164,10 @@ let g:EclimCompletionMethod = 'omnifunc'
 let g:EclimSignLevel = 2
 
 " Some Eclim shortcuts
-au FileType java nmap <leader>jc :JavaCorrect<cr>
-au FileType java nmap <leader>js :JavaSearchContext<cr>
-au FileType java nmap <leader>ji :JavaImport<cr>
-au FileType java nmap <leader>jio :JavaImportOrganize<cr>
+au FileType java nmap <leader>ejc :JavaCorrect<cr>
+au FileType java nmap <leader>ejs :JavaSearchContext<cr>
+au FileType java nmap <leader>eji :JavaImport<cr>
+au FileType java nmap <leader>ejio :JavaImportOrganize<cr>
 au FileType scala nmap <leader>si :ScalaImport<cr>
 
 " Eclim disables syntastic for java files, but only if there's an active
@@ -235,13 +251,15 @@ autocmd FileType cpp set foldmethod=syntax
 " *.md files are markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
-" Use the skeletons when opening python and latex files
+" Use the skeletons when opening specific file types.
 autocmd BufNewFile *.py r ~/.vim/skel.py
 autocmd BufNewFile *.tex r ~/.vim/skel.tex
+autocmd BufNewFile */clone/paper-thoughts/_posts/*.md r ~/.vim/skel.post
 
 " Gets rid of an extra line that gets put in
 autocmd BufNewFile *.py exe "normal 1Gddj"
 autocmd BufNewFile *.tex exe "normal 1Gddj"
+autocmd BufNewFile */clone/paper-thoughts/_posts/*.md exe "normal 1Gddj"
 
 " Use django file type for html files, 'cause I don't do any other html>
 " Except now I've started using play, which has *.scala.html files.
@@ -341,8 +359,11 @@ set statusline+=%*
 set statusline+=%=                        "left/right separator
 set statusline+=%c,                       "cursor column
 set statusline+=%l/%L                     "cursor line/total lines
+set statusline+=\ (byte:\ %o)                      "byte offset in the file
 set statusline+=\ %P                      "percent through file
 
+" diff mode should be vertical (fugitive looks at this option)
+set diffopt=filler,vertical
 
 " Show partial commands in the command buffer as they are being typed
 set showcmd
@@ -432,4 +453,3 @@ nmap <C-K> <C-W>k
 
 set hlsearch " Highlight the last used search pattern
 set ruler " show the cursor position all the time
-
