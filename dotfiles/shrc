@@ -3,24 +3,14 @@
 ##############################################################################
 # Path
 
-if [[ `hostname` == 'matt-ai2.local' ]]
-then
-  prepath=(
-    /usr/local/bin
-    $HOME/clone/eclipse/Eclipse.app/Contents/MacOS/
-    $HOME/clone/scala-2.11.2/bin
-    $HOME/bin
-    )
-else
-  prepath=(
-    $HOME/clone/apps/eclipse
-    $HOME/clone/apps/scala-2.11.2/bin
-    $HOME/clone/apps/activator-1.2.10/
-    $HOME/clone/vim-7.4/bin
-    $HOME/clone/scala-2.9.1/bin
-    $HOME/bin
-    )
-fi
+prepath=(
+  $HOME/clone/apps/eclipse
+  $HOME/clone/apps/scala-2.11.2/bin
+  $HOME/clone/apps/sbt/bin
+  $HOME/clone/apps/activator-1.2.10/
+  $HOME/clone/vim-7.4/bin
+  $HOME/bin
+  )
 
 postpath=(
   $HOME/clone/android-sdk-linux/platform-tools
@@ -86,14 +76,6 @@ then
   . $HOME/.aliases
 fi
 
-# A few things that are specific to my mac laptop at AI2
-if [[ `hostname` == 'matt-ai2.local' ]]
-then
-  export MAVEN_OPTS='-Xms1g -Xmx2g'
-  export _JAVA_OPTIONS='-Xms1g -Xmx2g -XX:MaxPermSize=512m'
-  export SBT_OPTS='-Xms1g -Xmx4g -XX:PermSize=512m -XX:MaxPermSize=512m'
-fi
-
 # Default editor should be vim
 export EDITOR=vim
 export VISUAL=vim
@@ -109,14 +91,7 @@ alias 2up="pdfnup --nup 2x1 --paper letterpaper --trim '40 60 60 40'"
 alias start_vpn="cd ~/config/openvpn; sudo openvpn --config client.conf"
 alias grep='grep --color'
 
-# Some system specific stuff
-if [[ `hostname` == 'matt-ai2.local' ]]
-then
-  export CLICOLOR=1
-  alias ls='ls -G'
-else
-  alias ls='ls --color=always'
-fi
+alias ls='ls --color=always'
 
 export LS_COLORS="di=36:ln=35:so=32:pi=33:ex=32:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:*.py=33"
 

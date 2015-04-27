@@ -35,6 +35,9 @@ Plugin 'tpope/vim-dispatch'
 " Navigate code tags in a sidebar.
 Plugin 'majutsushi/tagbar'
 
+" Mostly I got this for play2-html syntax highlighting.
+Plugin 'gre/play2vim'
+
 " **********************
 " GENERAL VIM UX PLUGINS
 " **********************
@@ -54,6 +57,10 @@ Plugin 'scrooloose/nerdtree'
 " Press <leader>yw and <leader>pw to yank and paste windows, for easier window
 " swapping
 Plugin 'wesQ3/vim-windowswap'
+
+" Press <leader>yw and <leader>pw to yank and paste windows, for easier window
+" swapping
+Plugin 'Lokaltog/vim-easymotion'
 
 call vundle#end()
 
@@ -81,8 +88,20 @@ let g:ycm_filetype_blacklist = {
 
 let g:syntastic_python_checkers=['pyflakes']
 
+" This sets some stuff under <Leader>f and <Leader>j that I have never used,
+" and gets in the way of some other mappings that I want to use.
+let g:scala_use_default_keymappings=0
+
 " NERDTree shortcuts, for browsing the filesystem
 noremap <leader>nt :NERDTreeToggle<CR>
+
+" easymotion shortcuts
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_add_search_history = 0
+let g:EasyMotion_landing_highlight = 0
+nmap <Leader>s <Plug>(easymotion-sn)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
 
 " Show bookmarks by default in the NERDTree
 let NERDTreeShowBookmarks = 1
@@ -145,19 +164,20 @@ let g:EclimCompletionMethod = 'omnifunc'
 let g:EclimSignLevel = 2
 
 " Some Eclim shortcuts
-au FileType java nmap <leader>jc :JavaCorrect<cr>
-au FileType java nmap <leader>js :JavaSearchContext<cr>
-au FileType java nmap <leader>ji :JavaImport<cr>
-au FileType java nmap <leader>jio :JavaImportOrganize<cr>
+au FileType java nmap <leader>ejc :JavaCorrect<cr>
+au FileType java nmap <leader>ejs :JavaSearchContext<cr>
+au FileType java nmap <leader>eji :JavaImport<cr>
+au FileType java nmap <leader>ejio :JavaImportOrganize<cr>
 au FileType scala nmap <leader>si :ScalaImport<cr>
 
 " Eclim disables syntastic for java files, but only if there's an active
 " project in the directory.  This makes sure we don't use syntastic for java
 " even if there's no project - it misses imports and in general isn't very
-" good.
+" good.  Also, it seems like it does not work well with scala, particularly
+" with .sbt files.  So let's disable it there, too.  And latex...
 let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'active_filetypes': [],
-                           \ 'passive_filetypes': ['java'] }
+                           \ 'passive_filetypes': ['java', 'scala', 'tex'] }
 
 " Not sure what the deal is, but YCM messed up backspace, and this fixes it
 set backspace=indent,eol,start
@@ -201,23 +221,24 @@ autocmd FileType python setlocal et sw=4 sts=4
 set textwidth=79
 
 " Let lines in java be 100 characters long, as per convention
-autocmd FileType java set textwidth=99
-autocmd FileType scala set textwidth=99
+autocmd FileType java,scala,markdown,text set textwidth=99
 
 " HTML files can have pretty long lines, let's say.
 autocmd FileType htmldjango set textwidth=139
+autocmd FileType play2-html set textwidth=139
 
 " Highlight the 81st column, if possible
 if exists('+colorcolumn')
     set colorcolumn=81
-    autocmd FileType java set colorcolumn=101
-    autocmd FileType scala set colorcolumn=101
+    autocmd FileType java,scala,markdown,text set colorcolumn=101
     autocmd FileType htmldjango set colorcolumn=141
+    autocmd FileType play2-html set colorcolumn=141
 " If it isn't, highlight any characters that go over the allowed width.
 else
     au Filetype python,c,cpp,tex let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-    au Filetype java let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
+    au Filetype java,scala,markdown,text let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
     au Filetype htmldjango let w:m2=matchadd('ErrorMsg', '\%>140v.\+', -1)
+    au Filetype play2-html let w:m2=matchadd('ErrorMsg', '\%>140v.\+', -1)
 endif
 
 " And put an underline on the line where the cursor currently is, to save on
@@ -227,16 +248,22 @@ set cursorline
 " Use syntax folding for C++ because I don't have a good script for it
 autocmd FileType cpp set foldmethod=syntax
 
-" Use the skeletons when opening python and latex files
+" *.md files are markdown
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" Use the skeletons when opening specific file types.
 autocmd BufNewFile *.py r ~/.vim/skel.py
 autocmd BufNewFile *.tex r ~/.vim/skel.tex
+autocmd BufNewFile */clone/paper-thoughts/_posts/*.md r ~/.vim/skel.post
 
 " Gets rid of an extra line that gets put in
 autocmd BufNewFile *.py exe "normal 1Gddj"
 autocmd BufNewFile *.tex exe "normal 1Gddj"
+autocmd BufNewFile */clone/paper-thoughts/_posts/*.md exe "normal 1Gddj"
 
-" Use django file type for html files, 'cause I don't do any other html
-autocmd BufEnter *.html setfiletype htmldjango
+" Use django file type for html files, 'cause I don't do any other html>
+" Except now I've started using play, which has *.scala.html files.
+autocmd BufEnter *.html if @% =~ "\.scala\.html" | setfiletype html | set syntax=play2-html | else | setfiletype htmldjango | endif
 
 " Include bibliography files for autocompletion purposes
 autocmd FileType tex set include=\\\\input\\\\|\\\\include{\\\\|\\\\bibliography{\\\\|\\.\\.\\/\\.\\.\\/\\.\\.
@@ -332,8 +359,11 @@ set statusline+=%*
 set statusline+=%=                        "left/right separator
 set statusline+=%c,                       "cursor column
 set statusline+=%l/%L                     "cursor line/total lines
+set statusline+=\ (byte:\ %o)                      "byte offset in the file
 set statusline+=\ %P                      "percent through file
 
+" diff mode should be vertical (fugitive looks at this option)
+set diffopt=filler,vertical
 
 " Show partial commands in the command buffer as they are being typed
 set showcmd
@@ -423,4 +453,3 @@ nmap <C-K> <C-W>k
 
 set hlsearch " Highlight the last used search pattern
 set ruler " show the cursor position all the time
-
