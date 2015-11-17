@@ -43,7 +43,6 @@ pythondirs=(
     /usr/lib64/python2.7/site-packages
     $HOME/clone/pythonutil
     $HOME/clone
-    $HOME/clone/django
     $HOME/clone/mrs-mapreduce
     $HOME/clone/amlpso
     $HOME/clone/django
