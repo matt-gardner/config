@@ -41,7 +41,7 @@ pythondirs=(
     /usr/lib/python2.7/dist-packages
     /usr/lib/python2.7/site-packages
     /usr/lib64/python2.7/site-packages
-    $HOME/pythonutil
+    $HOME/clone/pythonutil
     $HOME/clone
     $HOME/clone/django
     $HOME/clone/mrs-mapreduce
