@@ -1,0 +1,5 @@
+.cache-main
+.cache-tests
+*.sw[nop]
+.classpath
+.project
