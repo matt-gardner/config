@@ -1,11 +1,12 @@
 dotfiles=(
   bashrc
-  shrc
+  byobu
   gitconfig
   gitignore
+  shrc
+  toprc
   vim
   vimrc
-  byobu
 )
 
 for dotfile in "${dotfiles[@]}"
