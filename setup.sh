@@ -1,3 +1,7 @@
+#!/usr/bin/env bash
+
+set -e
+
 dotfiles=(
   bashrc
   byobu
@@ -21,8 +25,13 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 echo "Installing vundle plugins with: vim -c PluginInstall -c quitall"
 vim -c PluginInstall -c quitall
 
-echo "Trying to install cmake and python-dev with: sudo apt-get install cmake python-dev"
-sudo apt-get install cmake python-dev
+if hash apt-get 2>/dev/null; then
+  echo "Trying to install cmake and python-dev with: sudo apt-get install cmake python-dev"
+  sudo apt-get install cmake python-dev
+else
+  echo "Trying to install cmake and python-dev with: sudo dnf install cmake python-dev"
+  sudo dnf install cmake python-dev
+fi
 
 echo "Compiling YCM"
 cd ~/.vim/bundle/YouCompleteMe
