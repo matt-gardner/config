@@ -38,6 +38,9 @@ Plugin 'majutsushi/tagbar'
 " Mostly I got this for play2-html syntax highlighting.
 Plugin 'gre/play2vim'
 
+" I use json files somewhat frequently; this makes them better.
+Plugin 'elzr/vim-json'
+
 " **********************
 " GENERAL VIM UX PLUGINS
 " **********************
