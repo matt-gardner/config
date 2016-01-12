@@ -37,3 +37,6 @@ echo "Compiling YCM"
 cd ~/.vim/bundle/YouCompleteMe
 ./install.py
 cd -
+
+echo "TODO: set up eclim"
+echo "TODO: set up sbt plugins (or add some of .sbt to the dotfiles)"
