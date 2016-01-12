@@ -3,3 +3,4 @@
 *.sw[nop]
 .classpath
 .project
+.settings
