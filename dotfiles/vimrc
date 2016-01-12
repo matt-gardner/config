@@ -260,8 +260,13 @@ else
 endif
 
 " And put an underline on the line where the cursor currently is, to save on
-" searching for the cursor when switching windows.
-set cursorline
+" searching for the cursor when switching windows.  But only in the active
+" window.
+augroup CursorLineOnlyInActiveWindow
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+augroup END
 
 augroup filetype_stuff
   autocmd!
