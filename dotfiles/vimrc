@@ -41,6 +41,9 @@ Plugin 'gre/play2vim'
 " Trying this out for editing Jayant's lisp files.
 Plugin 'kovisoft/slimv'
 
+" I use json files somewhat frequently; this makes them better.
+Plugin 'elzr/vim-json'
+
 " **********************
 " GENERAL VIM UX PLUGINS
 " **********************
@@ -171,11 +174,14 @@ let g:EclimCompletionMethod = 'omnifunc'
 let g:EclimSignLevel = 2
 
 " Some Eclim shortcuts
-au FileType java nmap <leader>ejc :JavaCorrect<cr>
-au FileType java nmap <leader>ejs :JavaSearchContext<cr>
-au FileType java nmap <leader>eji :JavaImport<cr>
-au FileType java nmap <leader>ejio :JavaImportOrganize<cr>
-au FileType scala nmap <leader>si :ScalaImport<cr>
+augroup eclim
+  au!
+  au FileType java nmap <leader>ejc :JavaCorrect<cr>
+  au FileType java nmap <leader>ejs :JavaSearchContext<cr>
+  au FileType java nmap <leader>eji :JavaImport<cr>
+  au FileType java nmap <leader>ejio :JavaImportOrganize<cr>
+  au FileType scala nmap <leader>si :ScalaImport<cr>
+augroup END
 
 " Eclim disables syntastic for java files, but only if there's an active
 " project in the directory.  This makes sure we don't use syntastic for java
@@ -196,13 +202,16 @@ set number
 set cinoptions+=(0,w1
 
 " When editing a file, always jump to the last curser position
-autocmd BufReadPost *
-\ if line("'\"") > 0 && line ("'\"") <= line("$") |
-\   exe "normal! g'\""  |
-\ endif
-" But don't do that when editing a git commit message - go back to the
-" first line
-autocmd BufReadPost *COMMIT_EDITMSG exe "normal 1G"
+augroup open_file
+  autocmd!
+  autocmd BufReadPost *
+  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+  \   exe "normal! g'\""  |
+  \ endif
+  " But don't do that when editing a git commit message - go back to the
+  " first line
+  autocmd BufReadPost *COMMIT_EDITMSG exe "normal 1G"
+augroup END
 
 " Hit F4 while in insert mode to do a correct paste
 set pastetoggle=<F4>
@@ -210,71 +219,86 @@ set pastetoggle=<F4>
 " Associate *.tape files with ducttape
 au BufRead,BufNewFile *.tape set filetype=ducttape
 
-" Some python goodies
-autocmd FileType python set foldlevel=1
-autocmd FileType python set includeexpr=PythonIncludeExpr()
-autocmd FileType python set include=^\\(from\\\\|import\\)
-autocmd FileType python set path+=,~/pythonutil
-
 " Use spaces instead of tabs everywhere, and use two spaces instead of four.
 set et sw=2 sts=2
 
-" Unless we're in python, where the convention is to use four spaces.
-autocmd FileType python setlocal et sw=4 sts=4
-
+" Some python goodies
+augroup python
+  autocmd!
+  autocmd FileType python set foldlevel=1
+  autocmd FileType python set includeexpr=PythonIncludeExpr()
+  autocmd FileType python set include=^\\(from\\\\|import\\)
+  autocmd FileType python set path+=,~/pythonutil
+  autocmd FileType python setlocal et sw=4 sts=4
+augroup END
 
 " Enforce 80 character line widths by wrapping automatically
 " And I like having an empty space on the end, so we actually make it 79
 set textwidth=79
 
-" Let lines in java be 100 characters long, as per convention
-autocmd FileType java,scala,markdown,text set textwidth=99
+augroup textwidth
+  autocmd!
+  " Let lines in java be 100 characters long, as per convention
+  autocmd FileType java,scala,markdown,text set textwidth=99
 
-" HTML files can have pretty long lines, let's say.
-autocmd FileType htmldjango set textwidth=139
-autocmd FileType play2-html set textwidth=139
+  " HTML files can have pretty long lines, let's say.
+  autocmd FileType htmldjango set textwidth=139
+  autocmd FileType play2-html set textwidth=139
+augroup END
 
 " Highlight the 81st column, if possible
 if exists('+colorcolumn')
-    set colorcolumn=81
+  set colorcolumn=81
+  augroup colorcolumn
+    autocmd!
     autocmd FileType java,scala,markdown,text set colorcolumn=101
     autocmd FileType htmldjango set colorcolumn=141
     autocmd FileType play2-html set colorcolumn=141
+  augroup END
 " If it isn't, highlight any characters that go over the allowed width.
 else
+  augroup colorcolumn
+    au!
     au Filetype python,c,cpp,tex let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
     au Filetype java,scala,markdown,text let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
     au Filetype htmldjango let w:m2=matchadd('ErrorMsg', '\%>140v.\+', -1)
     au Filetype play2-html let w:m2=matchadd('ErrorMsg', '\%>140v.\+', -1)
+  augroup END
 endif
 
 " And put an underline on the line where the cursor currently is, to save on
-" searching for the cursor when switching windows.
-set cursorline
+" searching for the cursor when switching windows.  But only in the active
+" window.
+augroup CursorLineOnlyInActiveWindow
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+augroup END
 
-" Use syntax folding for C++ because I don't have a good script for it
-autocmd FileType cpp set foldmethod=syntax
+augroup filetype_stuff
+  autocmd!
+  " Use syntax folding for C++ because I don't have a good script for it
+  autocmd FileType cpp set foldmethod=syntax
 
-" *.md files are markdown
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+  " *.md files are markdown
+  autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
-" Use the skeletons when opening specific file types.
-autocmd BufNewFile *.py r ~/.vim/skel.py
-autocmd BufNewFile *.tex r ~/.vim/skel.tex
-autocmd BufNewFile */clone/paper-thoughts/_posts/*.md r ~/.vim/skel.post
+  " Use the skeletons when opening specific file types.
+  autocmd BufNewFile *.py r ~/.vim/skel.py
+  autocmd BufNewFile *.tex r ~/.vim/skel.tex
+  autocmd BufNewFile */clone/paper-thoughts/_posts/*.md r ~/.vim/skel.post
 
-" Gets rid of an extra line that gets put in
-autocmd BufNewFile *.py exe "normal 1Gddj"
-autocmd BufNewFile *.tex exe "normal 1Gddj"
-autocmd BufNewFile */clone/paper-thoughts/_posts/*.md exe "normal 1Gddj"
+  " Gets rid of an extra line that gets put in
+  autocmd BufNewFile *.py exe "normal 1Gddj"
+  autocmd BufNewFile *.tex exe "normal 1Gddj"
+  autocmd BufNewFile */clone/paper-thoughts/_posts/*.md exe "normal 1Gddj"
 
-" Use django file type for html files, 'cause I don't do any other html>
-" Except now I've started using play, which has *.scala.html files.
-autocmd BufEnter *.html if @% =~ "\.scala\.html" | setfiletype html | set syntax=play2-html | else | setfiletype htmldjango | endif
+  " Use django file type for html files, 'cause I don't do any other html>
+  " Except now I've started using play, which has *.scala.html files.
+  autocmd BufEnter *.html if @% =~ "\.scala\.html" | setfiletype html | set syntax=play2-html | else | setfiletype htmldjango | endif
+augroup END
 
 " Include bibliography files for autocompletion purposes
-autocmd FileType tex set include=\\\\input\\\\|\\\\include{\\\\|\\\\bibliography{\\\\|\\.\\.\\/\\.\\.\\/\\.\\.
-autocmd FileType tex set suffixesadd=.tex,.bib
 function! LatexIncludeExpr(fname)
     let fname = a:fname
     if fname[0] != "."
@@ -283,9 +307,15 @@ function! LatexIncludeExpr(fname)
     let fname = substitute(fname, '^.\{-}{\|}.*\|,.*', '', 'g')
     return fname
 endfunction
-autocmd FileType tex let &l:includeexpr="LatexIncludeExpr(v:fname)"
-" Also set the default foldlevel for tex to fold less stuff.
-autocmd FileType tex set foldlevel=1
+
+augroup latex
+  autocmd!
+  autocmd FileType tex set include=\\\\input\\\\|\\\\include{\\\\|\\\\bibliography{\\\\|\\.\\.\\/\\.\\.\\/\\.\\.
+  autocmd FileType tex set suffixesadd=.tex,.bib
+  autocmd FileType tex let &l:includeexpr="LatexIncludeExpr(v:fname)"
+  " Also set the default foldlevel for tex to fold less stuff.
+  autocmd FileType tex set foldlevel=1
+augroup END
 
 " Add a highlight group to look out for trailing whitespace.
 " Thanks to: http://vim.wikia.com/wiki/Highlight_unwanted_spaces
