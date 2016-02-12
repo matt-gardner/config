@@ -38,6 +38,9 @@ Plugin 'majutsushi/tagbar'
 " Mostly I got this for play2-html syntax highlighting.
 Plugin 'gre/play2vim'
 
+" Trying this out for editing Jayant's lisp files.
+Plugin 'kovisoft/slimv'
+
 " I use json files somewhat frequently; this makes them better.
 Plugin 'elzr/vim-json'
 
@@ -75,6 +78,9 @@ call vundle#end()
 filetype plugin indent on
 
 syntax on
+
+" Paredit mode in the lisp plugin is driving me insane...
+let g:paredit_mode = 0
 
 " I've taken a liking to this colorscheme for the moment.
 let g:seoul256_background = 233
@@ -445,6 +451,10 @@ let g:tagbar_type_scala = {
         \ 'm:methods'
     \ ]
     \ }
+
+" I tend to have files open for a long time, and sometimes update git repositories while a vim
+" window is open.  This checks for updates to a file more frequently than at write time.
+autocmd BufWinEnter,CursorHold,CursorHoldI * silent! checktime
 
 " Get rid of annoying ctr-u in insert mode
 imap <c-u> <nop>
