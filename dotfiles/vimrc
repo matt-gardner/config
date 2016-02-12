@@ -48,7 +48,8 @@ Plugin 'elzr/vim-json'
 " GENERAL VIM UX PLUGINS
 " **********************
 
-" Puts a tab-like buffer list at the top of vim
+" Puts a tab-like buffer list at the top of vim; I don't use this anymore,
+" though.
 Plugin 'fholgado/minibufexpl.vim'
 
 " A decent 256 color scheme
@@ -68,8 +69,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 " swapping
 Plugin 'wesQ3/vim-windowswap'
 
-" Press <leader>yw and <leader>pw to yank and paste windows, for easier window
-" swapping
+" A nice interface for easily navigating an open window.
 Plugin 'Lokaltog/vim-easymotion'
 
 call vundle#end()
