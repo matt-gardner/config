@@ -1,0 +1,15 @@
+diff --git a/autoload/nerdtree.vim b/autoload/nerdtree.vim
+index 3ad2a03..01c1b17 100644
+--- a/autoload/nerdtree.vim
++++ b/autoload/nerdtree.vim
+@@ -63,10 +63,7 @@ endfunction
+ " FUNCTION: nerdtree#exec(cmd) {{{2
+ " same as :exec cmd  but eventignore=all is set for the duration
+ function! nerdtree#exec(cmd)
+-    let old_ei = &ei
+-    set ei=all
+     exec a:cmd
+-    let &ei = old_ei
+ endfunction
+ 
+ " FUNCTION: nerdtree#has_opt(options, name) {{{2
