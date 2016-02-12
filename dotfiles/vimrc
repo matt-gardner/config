@@ -56,6 +56,10 @@ Plugin 'christoomey/vim-tmux-navigator'
 
 " Nice filesystem browsing
 Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree-project-plugin'
+
+" Add git status directly to the nerdtree window
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 " Press <leader>yw and <leader>pw to yank and paste windows, for easier window
 " swapping
@@ -117,6 +121,7 @@ autocmd bufenter * if (winnr("$") == 1
                        \ && b:NERDTreeType == "primary") | q | endif
 
 let NERDTreeIgnore = ['\.pyc$', '\.swp$']
+let NERDTreeWinSize = 50
 
 " Make UltiSnips play nicely with YCM.  These mappings do not work well in
 " latex, so we remove the mappings for FileType tex (these contortions are
@@ -164,7 +169,7 @@ let g:EclimCompletionMethod = 'omnifunc'
 " the screen, as TODOs in eclipse come in at "sign level" 3 (task tags).  I
 " wish there were a better way to do this, as some other warnings are quite
 " helpful...
-let g:EclimSignLevel = 2
+let g:EclimSignLevel = 4
 
 " Some Eclim shortcuts
 augroup eclim
