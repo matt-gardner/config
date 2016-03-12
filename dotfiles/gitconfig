@@ -1,5 +1,5 @@
 [user]
-	email = mg1@cs.cmu.edu
+	email = mattg@allenai.org
 	name = Matt Gardner
 [color]
     status = auto
@@ -15,3 +15,5 @@
 	helper = cache --timeout=3600
 [push]
 	default = simple
+[core]
+	excludesfile = ~/.gitignore
