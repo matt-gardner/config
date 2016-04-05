@@ -1,0 +1,1 @@
+30 23 * * * echo "Did you mean for this machine to still be on?" |mail -s "Shut down EC2 machine" "mattg@allenai.org"
