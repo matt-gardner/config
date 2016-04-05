@@ -9,6 +9,7 @@ prepath=(
   $HOME/clone/apps/sbt/bin
   $HOME/clone/apps/activator-1.2.10/
   $HOME/clone/vim-7.4/bin
+  $HOME/bin/sbt/bin
   $HOME/bin
   )
 
@@ -41,11 +42,12 @@ pythondirs=(
     /usr/lib/python2.7/dist-packages
     /usr/lib/python2.7/site-packages
     /usr/lib64/python2.7/site-packages
-    $HOME/clone/pythonutil
     $HOME/clone
+    $HOME/clone/pythonutil
     $HOME/clone/mrs-mapreduce
     $HOME/clone/amlpso
     $HOME/clone/django
+    $HOME/clone/django-taggit
     $HOME/clone/south
     $HOME/clone/smug
     $HOME/clone/evilplot
@@ -79,6 +81,8 @@ fi
 # Default editor should be vim
 export EDITOR=vim
 export VISUAL=vim
+
+export ANDROID_HOME=$HOME/clone/android-sdk-linux/
 
 # Aliases that I want on all of my machines
 alias convertalltoeps='for file in `ls *.pgm`; do convert $file `basename $file .pgm`.eps; done; for file in `ls *.ppm`; do convert $file `basename $file .ppm`.eps; done'
