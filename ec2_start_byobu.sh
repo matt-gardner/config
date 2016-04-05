@@ -1,5 +1,14 @@
 tmux start-server
 
+windowSize=434
+if [[ "$1" ]]; then
+  if [[ "$1" == "laptop" ]]; then
+    windowSize=160
+  fi
+fi
+
+echo "Vim window size: $windowSize"
+
 # Parameters:
 # $1 is the directory the window should use
 # $2 is the name of the window
@@ -10,7 +19,7 @@ createDevWindow() {
   else
     byobu-tmux new-window -dP -c $1 -k -t $3 -n $2
   fi
-  byobu-tmux split-window -d -c $1 -h -l 434 -t dev:$2 "vim build.sbt"
+  byobu-tmux split-window -d -c $1 -h -l $windowSize -t dev:$2 "vim build.sbt"
   byobu-tmux split-window -d -c $1 -l 15 -t dev:${2}.0
 }
 
@@ -36,7 +45,7 @@ byobu-tmux new-session -d -s dev
 createDevWindow ~/clone/semparse semparse 1 sbt
 createDevWindow ~/clone/pra pra 2 no_sbt
 createDevWindow ~/clone/util util 3 no_sbt
-createDevWindow ~/clone/jklol jklol 4 no_sbt
+#createDevWindow ~/clone/jklol jklol 4 no_sbt
 
 createBlankWindow ~/ misc 5
 
