@@ -1,12 +1,25 @@
 tmux start-server
 
+windowSize=434
+if [[ "$1" ]]; then
+  if [[ "$1" == "laptop" ]]; then
+    windowSize=160
+  fi
+fi
+
+echo "Vim window size: $windowSize"
+
 # Parameters:
 # $1 is the directory the window should use
 # $2 is the name of the window
 # $3 is the window index
 createDevWindow() {
-  byobu-tmux new-window -dP -c $1 -k -t $3 -n $2
-  byobu-tmux split-window -d -c $1 -h -l 434 -t dev:$2
+  if [[ "$4" == "sbt" ]]; then
+    byobu-tmux new-window -dP -c $1 -k -t $3 -n $2 "bash --init-file <(echo '. ~/.bashrc && sbt')"
+  else
+    byobu-tmux new-window -dP -c $1 -k -t $3 -n $2
+  fi
+  byobu-tmux split-window -d -c $1 -h -l $windowSize -t dev:$2 "vim build.sbt"
   byobu-tmux split-window -d -c $1 -l 15 -t dev:${2}.0
 }
 
@@ -29,11 +42,11 @@ createWindowWithCommand() {
 
 byobu-tmux new-session -d -s dev
 
-createDevWindow ~/clone/tacl2015-factorization semparse 1
-createDevWindow ~/clone/jklol jklol 2
-createDevWindow ~/clone/pra pra 3
-createDevWindow ~/clone/util util 4
+createDevWindow ~/clone/dlfa dlfa 1 sbt
 
-createBlankWindow ~/ misc 5
+createBlankWindow ~/ misc 2
 
 createWindowWithCommand ~/clone/eclipse eclim 9 "(Xvfb :1 -screen 0 1024x768x24 &);  DISPLAY=:1 ./eclimd"
+
+byobu-keybindings
+byobu attach
