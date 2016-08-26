@@ -46,7 +46,7 @@ pythondirs=(
     #/usr/lib64/python2.7/site-packages
     $HOME/clone/pythonutil
     #$HOME/clone/mrs-mapreduce
-    #$HOME/clone/amlpso
+    #$HOME/clone/optprime
     #$HOME/clone/django
     $HOME/clone/django-taggit
     #$HOME/clone/south
@@ -113,4 +113,7 @@ update_display() {
     export DISPLAY=${HOSTNAME}:${good_display}.0
 }
 
-. $HOME/.awsrc
+if [ -f $HOME/.awsrc ]
+then
+  . $HOME/.awsrc
+fi
