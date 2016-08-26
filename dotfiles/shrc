@@ -4,6 +4,8 @@
 # Path
 
 prepath=(
+  $HOME/anaconda2/bin
+  $HOME/anaconda3/bin
   $HOME/clone/apps/eclipse
   $HOME/clone/apps/scala-2.11.2/bin
   $HOME/clone/apps/sbt/bin
@@ -38,20 +40,19 @@ done
 # Python Path
 
 pythondirs=(
-    /usr0/local/lib/python2.7/dist-packages
-    /usr/lib/python2.7/dist-packages
-    /usr/lib/python2.7/site-packages
-    /usr/lib64/python2.7/site-packages
-    $HOME/clone
+    #/usr0/local/lib/python2.7/dist-packages
+    #/usr/lib/python2.7/dist-packages
+    #/usr/lib/python2.7/site-packages
+    #/usr/lib64/python2.7/site-packages
     $HOME/clone/pythonutil
-    $HOME/clone/mrs-mapreduce
-    $HOME/clone/amlpso
-    $HOME/clone/django
+    #$HOME/clone/mrs-mapreduce
+    #$HOME/clone/amlpso
+    #$HOME/clone/django
     $HOME/clone/django-taggit
-    $HOME/clone/south
-    $HOME/clone/smug
-    $HOME/clone/evilplot
-    $HOME/games
+    #$HOME/clone/south
+    #$HOME/clone/smug
+    #$HOME/clone/evilplot
+    #$HOME/games
     )
 
 export PYTHONPATH=""
@@ -110,3 +111,5 @@ update_display() {
     good_display=${good_display: -2}
     export DISPLAY=${HOSTNAME}:${good_display}.0
 }
+
+. $HOME/.awsrc
