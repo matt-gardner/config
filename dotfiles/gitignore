@@ -6,3 +6,6 @@
 .classpath
 .project
 .settings
+project/target/
+/target/
+.DS_Store
