@@ -7,14 +7,11 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " The base vundle plugin
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 
 " ***********************
 " CODING SPECIFIC PLUGINS
 " ***********************
-
-" Very nice autocomplete
-Plugin 'Valloric/YouCompleteMe'
 
 " Template (snippet) code completion
 Plugin 'SirVer/ultisnips'
@@ -43,6 +40,9 @@ Plugin 'kovisoft/slimv'
 
 " I use json files somewhat frequently; this makes them better.
 Plugin 'elzr/vim-json'
+
+" Very nice autocomplete
+Plugin 'Valloric/YouCompleteMe'
 
 " **********************
 " GENERAL VIM UX PLUGINS
@@ -91,6 +91,8 @@ colorscheme seoul256
 " mode.
 let g:ycm_autoclose_preview_window_after_insertion=1
 
+let g:ycm_server_log_level='debug'
+
 " This specifies paths that YCM will not ask about when loading a
 " .ycm_extra_conf.py file.
 let g:ycm_extra_conf_globlist = ['~/classes/my_own_learning/neural_nets/*']
@@ -99,7 +101,11 @@ let g:ycm_filetype_blacklist = {
     \ 'tex': 1
     \}
 
-let g:syntastic_python_checkers=['pyflakes']
+let g:syntastic_python_checkers=['pylint']
+
+" Let's use python3, instead of python2, to take advantage of type hints
+let g:syntastic_python_pylint_exec='~/anaconda3/bin/pylint'
+let g:ycm_python_binary_path='/usr/bin/python3'
 
 " This sets some stuff under <Leader>f and <Leader>j that I have never used,
 " and gets in the way of some other mappings that I want to use.
@@ -126,7 +132,7 @@ autocmd bufenter * if (winnr("$") == 1
                        \ && exists("b:NERDTreeType")
                        \ && b:NERDTreeType == "primary") | q | endif
 
-let NERDTreeIgnore = ['\.pyc$', '\.swp$']
+let NERDTreeIgnore = ['\.pyc$', '\.swp$', '__pycache__[[dir]]']
 let NERDTreeWinSize = 50
 
 " Make UltiSnips play nicely with YCM.  These mappings do not work well in
@@ -239,12 +245,16 @@ augroup python
   autocmd FileType python setlocal et sw=4 sts=4
 augroup END
 
-" Enforce 80 character line widths by wrapping automatically
-" And I like having an empty space on the end, so we actually make it 79
-set textwidth=79
+" Enforce 100 character line widths by wrapping automatically.
+" And I like having an empty space on the end, so we actually make it 99.
+" I've decided that our screens are big enough now that I'm just fine with 100 characters instead of
+" 80.
+set textwidth=99
 
 augroup textwidth
   autocmd!
+  " I just switched everything to be 100 character line width, so this isn't really necessary
+  " anymore, but let's keep it here anyway, just in case I change my mind about the global value.
   " Let lines in java be 100 characters long, as per convention
   autocmd FileType java,scala,markdown,text set textwidth=99
 
@@ -253,12 +263,12 @@ augroup textwidth
   autocmd FileType play2-html set textwidth=139
 augroup END
 
-" Highlight the 81st column, if possible
+" Highlight the 101st column, if possible
 if exists('+colorcolumn')
-  set colorcolumn=81
+  set colorcolumn=101
   augroup colorcolumn
     autocmd!
-    autocmd FileType java,scala,markdown,text set colorcolumn=101
+    autocmd FileType java,scala,markdown,text set colorcolumn=101  " see comment about tw above
     autocmd FileType htmldjango set colorcolumn=141
     autocmd FileType play2-html set colorcolumn=141
   augroup END
