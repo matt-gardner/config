@@ -45,6 +45,7 @@ pythondirs=(
     #/usr/lib/python2.7/dist-packages
     #/usr/lib/python2.7/site-packages
     #/usr/lib64/python2.7/site-packages
+    $HOME/clone/keras
     $HOME/clone/pythonutil
     #$HOME/clone/mrs-mapreduce
     #$HOME/clone/optprime
@@ -66,13 +67,17 @@ do
     then
       export PYTHONPATH="$dir"
     else
-      export PYTHONPATH="$PYTHONPATH:$dir"
+      export PYTHONPATH="$dir:$PYTHONPATH"
     fi
   fi
 done
 
 set -o vi
 
+# Python 3 does hash randomization, which is good for security, but bad for running reproducible
+# code.  We need to set the hash seed if we want our code to produce the same result across runs.
+# DO NOT USE THIS LINE IF YOU ARE RUNNING A WEB SERVER, OR SOMETHING SIMILAR!
+export PYTHONHASHSEED=2157
 
 # Aliases that are machine specific
 if [[ -e $HOME/.aliases ]]
