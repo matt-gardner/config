@@ -42,9 +42,9 @@ createWindowWithCommand() {
 
 byobu-tmux new-session -d -s dev
 
-createDevWindow ~/clone/dlfa dlfa 1 sbt
+createDevWindow ~/clone/deep_qa deep_qa 1 sbt
 
-createBlankWindow ~/ misc 2
+createBlankWindow ~/ misc 8
 
 createWindowWithCommand ~/clone/eclipse eclim 9 "(Xvfb :1 -screen 0 1024x768x24 &);  DISPLAY=:1 ./eclimd"
 
