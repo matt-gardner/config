@@ -6,7 +6,6 @@
 .classpath
 .project
 .settings
-project/target/
-/target/
+target/
 .DS_Store
 bin/
