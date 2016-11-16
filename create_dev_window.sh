@@ -10,5 +10,5 @@ if [[ "$2" ]]; then
 fi
 
 byobu-tmux new-window -dP -c ~/clone/$1 -k -n $1
-byobu-tmux split-window -d -c ~/clone/$1 -h -l $windowSize -t dev:$1 "vim build.sbt"
+byobu-tmux split-window -d -c ~/clone/$1 -h -l $windowSize -t dev:$1 "bash --init-file <(echo '. ~/.bashrc && vim build.sbt')"
 byobu-tmux split-window -d -c ~/clone/$1 -l 15 -t dev:${1}.0
