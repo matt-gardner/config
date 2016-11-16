@@ -7,3 +7,5 @@ dotfiles/byobu/.ssh-agent
 dotfiles/vim/bundle/
 dotfiles/vim/eclim/
 dotfiles/vim/plugin/eclim.vim
+# Has credentials that can't be added
+dotfiles/sbt/0.13/allenai.sbt
