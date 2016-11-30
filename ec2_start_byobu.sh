@@ -19,7 +19,7 @@ createDevWindow() {
   else
     byobu-tmux new-window -dP -c $1 -k -t $3 -n $2
   fi
-  byobu-tmux split-window -d -c $1 -h -l $windowSize -t dev:$2 "bash --init-file <(echo '. ~/.bashrc && vim build.sbt')"
+  byobu-tmux split-window -d -c $1 -h -l $windowSize -t dev:$2 "vim build.sbt"
   byobu-tmux split-window -d -c $1 -l 15 -t dev:${2}.0
 }
 
