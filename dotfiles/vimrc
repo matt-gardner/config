@@ -105,7 +105,7 @@ let g:syntastic_python_checkers=['pylint']
 
 " Let's use python3, instead of python2, to take advantage of type hints
 let g:syntastic_python_pylint_exec='~/anaconda3/bin/pylint'
-let g:ycm_python_binary_path='/usr/bin/python3'
+let g:ycm_python_binary_path='~/anaconda3/bin/python'
 
 " This sets some stuff under <Leader>f and <Leader>j that I have never used,
 " and gets in the way of some other mappings that I want to use.
