@@ -72,6 +72,9 @@ Plugin 'wesQ3/vim-windowswap'
 " A nice interface for easily navigating an open window.
 Plugin 'Lokaltog/vim-easymotion'
 
+" See undo branching history
+Plugin 'sjl/gundo.vim'
+
 call vundle#end()
 
 " Allow filetype detection, plugins, and indenting
@@ -101,11 +104,28 @@ let g:ycm_filetype_blacklist = {
     \ 'tex': 1
     \}
 
-let g:syntastic_python_checkers=['pylint']
+" Some syntastic configuration.
+let g:syntastic_python_checkers=['mypy', 'pylint']
+let g:syntastic_python_mypy_args='--ignore-missing-imports'
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_wq = 0
+
+" Eclim disables syntastic for java files, but only if there's an active
+" project in the directory.  This makes sure we don't use syntastic for java
+" even if there's no project - it misses imports and in general isn't very
+" good.  Also, it seems like it does not work well with scala, particularly
+" with .sbt files.  So let's disable it there, too.  And latex...
+" Actually, we'll just make the mode passive by default, and add a mapping for manually running the
+" check.
+let g:syntastic_mode_map = { 'mode': 'passive',
+                           \ 'active_filetypes': [],
+                           \ 'passive_filetypes': ['java', 'scala', 'tex'] }
+noremap <leader>c :SyntasticCheck<CR>
 
 " Let's use python3, instead of python2, to take advantage of type hints
 let g:syntastic_python_pylint_exec='~/anaconda3/bin/pylint'
-let g:ycm_python_binary_path='~/anaconda3/bin/python'
+let g:ycm_python_binary_path='python'
 
 " This sets some stuff under <Leader>f and <Leader>j that I have never used,
 " and gets in the way of some other mappings that I want to use.
@@ -114,11 +134,14 @@ let g:scala_use_default_keymappings=0
 " NERDTree shortcuts, for browsing the filesystem
 noremap <leader>nt :NERDTreeToggle<CR>
 
+" Gundo.vim shortcuts
+noremap <leader>u :GundoToggle<CR>
+
 " easymotion shortcuts
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_add_search_history = 0
 let g:EasyMotion_landing_highlight = 0
-nmap <Leader>s <Plug>(easymotion-sn)
+nmap <Leader>s <Plug>(easymotion-overwin-line)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
@@ -174,6 +197,9 @@ noremap <leader>gb :Gblame<CR>
 noremap <leader>gps :Gpush<CR>
 noremap <leader>gpl :Gpull<CR>
 
+" Folding shortcut
+nnoremap <Space> za
+
 " This makes eclim play nicely with YCM.
 let g:EclimCompletionMethod = 'omnifunc'
 
@@ -192,15 +218,6 @@ augroup eclim
   au FileType java nmap <leader>ejio :JavaImportOrganize<cr>
   au FileType scala nmap <leader>si :ScalaImport<cr>
 augroup END
-
-" Eclim disables syntastic for java files, but only if there's an active
-" project in the directory.  This makes sure we don't use syntastic for java
-" even if there's no project - it misses imports and in general isn't very
-" good.  Also, it seems like it does not work well with scala, particularly
-" with .sbt files.  So let's disable it there, too.  And latex...
-let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': [],
-                           \ 'passive_filetypes': ['java', 'scala', 'tex'] }
 
 " Not sure what the deal is, but YCM messed up backspace, and this fixes it
 set backspace=indent,eol,start
