@@ -1,27 +1,11 @@
 tmux start-server
 
-windowSize=434
+laptopArg=""
 if [[ "$1" ]]; then
   if [[ "$1" == "laptop" ]]; then
-    windowSize=160
+    laptopArg="-l"
   fi
 fi
-
-echo "Vim window size: $windowSize"
-
-# Parameters:
-# $1 is the directory the window should use
-# $2 is the name of the window
-# $3 is the window index
-createDevWindow() {
-  if [[ "$4" == "sbt" ]]; then
-    byobu-tmux new-window -dP -c $1 -k -t $3 -n $2 "bash --init-file <(echo '. ~/.bashrc && sbt')"
-  else
-    byobu-tmux new-window -dP -c $1 -k -t $3 -n $2
-  fi
-  byobu-tmux split-window -d -c $1 -h -l $windowSize -t dev:$2 "vim build.sbt"
-  byobu-tmux split-window -d -c $1 -l 15 -t dev:${2}.0
-}
 
 # Parameters:
 # $1 is the directory the window should use
@@ -42,7 +26,7 @@ createWindowWithCommand() {
 
 byobu-tmux new-session -d -s dev
 
-createDevWindow ~/clone/deep_qa deep_qa 1 sbt
+./create_dev_window.sh -t 1 $laptopArg allennlp
 
 createBlankWindow ~/ misc 8
 
