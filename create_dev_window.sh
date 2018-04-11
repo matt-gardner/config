@@ -29,7 +29,7 @@ done
 shift $(expr $OPTIND - 1)
 
 byobu-tmux new-window -dP -c ~/clone/$1 -k -n $1 $windowNumArg
-if [ "$useLaptop" ]; then
+if [ "$useLaptop" = true ]; then
   byobu-tmux split-window -d -c ~/clone/$1 -h -t dev:$1
   byobu-tmux new-window -dP -c ~/clone/$1 -k -n $1-vim "vim build.sbt"
 else

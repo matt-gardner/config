@@ -30,7 +30,7 @@ then
 
   if hash apt-get 2>/dev/null; then
     printf "Trying to install YCM pre-requisites with apt-get\n"
-    sudo apt-get install -y build-essential cmake python-dev python3-dev
+    sudo apt-get install -y build-essential cmake python-dev python3-dev exuberant-ctags
   else
     printf "Trying to install YCM pre-requisites with dnf\n"
     sudo dnf install build-essential cmake python-dev python3-dev

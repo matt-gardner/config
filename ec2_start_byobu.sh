@@ -30,7 +30,9 @@ byobu-tmux new-session -d -s dev
 
 createBlankWindow ~/ misc 8
 
-createWindowWithCommand ~/clone/eclipse eclim 9 "(Xvfb :1 -screen 0 1024x768x24 &);  DISPLAY=:1 ./eclimd"
+# I don't write any java / scala code these days, so this is no longer necessary.  But I'm keeping
+# the line here, so it's easy to add back later when I need it.
+# createWindowWithCommand ~/clone/eclipse eclim 9 "(Xvfb :1 -screen 0 1024x768x24 &);  DISPLAY=:1 ./eclimd"
 
 byobu-keybindings
 byobu attach
