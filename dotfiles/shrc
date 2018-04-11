@@ -6,6 +6,7 @@
 prepath=(
   $HOME/anaconda2/bin
   $HOME/anaconda3/bin
+  /usr/texbin
   $HOME/clone/apps/eclipse
   $HOME/clone/apps/scala-2.11.2/bin
   $HOME/clone/apps/sbt/bin
@@ -102,7 +103,7 @@ alias 2up="pdfnup --nup 2x1 --paper letterpaper --trim '40 60 60 40'"
 alias start_vpn="cd ~/config/openvpn; sudo openvpn --config client.conf"
 alias grep='grep --color'
 
-alias ls='ls --color=always'
+alias ls='ls -G'
 
 export LS_COLORS="di=36:ln=35:so=32:pi=33:ex=32:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:*.py=33"
 export LSCOLORS="gxfxcxdxcxegedabaggxgx"
