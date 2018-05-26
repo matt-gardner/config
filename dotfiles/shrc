@@ -4,8 +4,8 @@
 # Path
 
 prepath=(
-  $HOME/anaconda2/bin
-  $HOME/anaconda3/bin
+  #$HOME/anaconda2/bin
+  #$HOME/anaconda3/bin
   /usr/texbin
   $HOME/clone/apps/eclipse
   $HOME/clone/apps/scala-2.11.2/bin
