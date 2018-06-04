@@ -123,3 +123,8 @@ if [ -f $HOME/.awsrc ]
 then
   . $HOME/.awsrc
 fi
+
+if [ -f $HOME/.slackrc ]
+then
+  . $HOME/.slackrc
+fi
