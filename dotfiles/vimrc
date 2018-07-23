@@ -81,6 +81,15 @@ Plugin 'sjl/gundo.vim'
 " Simple mappings for toggling the quickfix and locationlist windows
 Plugin 'Valloric/ListToggle'
 
+" Simple vim script to add a :Shuffle command in visual mode
+Plugin 'vim-scripts/shuffle.vim'
+
+" Toggle comment blocks with gc
+Plugin 'tpope/vim-commentary'
+
+" Temporarily highlight the last-yanked thing
+Plugin 'machakann/vim-highlightedyank'
+
 call vundle#end()
 
 " Allow filetype detection, plugins, and indenting
