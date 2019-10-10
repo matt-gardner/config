@@ -13,33 +13,17 @@ Plugin 'VundleVim/Vundle.vim'
 " CODING SPECIFIC PLUGINS
 " ***********************
 
-" Template (snippet) code completion
-Plugin 'SirVer/ultisnips'
-
-" General scala editing foo (I'm not actually sure what all is in here)
-Plugin 'derekwyatt/vim-scala'
-
-" Syntax checking (mostly useful for python, as YCM has its own C++ stuff, and
-" I use eclim for java/scala)
-Plugin 'scrooloose/syntastic'
-
 " Git integration with vim
 Plugin 'tpope/vim-fugitive'
 
 " Makes fugitive play nicely with eclim (specifically, :Gpush breaks without this)
 Plugin 'tpope/vim-dispatch'
 
-" Navigate code tags in a sidebar.
-Plugin 'majutsushi/tagbar'
-
-" Mostly I got this for play2-html syntax highlighting.
-Plugin 'gre/play2vim'
-
-" Trying this out for editing Jayant's lisp files.
-Plugin 'kovisoft/slimv'
-
 " I use json files somewhat frequently; this makes them better.
 Plugin 'elzr/vim-json'
+
+" jsonnet is a relative of json that we also sometimes use.
+Plugin 'google/vim-jsonnet'
 
 " Very nice autocomplete
 Plugin 'Valloric/YouCompleteMe'
@@ -47,13 +31,15 @@ Plugin 'Valloric/YouCompleteMe'
 " ctags integration
 Plugin 'szw/vim-tags'
 
+" python auto-formatting
+Plugin 'psf/black'
+
+" python folding
+Plugin 'tmhedberg/SimpylFold'
+
 " **********************
 " GENERAL VIM UX PLUGINS
 " **********************
-
-" Puts a tab-like buffer list at the top of vim; I don't use this anymore,
-" though.
-Plugin 'fholgado/minibufexpl.vim'
 
 " A decent 256 color scheme
 Plugin 'junegunn/seoul256.vim'
@@ -90,6 +76,9 @@ Plugin 'tpope/vim-commentary'
 " Temporarily highlight the last-yanked thing
 Plugin 'machakann/vim-highlightedyank'
 
+" Use Ctrl-P for finding files
+Plugin 'ctrlpvim/ctrlp.vim'
+
 call vundle#end()
 
 " Allow filetype detection, plugins, and indenting
@@ -110,6 +99,8 @@ colorscheme seoul256
 let g:ycm_autoclose_preview_window_after_insertion=1
 
 let g:ycm_server_log_level='debug'
+" YCM was complaining at me that I needed to set the encoding to utf-8.
+set encoding=utf-8
 
 " This specifies paths that YCM will not ask about when loading a
 " .ycm_extra_conf.py file.
@@ -119,32 +110,8 @@ let g:ycm_filetype_blacklist = {
     \ 'tex': 1
     \}
 
-" Some syntastic configuration.
-let g:syntastic_python_checkers=['mypy', 'pylint']
-let g:syntastic_python_mypy_args='--ignore-missing-imports'
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_wq = 0
-
-" Eclim disables syntastic for java files, but only if there's an active
-" project in the directory.  This makes sure we don't use syntastic for java
-" even if there's no project - it misses imports and in general isn't very
-" good.  Also, it seems like it does not work well with scala, particularly
-" with .sbt files.  So let's disable it there, too.  And latex...
-" Actually, we'll just make the mode passive by default, and add a mapping for manually running the
-" check.
-let g:syntastic_mode_map = { 'mode': 'passive',
-                           \ 'active_filetypes': [],
-                           \ 'passive_filetypes': ['java', 'scala', 'tex'] }
-noremap <leader>c :SyntasticCheck<CR>
-
 " Let's use python3, instead of python2, to take advantage of type hints
-let g:syntastic_python_pylint_exec='~/anaconda3/bin/pylint'
 let g:ycm_python_binary_path='python'
-
-" This sets some stuff under <Leader>f and <Leader>j that I have never used,
-" and gets in the way of some other mappings that I want to use.
-let g:scala_use_default_keymappings=0
 
 " NERDTree shortcuts, for browsing the filesystem
 noremap <leader>nt :NERDTreeToggle<CR>
@@ -173,36 +140,28 @@ autocmd bufenter * if (winnr("$") == 1
 let NERDTreeIgnore = ['\.pyc$', '\.swp$', '__pycache__[[dir]]']
 let NERDTreeWinSize = 50
 
-" Make UltiSnips play nicely with YCM.  These mappings do not work well in
-" latex, so we remove the mappings for FileType tex (these contortions are
-" necessary because the mapping happens at load time, while the autocommand
-" runs at buffer open time - the mappings are already set, and changing
-" <leader> won't do anything).
-let g:UltiSnipsExpandTrigger = '<leader>f'
-let g:UltiSnipsJumpForwardTrigger = '<leader>g'
-let g:UltiSnipsJumpBackwardTrigger = '<leader>d'
-au FileType tex call SetLatexSnippetOptions()
-function SetLatexSnippetOptions()
-    if exists("g:loaded_latex_options")
-      return
-    endif
-    let g:loaded_latex_options = 1
-    iunmap <leader>f
-    iunmap <leader>g
-    iunmap <leader>d
-    inoremap <leader>,f <C-R>=UltiSnips_ExpandSnippet()<CR>
-    inoremap <leader>,g <C-R>=UltiSnips_JumpForwards()<CR>
-    inoremap <leader>,d <C-R>=UltiSnips_JumpBackwards()<CR>
-endfunction
+" Ignore unwanted files in ctrlp.vim
+let g:ctrlp_custom_ignore = {
+      \  'file': '\v\.(pyc|swp)$',
+      \  'dir': '\v(\.git|_build)',
+      \  }
+"let g:ctrlp_user_command = {
+      "\ 'types': {
+      "\ 1: ['.git', 'cd %s && git ls-files'],
+      "\ 2: ['.hg', 'hg --cwd %s locate -I .'],
+      "\ },
+      "\ 'fallback': 'ag %s -i --nocolor --nogroup --hidden
+      "\ --ignore out
+      "\ --ignore .git
+      "\ --ignore .svn
+      "\ --ignore .hg
+      "\ --ignore .DS_Store
+      "\ --ignore "*\.pyc"
+      "\ -g ""'
+      "\ }
+
 " Don't split on - in identifiers for autocomplete purposes when editing latex.
 au FileType tex set iskeyword+=-
-
-" MiniBufExplorer - a tab-like buffer list at the top of the page.  Use
-" <leader>r to get there, like the related files plugin at Google.
-noremap <leader>r :MBEFocus<CR>
-" But don't start the plugin automatically, as I don't need it all that often
-" anymore with NERDTree, and it can get so big as to be unweildy.
-let g:miniBufExplorerAutoStart = 0
 
 " Fugitive shortcuts, for running vim commands
 noremap <leader>gd :Gdiff<CR>
@@ -222,33 +181,11 @@ let g:vim_tags_project_tags_command = "{CTAGS} -R {OPTIONS} --extra=+f --languag
 " Folding shortcut
 nnoremap <Space> za
 
-" This makes eclim play nicely with YCM.
-let g:EclimCompletionMethod = 'omnifunc'
-
-" This makes it so that eclim doesn't show TODOs as errors on the left side of
-" the screen, as TODOs in eclipse come in at "sign level" 3 (task tags).  I
-" wish there were a better way to do this, as some other warnings are quite
-" helpful...
-let g:EclimSignLevel = 4
-
-" Some Eclim shortcuts
-augroup eclim
-  au!
-  au FileType java nmap <leader>ejc :JavaCorrect<cr>
-  au FileType java nmap <leader>ejs :JavaSearchContext<cr>
-  au FileType java nmap <leader>eji :JavaImport<cr>
-  au FileType java nmap <leader>ejio :JavaImportOrganize<cr>
-  au FileType scala nmap <leader>si :ScalaImport<cr>
-augroup END
-
 " Not sure what the deal is, but YCM messed up backspace, and this fixes it
 set backspace=indent,eol,start
 
 " Show line numbers
 set number
-
-" Trying to get auto-indentation to be more like Google's style guide...
-set cinoptions+=(0,w1
 
 " When editing a file, always jump to the last curser position
 augroup open_file
@@ -268,9 +205,6 @@ augroup END
 " Hit F4 while in insert mode to do a correct paste
 set pastetoggle=<F4>
 
-" Associate *.tape files with ducttape
-au BufRead,BufNewFile *.tape set filetype=ducttape
-
 " Use spaces instead of tabs everywhere, and use two spaces instead of four.
 set et sw=2 sts=2
 
@@ -278,28 +212,17 @@ set et sw=2 sts=2
 augroup python
   autocmd!
   autocmd FileType python set foldlevel=1
-  autocmd FileType python set includeexpr=PythonIncludeExpr()
-  autocmd FileType python set include=^\\(from\\\\|import\\)
-  autocmd FileType python set path+=,~/pythonutil
   autocmd FileType python setlocal et sw=4 sts=4
 augroup END
 
 " Enforce 100 character line widths by wrapping automatically.
-" And I like having an empty space on the end, so we actually make it 99.
-" I've decided that our screens are big enough now that I'm just fine with 100 characters instead of
-" 80.
-set textwidth=99
+set textwidth=100
 
 augroup textwidth
   autocmd!
-  " I just switched everything to be 100 character line width, so this isn't really necessary
-  " anymore, but let's keep it here anyway, just in case I change my mind about the global value.
-  " Let lines in java be 100 characters long, as per convention
-  autocmd FileType java,scala,markdown,text set textwidth=99
-
   " HTML files can have pretty long lines, let's say.
-  autocmd FileType htmldjango set textwidth=139
-  autocmd FileType play2-html set textwidth=139
+  autocmd FileType htmldjango set textwidth=140
+  autocmd FileType play2-html set textwidth=140
 augroup END
 
 " Highlight the 101st column, if possible
@@ -339,38 +262,9 @@ augroup filetype_stuff
   " *.md files are markdown
   autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
-  " Use the skeletons when opening specific file types.
-  autocmd BufNewFile *.py r ~/.vim/skel.py
-  autocmd BufNewFile *.tex r ~/.vim/skel.tex
-  autocmd BufNewFile */clone/paper-thoughts/_posts/*.md r ~/.vim/skel.post
-
-  " Gets rid of an extra line that gets put in
-  autocmd BufNewFile *.py exe "normal 1Gddj"
-  autocmd BufNewFile *.tex exe "normal 1Gddj"
-  autocmd BufNewFile */clone/paper-thoughts/_posts/*.md exe "normal 1Gddj"
-
   " Use django file type for html files, 'cause I don't do any other html>
   " Except now I've started using play, which has *.scala.html files.
   autocmd BufEnter *.html if @% =~ "\.scala\.html" | setfiletype html | set syntax=play2-html | else | setfiletype htmldjango | endif
-augroup END
-
-" Include bibliography files for autocompletion purposes
-function! LatexIncludeExpr(fname)
-    let fname = a:fname
-    if fname[0] != "."
-        let fname = "../../.." . fname
-    endif
-    let fname = substitute(fname, '^.\{-}{\|}.*\|,.*', '', 'g')
-    return fname
-endfunction
-
-augroup latex
-  autocmd!
-  autocmd FileType tex set include=\\\\input\\\\|\\\\include{\\\\|\\\\bibliography{\\\\|\\.\\.\\/\\.\\.\\/\\.\\.
-  autocmd FileType tex set suffixesadd=.tex,.bib
-  autocmd FileType tex let &l:includeexpr="LatexIncludeExpr(v:fname)"
-  " Also set the default foldlevel for tex to fold less stuff.
-  autocmd FileType tex set foldlevel=1
 augroup END
 
 " Add a highlight group to look out for trailing whitespace.
@@ -391,36 +285,9 @@ set list
 set listchars=tab:\ \ ,
 highlight SpecialKey ctermbg=Red guibg=Red
 
-function! PythonIncludeExpr()
-  "echo v:fname
-  for dir in split(&path, ',')
-    "echo dir
-    if isdirectory(dir . '/' . v:fname)
-      echo 'Directory found'
-      return v:fname . "/__init__.py"
-    endif
-  endfor
-  return substitute(v:fname, '\.', '/', 'g')
-endfunction
-
-" Add everything in PYTHONPATH to vim's path, for autocompletion purposes
-"python << EOF
-"import os
-"import sys
-"import vim
-"for p in sys.path:
-  "# Add each directory in sys.path, if it exists.
-  "if os.path.isdir(p):
-    "# Command 'set' needs backslash before each space.
-    "vim.command(r"set path+=%s" % (p.replace(" ", r"\ ")))
-"EOF
-
 " Automatically format comments when typing.  So if you type a long comment,
 " vim will autowrap for you.
 set formatoptions+=r
-" Also continue a comment if inserting with 'O' directly under or over an
-" existing comment.
-set formatoptions+=o
 
 " Get rid of the annoying default plaintex for empty .tex files
 let g:tex_flavor='latex'
@@ -461,48 +328,8 @@ set diffopt=filler,vertical
 " Show partial commands in the command buffer as they are being typed
 set showcmd
 
-" ReST editing stuff
-function ReST_Extend_Line()
-    let cur = getline(".")
-    let prev = getline( line(".") - 1 )
-    return repeat(cur[0], len(prev) - len(cur))
-endfunction
-imap <F9> <c-r>=ReST_Extend_Line()<cr>
-map <F9> yypVr
-
 " Don't use Ex mode.
 map Q <nop>
-
-" Open tagbar on the left, not the right.
-let g:tagbar_left = 1
-
-" Because I have the NERDTree open most of the time, let's use the tagbar a
-" little differently.  It's mostly useful for when I want to jump to a
-" particular method, and after I've jumped it just gets in the way.  So auto
-" focus on open, and close it when I jump somewhere.
-let g:tagbar_autofocus = 1
-let g:tagbar_autoclose = 1
-
-" Use <C-T> to open the tagbar
-nmap <C-T> :TagbarToggle<cr>
-
-" Make tags work better for scala
-set tags=./.tags,.tags,./tags,tags
-let g:tagbar_type_scala = {
-    \ 'ctagstype' : 'Scala',
-    \ 'kinds'     : [
-        \ 'p:packages:1',
-        \ 'V:values',
-        \ 'v:variables',
-        \ 'T:types',
-        \ 't:traits',
-        \ 'o:objects',
-        \ 'a:aclasses',
-        \ 'c:classes',
-        \ 'r:cclasses',
-        \ 'm:methods'
-    \ ]
-    \ }
 
 " I tend to have files open for a long time, and sometimes update git repositories while a vim
 " window is open.  This checks for updates to a file more frequently than at write time.
