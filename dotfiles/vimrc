@@ -313,7 +313,6 @@ set statusline+=%m                        "modified flag
 set statusline+=%r                        "read only flag
 " Add syntastic stuff to the status line
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 "set statusline+=%y                        "filetype
 set statusline+=%=                        "left/right separator
