@@ -13,7 +13,7 @@ prepath=(
   $HOME/clone/vim-7.4/bin
   $HOME/bin/sbt/bin
   $HOME/bin
-  /usr/local/cuda-8.0/bin
+  /usr/local/bin
   )
 
 postpath=(

@@ -5,6 +5,7 @@ vim/.netrwhist
 *.netrwhist
 dotfiles/byobu/.ssh-agent
 dotfiles/vim/bundle/
+dotfiles/vim/black/
 dotfiles/vim/eclim/
 dotfiles/vim/plugin/eclim.vim
 # Has credentials that can't be added
